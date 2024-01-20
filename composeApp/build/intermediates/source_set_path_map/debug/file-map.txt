@@ -1,0 +1,47 @@
+uark.hazmat.project.composeApp-material-release-0 /Users/tatenaumann/.gradle/caches/transforms-3/16104b1462360fc634ac12edc5650fc3/transformed/material-release/res
+uark.hazmat.project.composeApp-foundation-layout-release-1 /Users/tatenaumann/.gradle/caches/transforms-3/2022e1117f7546d9325a62bffd32dfd0/transformed/foundation-layout-release/res
+uark.hazmat.project.composeApp-ui-util-release-2 /Users/tatenaumann/.gradle/caches/transforms-3/20dd76e8928253276e6ab65a722afcc7/transformed/ui-util-release/res
+uark.hazmat.project.composeApp-ui-tooling-data-release-3 /Users/tatenaumann/.gradle/caches/transforms-3/220614f2985a3464f7ee56e7b49a1c90/transformed/ui-tooling-data-release/res
+uark.hazmat.project.composeApp-activity-1.8.2-4 /Users/tatenaumann/.gradle/caches/transforms-3/25ef2698791d0562dd57ab34df2cd585/transformed/activity-1.8.2/res
+uark.hazmat.project.composeApp-profileinstaller-1.3.0-5 /Users/tatenaumann/.gradle/caches/transforms-3/306aedd7a5873188f456ef8fed4ca76a/transformed/profileinstaller-1.3.0/res
+uark.hazmat.project.composeApp-core-1.10.0-6 /Users/tatenaumann/.gradle/caches/transforms-3/330d1366cf21d84471d6e74bc8330e83/transformed/core-1.10.0/res
+uark.hazmat.project.composeApp-ui-unit-release-7 /Users/tatenaumann/.gradle/caches/transforms-3/3b0d9c3844331013922a33f462d1b357/transformed/ui-unit-release/res
+uark.hazmat.project.composeApp-lifecycle-runtime-2.6.1-8 /Users/tatenaumann/.gradle/caches/transforms-3/3fcf3f44d09ba029f845b45ae5c94ea1/transformed/lifecycle-runtime-2.6.1/res
+uark.hazmat.project.composeApp-lifecycle-viewmodel-ktx-2.6.1-9 /Users/tatenaumann/.gradle/caches/transforms-3/40f132514e5712a72ed2b912b94a3886/transformed/lifecycle-viewmodel-ktx-2.6.1/res
+uark.hazmat.project.composeApp-emoji2-1.4.0-10 /Users/tatenaumann/.gradle/caches/transforms-3/465c10a81352e14c1b39ac281fdd7cd9/transformed/emoji2-1.4.0/res
+uark.hazmat.project.composeApp-lifecycle-livedata-core-2.6.1-11 /Users/tatenaumann/.gradle/caches/transforms-3/4de6e26033b8b12ab1708aa81f7cbdf2/transformed/lifecycle-livedata-core-2.6.1/res
+uark.hazmat.project.composeApp-runtime-saveable-release-12 /Users/tatenaumann/.gradle/caches/transforms-3/5ddfe098acd059d65391388fa925f4b6/transformed/runtime-saveable-release/res
+uark.hazmat.project.composeApp-savedstate-ktx-1.2.1-13 /Users/tatenaumann/.gradle/caches/transforms-3/6010d46837933007d7c168ce9434da5b/transformed/savedstate-ktx-1.2.1/res
+uark.hazmat.project.composeApp-material-ripple-release-14 /Users/tatenaumann/.gradle/caches/transforms-3/60e4c1792ed510120253f802ddceb704/transformed/material-ripple-release/res
+uark.hazmat.project.composeApp-lifecycle-viewmodel-2.6.1-15 /Users/tatenaumann/.gradle/caches/transforms-3/6d4079b45f6ffd855e53bc8a8e196a8f/transformed/lifecycle-viewmodel-2.6.1/res
+uark.hazmat.project.composeApp-ui-geometry-release-16 /Users/tatenaumann/.gradle/caches/transforms-3/72d20bc110352d3c7b607b0cbfd31cfa/transformed/ui-geometry-release/res
+uark.hazmat.project.composeApp-ui-tooling-release-17 /Users/tatenaumann/.gradle/caches/transforms-3/7bb8d041d284f174135bf5cdb1f2c052/transformed/ui-tooling-release/res
+uark.hazmat.project.composeApp-animation-core-release-18 /Users/tatenaumann/.gradle/caches/transforms-3/7d8232b6422db5c8135a0921702d1e39/transformed/animation-core-release/res
+uark.hazmat.project.composeApp-ui-graphics-release-19 /Users/tatenaumann/.gradle/caches/transforms-3/8fa34d7fdd77ce5f9ac4ee8822e7defb/transformed/ui-graphics-release/res
+uark.hazmat.project.composeApp-runtime-release-20 /Users/tatenaumann/.gradle/caches/transforms-3/99b19103c2b89624898df974b1610a57/transformed/runtime-release/res
+uark.hazmat.project.composeApp-activity-compose-1.8.2-21 /Users/tatenaumann/.gradle/caches/transforms-3/9c7a130662887265dbb4393b324d71d5/transformed/activity-compose-1.8.2/res
+uark.hazmat.project.composeApp-activity-ktx-1.8.2-22 /Users/tatenaumann/.gradle/caches/transforms-3/a1a57f09b69f7462eef20ca3c4155512/transformed/activity-ktx-1.8.2/res
+uark.hazmat.project.composeApp-core-runtime-2.2.0-23 /Users/tatenaumann/.gradle/caches/transforms-3/a4ac877af069a452b58f30bea36348dd/transformed/core-runtime-2.2.0/res
+uark.hazmat.project.composeApp-foundation-release-24 /Users/tatenaumann/.gradle/caches/transforms-3/a6aa104ab2bbce65bb91ab301f92bd39/transformed/foundation-release/res
+uark.hazmat.project.composeApp-ui-text-release-25 /Users/tatenaumann/.gradle/caches/transforms-3/a9c90c62a77b417ea84a76d00f01143a/transformed/ui-text-release/res
+uark.hazmat.project.composeApp-savedstate-1.2.1-26 /Users/tatenaumann/.gradle/caches/transforms-3/b13aa9109490263b858b29101398f1dd/transformed/savedstate-1.2.1/res
+uark.hazmat.project.composeApp-core-ktx-1.10.0-27 /Users/tatenaumann/.gradle/caches/transforms-3/b8f781169ac26a1e93d9e9b53bece795/transformed/core-ktx-1.10.0/res
+uark.hazmat.project.composeApp-customview-poolingcontainer-1.0.0-28 /Users/tatenaumann/.gradle/caches/transforms-3/bc5db394a360a6003467dc6977cb190f/transformed/customview-poolingcontainer-1.0.0/res
+uark.hazmat.project.composeApp-ui-tooling-preview-release-29 /Users/tatenaumann/.gradle/caches/transforms-3/c38dbde9d2ee156a8336e52ede26355b/transformed/ui-tooling-preview-release/res
+uark.hazmat.project.composeApp-material-icons-core-release-30 /Users/tatenaumann/.gradle/caches/transforms-3/c61ee40709cc91739b3d6c10a9a7bb8a/transformed/material-icons-core-release/res
+uark.hazmat.project.composeApp-annotation-experimental-1.3.0-31 /Users/tatenaumann/.gradle/caches/transforms-3/d1a252a3d676ff110ff223a09fba2fb3/transformed/annotation-experimental-1.3.0/res
+uark.hazmat.project.composeApp-lifecycle-runtime-ktx-2.6.1-32 /Users/tatenaumann/.gradle/caches/transforms-3/d318bc63b860f11eda6cac7c729fe9f3/transformed/lifecycle-runtime-ktx-2.6.1/res
+uark.hazmat.project.composeApp-lifecycle-viewmodel-savedstate-2.6.1-33 /Users/tatenaumann/.gradle/caches/transforms-3/dc0408cf0b68b21770a54ae95e4d295f/transformed/lifecycle-viewmodel-savedstate-2.6.1/res
+uark.hazmat.project.composeApp-animation-release-34 /Users/tatenaumann/.gradle/caches/transforms-3/ed7b1f562054e8601f378adae5ec2932/transformed/animation-release/res
+uark.hazmat.project.composeApp-ui-release-35 /Users/tatenaumann/.gradle/caches/transforms-3/f442ba0111f9745bc383f029dbe666dc/transformed/ui-release/res
+uark.hazmat.project.composeApp-startup-runtime-1.1.1-36 /Users/tatenaumann/.gradle/caches/transforms-3/fe21b49335766e7642177ee69c1fe030/transformed/startup-runtime-1.1.1/res
+uark.hazmat.project.composeApp-lifecycle-process-2.6.1-37 /Users/tatenaumann/.gradle/caches/transforms-3/ff332095787bbbea3dffb6732b41eb79/transformed/lifecycle-process-2.6.1/res
+uark.hazmat.project.composeApp-pngs-38 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/generated/res/pngs/debug
+uark.hazmat.project.composeApp-resValues-39 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/generated/res/resValues/debug
+uark.hazmat.project.composeApp-packageDebugResources-40 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+uark.hazmat.project.composeApp-packageDebugResources-41 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+uark.hazmat.project.composeApp-merged_res-42 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/intermediates/merged_res/debug
+uark.hazmat.project.composeApp-androidDebug-43 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/androidDebug/res
+uark.hazmat.project.composeApp-androidMain-44 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/androidMain/res
+uark.hazmat.project.composeApp-debug-45 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/debug/res
+uark.hazmat.project.composeApp-main-46 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/main/res
