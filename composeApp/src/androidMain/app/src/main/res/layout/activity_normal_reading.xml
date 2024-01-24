@@ -14,7 +14,7 @@
         android:text="Methane Reading"
         android:textSize="40dp"
         android:gravity="center"
-        android:textColor="@color/pale_yellow"/>
+        android:textColor="@color/macaroon"/>
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="200dp"
@@ -24,5 +24,44 @@
         android:min="0"
         android:max="100"
         android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_bar"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textSize="25sp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:layout_below="@id/button_container"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Results"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
 </RelativeLayout>
