@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import com.example.hazmatapp.View.NormalReading
 import com.example.hazmatapp.R
 
 class MainActivity : AppCompatActivity() {
