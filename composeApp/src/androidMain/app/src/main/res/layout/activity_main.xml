@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".View.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_tittle"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/pale_yellow"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal" />
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/button1_menu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/pale_yellow"
+            android:layout_margin="10dp"
+            style="@style/MenuButtons"
+            tools:ignore="VisualLintButtonSize"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/button2_menu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/pale_yellow"
+            android:layout_margin="10dp"
+            style="@style/MenuButtons"
+            tools:ignore="VisualLintButtonSize"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/button3_menu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/pale_yellow"
+            android:layout_margin="10dp"
+            style="@style/MenuButtons"
+            tools:ignore="VisualLintButtonSize" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/button4_menu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/pale_yellow"
+            android:layout_margin="10dp"
+            style="@style/MenuButtons"
+            tools:ignore="VisualLintButtonSize"/>
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/button5_menu"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/pale_yellow"
+            android:layout_margin="10dp"
+            style="@style/MenuButtons"
+            tools:ignore="VisualLintButtonSize"/>
+    </LinearLayout>
+
+
+</LinearLayout>

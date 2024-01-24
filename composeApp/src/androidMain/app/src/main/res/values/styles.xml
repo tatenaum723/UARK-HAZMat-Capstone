@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MenuButtons" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item> <!-- Overwrites the custom theme -->
+        <item name="android:background">@drawable/button</item>
+    </style>
+
+</resources>

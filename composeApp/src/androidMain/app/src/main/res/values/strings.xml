@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HAZ-MAT</string>
+    <string name="main_tittle">HAZ-Mat Drone Readings</string>
+    <string name="button1_menu">Start Real-Time Reading</string>
+    <string name="button2_menu">Start Graph Capture</string>
+    <string name="button3_menu">View Previous Captures</string>
+    <string name="button4_menu">Test Bluetooth Connection</string>
+    <string name="button5_menu">App Instructions</string>
+</resources>
