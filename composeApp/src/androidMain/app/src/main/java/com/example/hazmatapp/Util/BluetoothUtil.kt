@@ -1,6 +1,228 @@
 package com.example.hazmatapp.Util
 
 // Use this file to add all the bluetooth methods needed
+
 class BluetoothUtil {
+    //These private values may need to be moved into a place where the functions have access to them
+    //Due to my inexperience in Kotlin, I am unsure if all function calls from the app will share the same address space
+    //This code uses some app specific UI code from the tutorial which must be changed for our app
+
+    //Maximum transmission size
+    private const val GATT_MAX_MTU_SIZE = 517
+
+    private const val RUNTIME_PERMISSION_REQUEST_CODE = 2
+
+    private val bleScanner by lazy {
+        bluetoothAdapter.bluetoothLeScanner
+    }
+
+
+    val bluetoothAdapter: BluetoothAdapter by lazy {
+        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        bluetoothManager.adapter
+    }
+
+    private val scanSettings = ScanSettings.Builder()
+        .setScanMode(ScanSettings.SCAN_MODE_BALANCED)
+        .build()
+
+    private val scanCallback = object : ScanCallback() {
+        override fun onScanResult(callbackType: Int, result: ScanResult) {
+            val indexQuery = scanResults.indexOfFirst { it.device.address == result.device.address }
+            if (indexQuery != -1) { // A scan result already exists with the same address
+                scanResults[indexQuery] = result
+                scanResultAdapter.notifyItemChanged(indexQuery)
+            } else {
+                with(result.device) {
+                    Log.i(“ScanCallback”, "Found BLE device! Name: ${name ?: "Unnamed"}, address: $address")
+                }
+                scanResults.add(result)
+                scanResultAdapter.notifyItemInserted(scanResults.size - 1)
+            }
+        }
+
+        override fun onScanFailed(errorCode: Int) {
+            Log.e(“ScanCallback”, "onScanFailed: code $errorCode")
+        }
+    }
+
+    private var isScanning = false
+
+    private val scanResults = mutableListOf<ScanResult>()
+    private val scanResultAdapter: ScanResultAdapter by lazy {
+        ScanResultAdapter(scanResults) { result ->
+            // User tapped on a scan result
+            if (isScanning) {
+                stopBleScan()
+            }
+            with(result.device) {
+                Log.w("ScanResultAdapter", "Connecting to $address")
+                connectGatt(context, false, gattCallback)
+                // TO DO: Create key for HMAC verification and send
+            }
+        }
+    }
+
+
+    //Gatt definitions
+    private val gattCallback = object : BluetoothGattCallback() {
+        override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
+            val deviceAddress = gatt.device.address
+
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                if (newState == BluetoothProfile.STATE_CONNECTED) {
+                    Log.w("BluetoothGattCallback", "Successfully connected to $deviceAddress")
+                    bluetoothGatt = gatt
+
+                } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                    Log.w("BluetoothGattCallback", "Successfully disconnected from $deviceAddress")
+                    gatt.close()
+                }
+            } else {
+                Log.w("BluetoothGattCallback", "Error $status encountered for $deviceAddress! Disconnecting...")
+                gatt.close()
+            }
+        }
+    }
+
+
+    fun Context.hasPermission(permissionType: String): Boolean {
+        return ContextCompat.checkSelfPermission(this, permissionType) ==
+                PackageManager.PERMISSION_GRANTED
+    }
+
+    fun Context.hasRequiredRuntimePermissions(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            hasPermission(Manifest.permission.BLUETOOTH_SCAN) &&
+                    hasPermission(Manifest.permission.BLUETOOTH_CONNECT)
+        } else {
+            hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    private fun startBleScan() {
+        if (!hasRequiredRuntimePermissions()) {
+            requestRelevantRuntimePermissions()
+        } else {
+            scanResults.clear()
+            scanResultAdapter.notifyDataSetChanged()
+            bleScanner.startScan(null, scanSettings, scanCallback)
+            isScanning = true
+        }
+    }
+
+    private fun stopBleScan() {
+        bleScanner.stopScan(scanCallback)
+        isScanning = false
+    }
+
+    private fun Activity.requestRelevantRuntimePermissions() {
+        if (hasRequiredRuntimePermissions()) { return }
+        when {
+            Build.VERSION.SDK_INT < Build.VERSION_CODES.S -> {
+                requestLocationPermission()
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                requestBluetoothPermissions()
+            }
+        }
+    }
+
+    private fun requestLocationPermission() {
+        runOnUiThread {
+            alert {
+                title = "Location permission required"
+                message = "Starting from Android M (6.0), the system requires apps to be granted " +
+                        "location access in order to scan for BLE devices."
+                isCancelable = false
+                positiveButton(android.R.string.ok) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        RUNTIME_PERMISSION_REQUEST_CODE
+                    )
+                }
+            }.show()
+        }
+    }
+
+    private fun requestBluetoothPermissions() {
+        runOnUiThread {
+            alert {
+                title = "Bluetooth permissions required"
+                message = "Starting from Android 12, the system requires apps to be granted " +
+                        "Bluetooth access in order to scan for and connect to BLE devices."
+                isCancelable = false
+                positiveButton(android.R.string.ok) {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(
+                            Manifest.permission.BLUETOOTH_SCAN,
+                            Manifest.permission.BLUETOOTH_CONNECT
+                        ),
+                        RUNTIME_PERMISSION_REQUEST_CODE
+                    )
+                }
+            }.show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            RUNTIME_PERMISSION_REQUEST_CODE -> {
+                val containsPermanentDenial = permissions.zip(grantResults.toTypedArray()).any {
+                    it.second == PackageManager.PERMISSION_DENIED &&
+                            !ActivityCompat.shouldShowRequestPermissionRationale(this, it.first)
+                }
+                val containsDenial = grantResults.any { it == PackageManager.PERMISSION_DENIED }
+                val allGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+                when {
+                    containsPermanentDenial -> {
+                        // TODO: Handle permanent denial (e.g., show AlertDialog with justification)
+                        // Note: The user will need to navigate to App Settings and manually grant
+                        // permissions that were permanently denied
+                    }
+                    containsDenial -> {
+                        requestRelevantRuntimePermissions()
+                    }
+                    allGranted && hasRequiredRuntimePermissions() -> {
+                        startBleScan()
+                    }
+                    else -> {
+                        // Unexpected scenario encountered when handling permissions
+                        recreate()
+                    }
+                }
+            }
+        }
+    }
+    private val scanResults = mutableListOf<ScanResult>()
+    private val scanResultAdapter: ScanResultAdapter by lazy {
+        ScanResultAdapter(scanResults) {
+            // TODO: Implement
+        }
+    }
+
+
+    //Gatt Connectivity
+    //Use this to request 517 byte transmission size gatt.requestMtu(GATT_MAX_MTU_SIZE)
+
+    fun BluetoothGattCharacteristic.isReadable(): Boolean =
+        containsProperty(BluetoothGattCharacteristic.PROPERTY_READ)
+
+    fun BluetoothGattCharacteristic.isWritable(): Boolean =
+        containsProperty(BluetoothGattCharacteristic.PROPERTY_WRITE)
+
+    fun BluetoothGattCharacteristic.isWritableWithoutResponse(): Boolean =
+        containsProperty(BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE)
+
+    fun BluetoothGattCharacteristic.containsProperty(property: Int): Boolean {
+        return properties and property != 0
+    }
 
 }
