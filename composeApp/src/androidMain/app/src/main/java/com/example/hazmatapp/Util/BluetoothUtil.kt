@@ -225,4 +225,55 @@ class BluetoothUtil {
         return properties and property != 0
     }
 
+    // Read Methane Level Function
+    // TODO: Replace first 8 characters of UUID strings with
+    // designated ones meant for use with our sensor package
+    private fun readMethaneLevel() {
+        val methaneServiceUuid = UUID.fromString("0000180f-0000-1000-8000-00805f9b34fb")
+        val methaneLevelCharUuid = UUID.fromString("00002a19-0000-1000-8000-00805f9b34fb")
+        val methaneLevelChar = gatt
+            .getService(methaneServiceUuid)?.getCharacteristic(methaneLevelCharUuid)
+        if (methaneLevelChar?.isReadable() == true) {
+            gatt.readCharacteristic(methaneLevelChar)
+        }
+    }
+//    These method calls can indeed return null if a given UUID doesn’t exist
+//    among the discovered services or characteristics,we can (and should) append a “?”
+//    so we get null-safety while calling those methods
+
+    override fun onCharacteristicRead(
+        gatt: BluetoothGatt,
+        characteristic: BluetoothGattCharacteristic,
+        status: Int
+    ) {
+        with(characteristic) {
+            when (status) {
+                BluetoothGatt.GATT_SUCCESS -> {
+                    Log.i("BluetoothGattCallback", "Read characteristic $uuid:\n${value.toHexString()}")
+                }
+                BluetoothGatt.GATT_READ_NOT_PERMITTED -> {
+                    Log.e("BluetoothGattCallback", "Read not permitted for $uuid!")
+                }
+                else -> {
+                    Log.e("BluetoothGattCallback", "Characteristic read failed for $uuid, error: $status")
+                }
+            }
+        }
+    }
+
+    // Read Methane ByteArray Function
+    fun ByteArray.readMethane() {
+        val hexString = this.joinToString(separator = " ", prefix = "0x") { String.format("%02X", it) }
+        val methaneLevel = this.first().toInt()
+
+        // Use hexString and methaneLevel as needed
+        Log.i("Hex representation: $hexString")
+        Log.i("Methane Level: $methaneLevel")
+        return methaneLevel
+    }
+
+    // Writing ByteArray Function
+    fun writeByteArray() {
+        // TODO: Implement
+    }
 }
