@@ -73,6 +73,8 @@ class BluetoothUtil {
                 if (newState == BluetoothProfile.STATE_CONNECTED) {
                     Log.w("BluetoothGattCallback", "Successfully connected to $deviceAddress")
                     bluetoothGatt = gatt
+                    Handler(Looper.getMainLooper()).post {
+                    bluetoothGatt?.discoverServices()
 
                 } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                     Log.w("BluetoothGattCallback", "Successfully disconnected from $deviceAddress")
@@ -83,6 +85,13 @@ class BluetoothUtil {
                 gatt.close()
             }
         }
+            override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
+        with(gatt) {
+            Log.w("BluetoothGattCallback", "Discovered ${services.size} services for ${device.address}")
+            printGattTable() // See implementation just above this section
+            // Consider connection setup as complete here
+        }
+    }
     }
 
 
@@ -166,6 +175,22 @@ class BluetoothUtil {
             }.show()
         }
     }
+
+    //Service discovery for BLE device functionality
+    private fun BluetoothGatt.printGattTable() {
+    if (services.isEmpty()) {
+        Log.i("printGattTable", "No service and characteristic available, call discoverServices() first?")
+        return
+    }
+    services.forEach { service ->
+        val characteristicsTable = service.characteristics.joinToString(
+            separator = "\n|--",
+            prefix = "|--"
+        ) { it.uuid.toString() }
+        Log.i("printGattTable", "\nService ${service.uuid}\nCharacteristics:\n$characteristicsTable"
+        )
+    }
+}
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
