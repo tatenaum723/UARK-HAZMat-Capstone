@@ -301,4 +301,47 @@ class BluetoothUtil {
     fun writeByteArray() {
         // TODO: Implement
     }
+
+    //Bluetooth write to the sensor package functionality
+    //AKA Bluetooth transmit function
+    fun writeSensorCommand(characteristic: BluetoothGattCharacteristic, payload: ByteArray) {
+    val writeType = when {
+        characteristic.isWritable() -> BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+        characteristic.isWritableWithoutResponse() -> {
+            BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE
+        }
+        else -> error("Characteristic ${characteristic.uuid} cannot be written to")
+    }
+
+ //Need to specify the type fo value being written
+ //After that specify the value to be written then write it to the GATT server
+    bluetoothGatt?.let { gatt ->
+        characteristic.writeType = writeType
+        characteristic.value = payload
+        gatt.writeCharacteristic(characteristic)
+    } ?: error("Not connected to a BLE device!")
+}
+
+    override fun onCharacteristicWrite(
+    gatt: BluetoothGatt,
+    characteristic: BluetoothGattCharacteristic,
+    status: Int
+) {
+    with(characteristic) {
+        when (status) {
+            BluetoothGatt.GATT_SUCCESS -> {
+                Log.i("BluetoothGattCallback", "Wrote to characteristic $uuid | value: ${value.toHexString()}")
+            }
+            BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH -> {
+                Log.e("BluetoothGattCallback", "Write exceeded connection ATT MTU!")
+            }
+            BluetoothGatt.GATT_WRITE_NOT_PERMITTED -> {
+                Log.e("BluetoothGattCallback", "Write not permitted for $uuid!")
+            }
+            else -> {
+                Log.e("BluetoothGattCallback", "Characteristic write failed for $uuid, error: $status")
+            }
+        }
+    }
+}
 }
