@@ -297,11 +297,6 @@ class BluetoothUtil {
         return methaneLevel
     }
 
-    // Writing ByteArray Function
-    fun writeByteArray() {
-        // TODO: Implement
-    }
-
     //Bluetooth write to the sensor package functionality
     //AKA Bluetooth transmit function
     fun writeSensorCommand(characteristic: BluetoothGattCharacteristic, payload: ByteArray) {
