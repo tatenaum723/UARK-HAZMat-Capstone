@@ -1,71 +1,101 @@
 @file:OptIn(ExperimentalResourceApi::class)
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.resource
 
 @Composable
-fun LoginButton(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
-        Text("Login")
+fun ShowAllButtons()
+{
+    Column(
+        modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        LoginButton {  }
+        SettingButton {  }
+        MenuButton1 {  }
+        MenuButton2 {  }
+        MenuButton3 {  }
+        MenuButton4 {  }
+        MenuButton5 {  }
     }
+}
+@Composable
+fun LoginButton(onClick: () -> Unit) {
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
+        Image(painterResource("login.png"), null, Modifier.size(20.dp))
+        Text("Login", Modifier.padding(start = 10.dp))
+
+    }
+
+    //Something about switching to the button's page using showContent
 }
 
 @Composable
 fun SettingButton(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
-        Image(painterResource("settings_cog.svg"), null)
-        Text("Setings", Modifier.padding(start = 10.dp))
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
+        Image(painterResource("settings-cog.png"), null, Modifier.size(20.dp))
+        Text("Settings", Modifier.padding(start = 10.dp))
     }
+
+    //Something about switching to the button's page using showContent
 }
 @Composable
 fun MenuButton1(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
         Text("Menu 1")
     }
+
+    //Something about switching to the button's page using showContent
 }
 
 @Composable
 fun MenuButton2(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
         Text("Menu 2")
     }
+
+    //Something about switching to the button's page using showContent
 }
 
 @Composable
 fun MenuButton3(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
         Text("Menu 3")
     }
+
+    //Something about switching to the button's page using showContent
 }
 
 @Composable
 fun MenuButton4(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
         Text("Menu 4")
     }
+
+    //Something about switching to the button's page using showContent
 }
 
 @Composable
 fun MenuButton5(onClick: () -> Unit) {
-    Button(onClick = { onClick() }) {
+    var showContent by remember { mutableStateOf(false) }
+    Button(onClick = { showContent = !showContent }) {
         Text("Menu 5")
     }
+
+    //Something about switching to the button's page using showContent
 }

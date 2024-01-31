@@ -15,15 +15,12 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication, title = "UARK HAZMat Capstone") {
-        Button(onClick = { onClick() }) {
-            Image(painterResource("settings_cog.svg"), null)
-            Text("Setings", Modifier.padding(start = 10.dp))
-        }
+        ShowAllButtons()
     }
 }
 
 @Preview
 @Composable
 fun AppDesktopPreview() {
-    App()
+    ShowAllButtons()
 }
