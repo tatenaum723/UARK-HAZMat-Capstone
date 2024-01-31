@@ -7,20 +7,30 @@
     tools:context=".View.MainActivity">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HAZ-Mat Drone Controller"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:gravity="center"/>
 
     <Button
+        android:id="@+id/open_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="Open sesame (To skip L/R for now)"
+        android:textSize="30sp"/>
+    <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginBottom="20dp"
         android:layout_above="@id/register_button"/>
 
@@ -29,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"/>
 

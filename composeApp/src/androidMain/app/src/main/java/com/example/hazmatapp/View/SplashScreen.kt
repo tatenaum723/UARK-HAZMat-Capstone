@@ -11,12 +11,13 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
+        // Launches the MainActivity after showing the splash screen for a short time
         Handler().postDelayed({
             startActivity(Intent(this, Menu::class.java))
             finish()
         }, SPLASH_DELAY)
     }
-    companion object {
+    companion object { // Sets delay time of splash screen
         private const val SPLASH_DELAY: Long = 3000 // Splash screen delay in milliseconds
     }
 }
