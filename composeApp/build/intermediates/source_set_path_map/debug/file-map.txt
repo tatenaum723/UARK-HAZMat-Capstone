@@ -36,12 +36,12 @@ uark.hazmat.project.composeApp-animation-release-34 /Users/tatenaumann/.gradle/c
 uark.hazmat.project.composeApp-ui-release-35 /Users/tatenaumann/.gradle/caches/transforms-3/f442ba0111f9745bc383f029dbe666dc/transformed/ui-release/res
 uark.hazmat.project.composeApp-startup-runtime-1.1.1-36 /Users/tatenaumann/.gradle/caches/transforms-3/fe21b49335766e7642177ee69c1fe030/transformed/startup-runtime-1.1.1/res
 uark.hazmat.project.composeApp-lifecycle-process-2.6.1-37 /Users/tatenaumann/.gradle/caches/transforms-3/ff332095787bbbea3dffb6732b41eb79/transformed/lifecycle-process-2.6.1/res
-uark.hazmat.project.composeApp-pngs-38 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/generated/res/pngs/debug
-uark.hazmat.project.composeApp-resValues-39 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/generated/res/resValues/debug
-uark.hazmat.project.composeApp-packageDebugResources-40 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/intermediates/incremental/debug/packageDebugResources/merged.dir
-uark.hazmat.project.composeApp-packageDebugResources-41 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
-uark.hazmat.project.composeApp-merged_res-42 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/build/intermediates/merged_res/debug
-uark.hazmat.project.composeApp-androidDebug-43 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/androidDebug/res
-uark.hazmat.project.composeApp-androidMain-44 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/androidMain/res
-uark.hazmat.project.composeApp-debug-45 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/debug/res
-uark.hazmat.project.composeApp-main-46 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK HAZMat Capstone/composeApp/src/main/res
+uark.hazmat.project.composeApp-pngs-38 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/build/generated/res/pngs/debug
+uark.hazmat.project.composeApp-resValues-39 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/build/generated/res/resValues/debug
+uark.hazmat.project.composeApp-packageDebugResources-40 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+uark.hazmat.project.composeApp-packageDebugResources-41 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+uark.hazmat.project.composeApp-merged_res-42 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/build/intermediates/merged_res/debug
+uark.hazmat.project.composeApp-androidDebug-43 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/src/androidDebug/res
+uark.hazmat.project.composeApp-androidMain-44 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/src/androidMain/res
+uark.hazmat.project.composeApp-debug-45 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/src/debug/res
+uark.hazmat.project.composeApp-main-46 /Users/tatenaumann/Desktop/Capstone/ProjectCode/UARK-HAZMat-Capstone/composeApp/src/main/res
