@@ -40,7 +40,6 @@ class Registration : AppCompatActivity() {
         // OnClick methods
         registerButton.setOnClickListener {
             registerUser()
-            finish() // The activity is finished/ terminated and user goes back to l/r menu 
         }
     }
 
@@ -62,18 +61,18 @@ class Registration : AppCompatActivity() {
                             val newUser = User(id, userName, email) // New user object to add the user data into
                             addUser(newUser) // Adds the new user object into the database
                             displayMessage("REGISTRATION SUCCESSFUL")
-                            finish() // terminates the activity
+                            finish() // The activity is finished/ terminated and user goes back to l/r menu
                         } else {
                             displayMessage("REGISTRATION FAILED")
                         }
                     }
             }
             else{
-                displayMessage("PASSWORD DO NOT MATCH")
+                displayMessage("PASSWORDS DO NOT MATCH")
             }
         }
         else{
-            displayMessage("ENTER ALL FIELDS TO CREATE USER")
+            displayMessage("ENTER ALL FIELDS")
         }
     }
 
