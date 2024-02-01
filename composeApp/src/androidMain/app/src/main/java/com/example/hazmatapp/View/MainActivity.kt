@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import com.example.hazmatapp.R
 
+// The first activity that shows up after the splash screen. It shows the Login/ Registration Menu
 class MainActivity : AppCompatActivity() {
 
     // Instance variables
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         // OnClick methods
         login.setOnClickListener {
-
+            intent = Intent(this, Login::class.java)
+            startActivity(intent)
         }
         registration.setOnClickListener { // Launches the Registration activity when the button is pressed
             intent = Intent(this, Registration::class.java)
