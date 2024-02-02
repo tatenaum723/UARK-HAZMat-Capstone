@@ -15,6 +15,7 @@
         android:textSize="40dp"
         android:gravity="center"
         android:textColor="@color/macaroon"/>
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="200dp"
@@ -49,19 +50,66 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/black"
         android:layout_below="@id/button_container"
         android:layout_marginTop="20dp">
 
         <TextView
+            android:id="@+id/result_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Results"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/current_methane_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/result_title"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Methane % LEL: "
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/current_methane_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="0%"
+            android:textSize="20dp"
+            android:layout_toRightOf="@id/current_methane_text"
+            android:layout_alignBottom="@id/current_methane_text"/>
+
+        <TextView
+            android:id="@+id/highest_methane_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/current_methane_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Methane % Volume: "
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/highest_methane_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="0%"
+            android:textSize="20dp"
+            android:layout_toRightOf="@id/highest_methane_text"
+            android:layout_alignBottom="@id/highest_methane_text"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -3,46 +3,39 @@ package com.example.hazmatapp.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import com.example.hazmatapp.R
 
+// The first activity that shows up after the splash screen. It shows the Login/ Registration Menu
 class MainActivity : AppCompatActivity() {
 
     // Instance variables
-    private lateinit var button1: Button
-    private lateinit var button2: Button
-    private lateinit var button3: Button
-    private lateinit var button4: Button
-    private lateinit var button5: Button
+    private lateinit var open: Button
+    private lateinit var login: Button
+    private lateinit var registration: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize buttons
-        button1 = findViewById(R.id.button1)
-        button2 = findViewById(R.id.button2)
-        button3 = findViewById(R.id.button3)
-        button4 = findViewById(R.id.button4)
-        button5 = findViewById(R.id.button5)
+        // Initializes variables
+        open = findViewById(R.id.open_button)
+        login = findViewById(R.id.login_button)
+        registration = findViewById(R.id.register_button)
 
-        // Button actions
-        button1.setOnClickListener {
-            val intent = Intent(this, NormalReading::class.java)
+        open.setOnClickListener { // Launches the Menu activity when the button is pressed
+            intent = Intent(this, Menu::class.java)
             startActivity(intent)
         }
-        button2.setOnClickListener {
-            Log.d("Main", "Clicking b2")
+
+        // OnClick methods
+        login.setOnClickListener {
+            intent = Intent(this, Login::class.java)
+            startActivity(intent)
         }
-        button3.setOnClickListener {
-            Log.d("Main", "Clicking b3")
-        }
-        button4.setOnClickListener {
-            Log.d("Main", "Clicking b4")
-        }
-        button5.setOnClickListener {
-            Log.d("Main", "Clicking b5")
+        registration.setOnClickListener { // Launches the Registration activity when the button is pressed
+            intent = Intent(this, Registration::class.java)
+            startActivity(intent)
         }
     }
 }

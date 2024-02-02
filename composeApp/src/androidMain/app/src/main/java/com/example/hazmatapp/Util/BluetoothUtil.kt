@@ -6,7 +6,7 @@ class BluetoothUtil {
     //These private values may need to be moved into a place where the functions have access to them
     //Due to my inexperience in Kotlin, I am unsure if all function calls from the app will share the same address space
     //This code uses some app specific UI code from the tutorial which must be changed for our app
-
+/**
     //Maximum transmission size
     private const val GATT_MAX_MTU_SIZE = 517
 
@@ -338,5 +338,5 @@ class BluetoothUtil {
             }
         }
     }
-}
+}**/
 }
