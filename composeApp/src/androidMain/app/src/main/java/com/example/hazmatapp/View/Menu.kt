@@ -53,7 +53,8 @@ class Menu : AppCompatActivity() {
             Log.d("Main", "Clicking b3")
         }
         bluetoothButton.setOnClickListener {
-            Log.d("Main", "Clicking b4")
+            val intent = Intent(this, ScanningBluetooth::class.java)
+            startActivity(intent)
         }
         instructionsButton.setOnClickListener {
             Log.d("Main", "Clicking b5")
