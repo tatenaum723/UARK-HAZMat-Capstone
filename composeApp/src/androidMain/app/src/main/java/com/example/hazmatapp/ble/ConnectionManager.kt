@@ -13,7 +13,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
-//import //Timber.log.//Timber
+//import //Timber.log
 import java.lang.ref.WeakReference
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
@@ -22,7 +22,6 @@ import java.util.concurrent.ConcurrentLinkedQueue
 private const val GATT_MIN_MTU_SIZE = 23
 /** Maximum BLE MTU size as defined in gatt_api.h. */
 private const val GATT_MAX_MTU_SIZE = 517
-/*
 object ConnectionManager {
 
     private var listeners: MutableSet<WeakReference<ConnectionEventListener>> = mutableSetOf()
@@ -318,6 +317,8 @@ object ConnectionManager {
             is MtuRequest -> with(operation) {
                 gatt.requestMtu(mtu)
             }
+
+            else -> {}
         }
     }
 
@@ -552,4 +553,4 @@ object ConnectionManager {
     }
 
     private fun BluetoothDevice.isConnected() = deviceGattMap.containsKey(this)
-}*/
+}
