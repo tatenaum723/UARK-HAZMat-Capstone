@@ -1,10 +1,12 @@
 package com.example.hazmatapp.View
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.hazmatapp.R
+import dagger.hilt.android.HiltAndroidApp
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

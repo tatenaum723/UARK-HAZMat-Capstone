@@ -39,7 +39,7 @@ import org.jetbrains.anko.alert
 import //Timber.log.//Timber*/
 
 //TODO: Need this entry point for dependency injection to work but causes errors here
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class ScanningBluetooth : AppCompatActivity() {
 
     //inject the bluetooth adapter
@@ -75,22 +75,22 @@ class ScanningBluetooth : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         //TODO: fix this here becuase it causes page crashes
-        //showBluetoothDialog()
+        showBluetoothDialog()
     }
-    private var isBluetootDialogAlreadyShown = false
+    private var isBluetoothDialogAlreadyShown = false
     private fun showBluetoothDialog(){
         if(!bluetoothAdapter.isEnabled){
-            if(!isBluetootDialogAlreadyShown){
+            if(!isBluetoothDialogAlreadyShown){
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startBluetoothIntentForResult.launch(enableBluetoothIntent)
-                isBluetootDialogAlreadyShown = true
+                isBluetoothDialogAlreadyShown = true
             }
         }
     }
 
     private val startBluetoothIntentForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            isBluetootDialogAlreadyShown = false
+            isBluetoothDialogAlreadyShown = false
             if(result.resultCode != Activity.RESULT_OK){
                 showBluetoothDialog()
             }
