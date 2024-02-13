@@ -25,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTempHumidityReceiveManager(
+    fun provideMethaneReceiveManager(
         @ApplicationContext context: Context,
         bluetoothAdapter: BluetoothAdapter
     ): MethaneReceiveManager {

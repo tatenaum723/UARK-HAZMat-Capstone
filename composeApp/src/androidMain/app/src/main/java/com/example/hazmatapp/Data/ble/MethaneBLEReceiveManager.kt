@@ -131,14 +131,15 @@ class MethaneBLEReceiveManager @Inject constructor(
                         val multiplicator = if(value.first().toInt()> 0) -1 else 1
                         val absMethane = value[1].toInt() + value[2].toInt() / 10f
                         val lelMethane = value[4].toInt() + value[5].toInt() / 10f
-                        val tempHumidityResult = MethaneResult(
+                        //Need another value for the HMAC hashed values
+                        val methaneResult = MethaneResult(
                             multiplicator * absMethane,
                             lelMethane,
                             ConnectionState.Connected
                         )
                         coroutineScope.launch {
                             data.emit(
-                                Resource.Success(data = tempHumidityResult)
+                                Resource.Success(data = methaneResult)
                             )
                         }
                     }
@@ -215,7 +216,7 @@ class MethaneBLEReceiveManager @Inject constructor(
         val cccdUuid = UUID.fromString(CCCD_DESCRIPTOR_UUID)
         characteristic.getDescriptor(cccdUuid)?.let { cccdDescriptor ->
             if(gatt?.setCharacteristicNotification(characteristic,false) == false){
-                Log.d("TempHumidReceiveManager","set charateristics notification failed")
+                Log.d("MethaneReceiveManager","set charateristics notification failed")
                 return
             }
             writeDescription(cccdDescriptor, BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE)

@@ -22,23 +22,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import android.widget.Button
 import android.widget.EditText
-
-
+import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import androidx.activity.result.contract.ActivityResultContracts
 
 
-//Must import the recycler view and edit APIs
-
-
-
-/* probably going to need a tailored version for our app
-import kotlinx.android.synthetic.main.activity_main.scan_results_recycler_view
-import org.jetbrains.anko.alert
-import //Timber.log.//Timber*/
-
-//TODO: Need this entry point for dependency injection to work but causes errors here
+//TODO: Need this entry point for dependency injection to work
+//You must manually enable bluetooth permissions for the app to query to turn on bluetooth
 @AndroidEntryPoint
 class ScanningBluetooth : AppCompatActivity() {
 
@@ -74,12 +65,13 @@ class ScanningBluetooth : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        //TODO: fix this here becuase it causes page crashes
+
+        //Works now
         showBluetoothDialog()
     }
     private var isBluetoothDialogAlreadyShown = false
     private fun showBluetoothDialog(){
-        if(!bluetoothAdapter.isEnabled){
+        if(bluetoothAdapter?.isEnabled == false){
             if(!isBluetoothDialogAlreadyShown){
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startBluetoothIntentForResult.launch(enableBluetoothIntent)
@@ -88,7 +80,7 @@ class ScanningBluetooth : AppCompatActivity() {
         }
     }
 
-    private val startBluetoothIntentForResult =
+   private val startBluetoothIntentForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             isBluetoothDialogAlreadyShown = false
             if(result.resultCode != Activity.RESULT_OK){
