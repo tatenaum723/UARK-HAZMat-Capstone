@@ -57,6 +57,18 @@ dependencies {
     //kapt ("androidx.hilt:hilt-compiler:1.0.0")
     //implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    //Kotlin Crypto
+    val core = "0.4.0"
+    implementation("org.kotlincrypto.core:digest:$core")
+    implementation("org.kotlincrypto.core:mac:$core")
+    implementation("org.kotlincrypto.core:xof:$core")
+    // define the BOM and its version
+    implementation(platform("org.kotlincrypto.macs:bom:0.4.0"))
+    // HmacSHA224, HmacSHA256, HmacSHA384, HmacSHA512
+    // HmacSHA512/t, HmacSHA512/224, HmacSHA512/256
+    implementation("org.kotlincrypto.macs:hmac-sha2")
+
+
     //Permissions
     implementation ("com.google.accompanist:accompanist-permissions:0.21.1-beta")
 
