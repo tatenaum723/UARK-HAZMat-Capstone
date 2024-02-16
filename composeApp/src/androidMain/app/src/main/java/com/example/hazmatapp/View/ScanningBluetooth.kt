@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,17 +39,18 @@ class ScanningBluetooth : AppCompatActivity() {
 
     //Declare button here
     private lateinit var scan: Button
+    private lateinit var userBLEStatus: TextView
 
     private var isScanning = false
 
 
-    //Function overrides for the bluetooth scanning activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scanning_bluetooth)
 
         // Initialize buttons
         scan = findViewById(R.id.scan_button)
+        userBLEStatus = findViewById(R.id.bluetooth_status)
         //Scan Button Click Actions
         scan.setOnClickListener {
             //scan.text = "Stop Scan"
@@ -72,17 +74,21 @@ class ScanningBluetooth : AppCompatActivity() {
     private var isBluetoothDialogAlreadyShown = false
     private fun showBluetoothDialog(){
         if(bluetoothAdapter?.isEnabled == false){
+            userBLEStatus.text = "Bluetooth is OFF"
             if(!isBluetoothDialogAlreadyShown){
                 val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startBluetoothIntentForResult.launch(enableBluetoothIntent)
                 isBluetoothDialogAlreadyShown = true
             }
+        }else{
+            userBLEStatus.text = "Bluetooth is ON"
         }
     }
 
    private val startBluetoothIntentForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             isBluetoothDialogAlreadyShown = false
+            userBLEStatus.text = "Bluetooth is ON"
             if(result.resultCode != Activity.RESULT_OK){
                 showBluetoothDialog()
             }
