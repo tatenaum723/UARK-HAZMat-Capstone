@@ -3,31 +3,17 @@ package com.example.hazmatapp.View
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hazmatapp.R
-import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothManager
-import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanResult
-import android.bluetooth.le.ScanSettings
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+
+//New Stuff
 
 //TODO: Need this entry point for dependency injection to work
 //You must manually enable bluetooth permissions for the app to query to turn on bluetooth
@@ -41,6 +27,8 @@ class ScanningBluetooth : AppCompatActivity() {
     private lateinit var scan: Button
     private lateinit var userBLEStatus: TextView
 
+
+
     private var isScanning = false
 
 
@@ -49,8 +37,10 @@ class ScanningBluetooth : AppCompatActivity() {
         setContentView(R.layout.activity_scanning_bluetooth)
 
         // Initialize buttons
-        scan = findViewById(R.id.scan_button)
-        userBLEStatus = findViewById(R.id.bluetooth_status)
+        scan = findViewById(R.id.connect_button)
+        userBLEStatus = findViewById(R.id.lel_methane)
+
+
         //Scan Button Click Actions
         scan.setOnClickListener {
             //scan.text = "Stop Scan"
@@ -68,8 +58,9 @@ class ScanningBluetooth : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        //Works now
+        //Prompt the user to turn on Bluetooth if it's off
         showBluetoothDialog()
+
     }
     private var isBluetoothDialogAlreadyShown = false
     private fun showBluetoothDialog(){

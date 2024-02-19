@@ -6,12 +6,12 @@ import android.content.Intent
 import android.content.IntentFilter
 
 
-/*
+
 fun SystemBroadcastReceiver(
     systemAction:String,
     onSystemEvent:(intent: Intent?)->Unit
 ) {
-
+/*
     val context = LocalContext.current
 
     val currentOnSystemEvent by rememberUpdatedState(onSystemEvent)
@@ -30,5 +30,5 @@ fun SystemBroadcastReceiver(
             context.unregisterReceiver(broadcast)
         }
 
-    }
-}*/
+    }*/
+}

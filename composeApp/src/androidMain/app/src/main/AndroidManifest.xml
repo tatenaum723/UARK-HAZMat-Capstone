@@ -57,6 +57,9 @@
         <activity
             android:name=".View.ScanningBluetooth"
             android:exported="false" />
+        <activity
+            android:name=".View.bluetooth_connection"
+            android:exported="false" />
 
     </application>
 

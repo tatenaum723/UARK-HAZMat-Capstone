@@ -14,17 +14,23 @@ import androidx.lifecycle.viewModelScope
 import javax.inject.Inject
 
 
+
 //TODO convert this to a conventional ViewModel
 @HiltViewModel
 class MethaneViewModel  @Inject constructor(
     private val MethaneReceiveManager: MethaneReceiveManager
 ) : ViewModel(){
 
-    private var initializingMessage: String? = ""
-    private var errorMessage: String? = ""
-    private var lowerExplosiveLimit: Float = 0.0f
-    private var absoluteMethane: Float = 0.0f
-    private var connectionState: ConnectionState = ConnectionState.Uninitialized
+     var initializingMessage: String? = ""
+         private set
+     var errorMessage: String? = ""
+         private set
+     var lowerExplosiveLimit: Float = 0.0f
+         private set
+     var absoluteMethane: Float = 0.0f
+         private set
+     var connectionState: ConnectionState = ConnectionState.Uninitialized
+         private set
 
 
 
