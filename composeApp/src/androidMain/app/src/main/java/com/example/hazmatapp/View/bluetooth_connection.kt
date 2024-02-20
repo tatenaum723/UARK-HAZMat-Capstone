@@ -32,7 +32,7 @@ class bluetooth_connection : AppCompatActivity() {
     private lateinit var viewModel: MethaneViewModel
 
     //Tie the connection state in the view the that of the ViewModel
-    //Basically the error is taht viewModel must be initialized before connection state can be assigned
+    //Basically the error is that viewModel must be initialized before connection state can be assigned
     //val bleConnectionState = viewModel.connectionState
 
     private var connectionEstablished = false
@@ -61,6 +61,7 @@ class bluetooth_connection : AppCompatActivity() {
             }
             else if (connectionEstablished == true) {
                 connect.text = "Connect"
+                viewModel.disconnect()
                 connectionEstablished = false
             }
         }
