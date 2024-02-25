@@ -1,26 +1,33 @@
 @file:OptIn(ExperimentalResourceApi::class)
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
+/*fun initializeFirebase() {
+    val serviceAccount = FileInputStream("path/to/google-services.json")
+
+    val options = FirebaseOptions.builder()
+        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .setDatabaseUrl("https://console.firebase.google.com/u/0/project/haz-mat-7ad0f/database/haz-mat-7ad0f-default-rtdb/data")
+        .build()
+
+    FirebaseApp.initializeApp(options)
+}*/
+
 fun main() = application {
+
+    //initializeFirebase()
+
     Window(onCloseRequest = ::exitApplication, title = "UARK HAZMat Capstone") {
-        ShowAllButtons()
+        AppContent()
     }
 }
 
 @Preview
 @Composable
 fun AppDesktopPreview() {
-    ShowAllButtons()
+    AppContent()
 }

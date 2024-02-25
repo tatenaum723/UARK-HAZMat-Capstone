@@ -16,7 +16,13 @@ kotlin {
         }
     }
     
-    jvm("desktop")
+    jvm("desktop") {
+        dependencies {
+            implementation(compose.desktop.currentOs)
+            //implementation("com.google.firebase:firebase-admin:8.0.1")
+            //implementation("com.google.firebase:firebase-database:8.0.1")
+        }
+    }
     
     listOf(
         iosX64(),
@@ -46,6 +52,8 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            //implementation("com.google.firebase:firebase-admin:8.0.1")
+            //implementation("com.google.firebase:firebase-database:8.0.1")
         }
     }
 }
@@ -86,7 +94,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "main"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
@@ -95,3 +103,5 @@ compose.desktop {
         }
     }
 }
+
+val composeVersion by extra("1.0.5")
