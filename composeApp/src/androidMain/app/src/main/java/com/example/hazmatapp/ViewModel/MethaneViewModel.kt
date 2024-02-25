@@ -3,6 +3,7 @@ package com.example.hazmatapp.ViewModel
 //import androidx.compose.runtime.getValue
 //import androidx.compose.runtime.mutableStateOf
 //import androidx.compose.runtime.setValue
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.hazmatapp.Data.ConnectionState
 import com.example.hazmatapp.Data.MethaneReceiveManager
@@ -39,9 +40,11 @@ class MethaneViewModel  @Inject constructor(
             MethaneReceiveManager.data.collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        //if HMACS match then update the values in the ViewModel
                         connectionState = result.data.connectionState
                         lowerExplosiveLimit = result.data.lel
-                        absoluteMethane = result.data.absolutePercent
+                        //absoluteMethane = result.data.absolutePercent
+                        println("LEL Methane: $lowerExplosiveLimit")
                     }
 
                     is Resource.Loading -> {

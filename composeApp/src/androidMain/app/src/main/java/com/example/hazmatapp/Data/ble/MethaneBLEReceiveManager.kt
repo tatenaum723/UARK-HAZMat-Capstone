@@ -24,9 +24,9 @@ class MethaneBLEReceiveManager @Inject constructor(
     private val context: Context
 ) : MethaneReceiveManager {
 
-    private val DEVICE_NAME = "enter name here"
-    private val METHANE_SERVICE_UUID = "0000aa20-0000-1000-8000-00805f9b34fb"
-    private val METHANE_CHARACTERISTICS_UUID = "0000aa21-0000-1000-8000-00805f9b34fb"
+    private val DEVICE_NAME = "MethaneSensor"
+    private val METHANE_SERVICE_UUID = "00001111-0000-1000-8000-00805f9b34fb"
+    private val METHANE_CHARACTERISTICS_UUID = "00002222-0000-1000-8000-00805f9b34fb"
 
     override val data: MutableSharedFlow<Resource<MethaneResult>> = MutableSharedFlow()
 
@@ -74,7 +74,7 @@ class MethaneBLEReceiveManager @Inject constructor(
                     this@MethaneBLEReceiveManager.gatt = gatt
                 } else if(newState == BluetoothProfile.STATE_DISCONNECTED){
                     coroutineScope.launch {
-                        data.emit(Resource.Success(data = MethaneResult(0f,0f,ConnectionState.Disconnected)))
+                        data.emit(Resource.Success(data = MethaneResult(0f,ConnectionState.Disconnected)))
                     }
                     gatt.close()
                 }
@@ -112,7 +112,7 @@ class MethaneBLEReceiveManager @Inject constructor(
             val characteristic = findCharacteristics(METHANE_SERVICE_UUID, METHANE_CHARACTERISTICS_UUID)
             if(characteristic == null){
                 coroutineScope.launch {
-                    data.emit(Resource.Error(errorMessage = "Could not find temp and humidity publisher"))
+                    data.emit(Resource.Error(errorMessage = "Could not find methane publisher"))
                 }
                 return
             }
@@ -128,12 +128,12 @@ class MethaneBLEReceiveManager @Inject constructor(
                     UUID.fromString(METHANE_CHARACTERISTICS_UUID) -> {
                         //TODO : modify this to get whatever is passed from sensor package
                         //Need to format exactly as the sensor package represents the passed data
-                        val multiplicator = if(value.first().toInt()> 0) -1 else 1
-                        val absMethane = value[1].toInt() + value[2].toInt() / 10f
-                        val lelMethane = value[4].toInt() + value[5].toInt() / 10f
+                        // XX XX XX XX XX
+                        //val multiplicator = if(value.first().toInt()> 5) -1 else 1
+                        val lelMethane = value[1].toFloat()
+                        //val lelMethane = value[4].toInt() + value[5].toInt() / 10f
                         //Need another value for the HMAC hashed values
                         val methaneResult = MethaneResult(
-                            multiplicator * absMethane,
                             lelMethane,
                             ConnectionState.Connected
                         )
