@@ -25,9 +25,9 @@ class RealTimeReading : AppCompatActivity() {
 
         // Initializes the variables
         lelBar = findViewById(R.id.lel_bar)
-        lelNum = findViewById(R.id.lel_bar_number)
+        lelNum = findViewById(R.id.lel_text)
         volBar = findViewById(R.id.vol_bar)
-        volNum = findViewById(R.id.vol_bar_number)
+        volNum = findViewById(R.id.vol_text)
         startButton = findViewById(R.id.start_button)
         emul = EmulatorUtil()
 
