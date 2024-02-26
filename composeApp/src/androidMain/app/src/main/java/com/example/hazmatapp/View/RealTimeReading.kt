@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.hazmatapp.R
+import com.example.hazmatapp.Util.EmulatorUtil
 
 class RealTimeReading : AppCompatActivity() {
 
@@ -15,6 +16,7 @@ class RealTimeReading : AppCompatActivity() {
     private lateinit var volBar: ProgressBar
     private lateinit var volNum: TextView
     private lateinit var startButton: Button
+    private lateinit var emul: EmulatorUtil
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +29,7 @@ class RealTimeReading : AppCompatActivity() {
         volBar = findViewById(R.id.vol_bar)
         volNum = findViewById(R.id.vol_bar_number)
         startButton = findViewById(R.id.start_button)
+        emul = EmulatorUtil()
 
         // On-click methods for buttons
         startButton.setOnClickListener {
@@ -36,6 +39,6 @@ class RealTimeReading : AppCompatActivity() {
     }
 
     private fun getData() {
-        TODO("Not yet implemented")
+        emul.startEmulation(60)
     }
 }

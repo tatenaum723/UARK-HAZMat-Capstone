@@ -1,86 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".View.RealTimeReading">
+    tools:context=".View.RealTimeReading"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/lel_text"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Methane LEL %"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/pale_yellow"
-        android:layout_centerHorizontal="true"/>
+        android:text="Real-Time Reading"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
 
     <RelativeLayout
-        android:id="@+id/progress_bar1"
+        android:id="@+id/lel_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lel_text">
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:id="@+id/lel_bar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="0"/>
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/progress_bar"
+            android:progress="60"
+            android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:id="@+id/lel_bar_number"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0"
-            android:textStyle="bold"/>
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Methane LEL"
+                android:textSize="20sp"
+                android:textColor="@color/green"/>
+
+            <LinearLayout
+                android:id="@+id/lel_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/lel_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textColor="@color/green" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textSize="20sp"
+                    android:textColor="@color/green"/>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/volume_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mehtane Volume %"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/pale_yellow"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/progress_bar1"/>
-
     <RelativeLayout
-        android:id="@+id/progress_bar2"
+        android:id="@+id/vol_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/volume_text">
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:id="@+id/vol_bar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="0"/>
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/progress_bar"
+            android:progress="60"
+            android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:id="@+id/vol_bar_number"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="0"
-            android:textStyle="bold"/>
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Methane VOL"
+                android:textSize="20sp"
+                android:textColor="@color/green"/>
+
+            <LinearLayout
+                android:id="@+id/vol_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/vol_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textColor="@color/green" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textSize="20sp"
+                    android:textColor="@color/green"/>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/start_button"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
-        android:text="Start Reading"
-        android:textSize="20sp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:padding="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reset"
+                android:padding="20dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:padding="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

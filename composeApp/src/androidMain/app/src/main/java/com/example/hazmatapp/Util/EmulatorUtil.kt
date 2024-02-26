@@ -1,7 +1,6 @@
 package com.example.hazmatapp.Util
 
 import android.util.Log
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.max
@@ -12,12 +11,8 @@ class EmulatorUtil {
     private var timer = Timer()
     private var currentVolume = Random.nextDouble(0.01, 1.0)
     private var isInTCMode = false
-    private lateinit var file: File
 
     fun startEmulation(duration: Int) {
-        val fileName = generateFileName()
-        file = File(fileName)
-
         val task = object : TimerTask() {
             var secondsPassed = 0
 
@@ -30,10 +25,10 @@ class EmulatorUtil {
                     val currentLEL = min(calculateLEL(currentVolume), 100.0)
 
                     if (!isInTCMode && currentLEL > 60) {
-                        println("Switching to Thermal Conductivity (TC) Mode")
+                        Log.d("Emulator","Switching to Thermal Conductivity (TC) Mode")
                         isInTCMode = true
                     } else if (isInTCMode && currentLEL < 50) {
-                        println("Switching to Catalytic mode")
+                        Log.d("Emulator","Switching to Catalytic mode")
                         isInTCMode = false
                     }
 
@@ -43,8 +38,7 @@ class EmulatorUtil {
                         """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
                             4
                         )}}"""
-                    println(logEntry)
-                    appendLogEntry(file, logEntry)
+                    Log.d("Emulator", "$logEntry")
 
                     secondsPassed++
                 } else {
@@ -64,15 +58,6 @@ class EmulatorUtil {
         currentVolume < 1.0 -> 1.25
         currentVolume < 2.0 -> 1.1
         else -> 0.95
-    }
-
-    private fun appendLogEntry(file: File, logEntry: String) {
-        file.appendText("$logEntry,\n")
-    }
-
-    private fun generateFileName(): String {
-        val dateFormat = SimpleDateFormat("MM-dd-yyyy_HH-mm-ss")
-        return "sensor_readings_${dateFormat.format(Date())}.json"
     }
 
     private fun Double.format(digits: Int) = "%.${digits}f".format(this)
