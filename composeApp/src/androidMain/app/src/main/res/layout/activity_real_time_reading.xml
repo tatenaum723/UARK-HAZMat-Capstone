@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context=".View.RealTimeReading">
+
+    <TextView
+        android:id="@+id/lel_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Methane LEL %"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/pale_yellow"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_bar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lel_text">
+
+        <ProgressBar
+            android:id="@+id/lel_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0"/>
+
+        <TextView
+            android:id="@+id/lel_bar_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/volume_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mehtane Volume %"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/pale_yellow"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/progress_bar1"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_bar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/volume_text">
+
+        <ProgressBar
+            android:id="@+id/vol_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="0"/>
+
+        <TextView
+            android:id="@+id/vol_bar_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:text="Start Reading"
+        android:textSize="20sp"/>
+
+</RelativeLayout>
