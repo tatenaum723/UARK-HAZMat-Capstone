@@ -2,7 +2,9 @@ package com.example.hazmatapp.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.hazmatapp.R
@@ -12,9 +14,9 @@ class RealTimeReading : AppCompatActivity() {
 
     // Instance variables
     private lateinit var lelBar: ProgressBar
-    private lateinit var lelNum: TextView
+    private lateinit var lelNum: EditText
     private lateinit var volBar: ProgressBar
-    private lateinit var volNum: TextView
+    private lateinit var volNum: EditText
     private lateinit var startButton: Button
     private lateinit var emul: EmulatorUtil
 
@@ -25,9 +27,9 @@ class RealTimeReading : AppCompatActivity() {
 
         // Initializes the variables
         lelBar = findViewById(R.id.lel_bar)
-        lelNum = findViewById(R.id.lel_text)
+        lelNum = findViewById(R.id.lel_number)
         volBar = findViewById(R.id.vol_bar)
-        volNum = findViewById(R.id.vol_text)
+        volNum = findViewById(R.id.vol_number)
         startButton = findViewById(R.id.start_button)
         emul = EmulatorUtil()
 
@@ -39,6 +41,13 @@ class RealTimeReading : AppCompatActivity() {
     }
 
     private fun getData() {
-        emul.startEmulation(60)
+        emul.startEmulation(10)
+        update()
+    }
+
+    private fun update(){
+        
+        Log.d("RTR Emul", "${emul.LELreadings}")
+        Log.d("RTR Emul", "${emul.VOLreadings}")
     }
 }

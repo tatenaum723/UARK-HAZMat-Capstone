@@ -11,6 +11,8 @@ class EmulatorUtil {
     private var timer = Timer()
     private var currentVolume = Random.nextDouble(0.01, 1.0)
     private var isInTCMode = false
+    val LELreadings = mutableListOf<Pair<Int, Double>>()
+    val VOLreadings = mutableListOf<Pair<Int, Double>>()
 
     fun startEmulation(duration: Int) {
         val task = object : TimerTask() {
@@ -38,9 +40,12 @@ class EmulatorUtil {
                         """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
                             4
                         )}}"""
-                    Log.d("Emulator", "$logEntry")
+                    //Log.d("Emulator", "$logEntry")
 
                     secondsPassed++
+
+                    LELreadings.add(Pair(secondsPassed + 1, currentLEL))
+                    VOLreadings.add(Pair(secondsPassed + 1, currentVolume))
                 } else {
                     timer.cancel()
                     timer.purge()
