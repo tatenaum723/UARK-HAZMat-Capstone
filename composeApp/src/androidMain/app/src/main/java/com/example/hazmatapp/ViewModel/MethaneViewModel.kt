@@ -5,13 +5,12 @@ package com.example.hazmatapp.ViewModel
 //import androidx.compose.runtime.setValue
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.hazmatapp.Data.ConnectionState
 import com.example.hazmatapp.Data.MethaneReceiveManager
 import com.example.hazmatapp.Util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.sql.Connection
-import androidx.lifecycle.viewModelScope
 import javax.inject.Inject
 
 
@@ -28,7 +27,7 @@ class MethaneViewModel  @Inject constructor(
          private set
      var lowerExplosiveLimit: Float = 0.0f
          private set
-     var sensorHash: Float = 0.0f
+     var sensorHash: ByteArray = byteArrayOf(0)
         private set
      var absoluteMethane: Float = 0.0f
          private set

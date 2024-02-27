@@ -1,6 +1,5 @@
 package com.example.hazmatapp.Data.ble
 
-import android.annotation.SuppressLint
 import android.bluetooth.*
 import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
@@ -11,6 +10,7 @@ import com.example.hazmatapp.Data.ConnectionState
 import com.example.hazmatapp.Data.MethaneResult
 import com.example.hazmatapp.Data.MethaneReceiveManager
 import com.example.hazmatapp.Util.Resource
+import com.example.hazmatapp.Util.CryptoUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -74,7 +74,7 @@ class MethaneBLEReceiveManager @Inject constructor(
                     this@MethaneBLEReceiveManager.gatt = gatt
                 } else if(newState == BluetoothProfile.STATE_DISCONNECTED){
                     coroutineScope.launch {
-                        data.emit(Resource.Success(data = MethaneResult(0f,0f,ConnectionState.Disconnected)))
+                        data.emit(Resource.Success(data = MethaneResult(0f, byteArrayOf(0),ConnectionState.Disconnected)))
                     }
                     gatt.close()
                 }
@@ -123,6 +123,7 @@ class MethaneBLEReceiveManager @Inject constructor(
             gatt: BluetoothGatt,
             characteristic: BluetoothGattCharacteristic
         ) {
+            val crypto = CryptoUtil();
             with(characteristic){
                 when(uuid){
                     UUID.fromString(METHANE_CHARACTERISTICS_UUID) -> {
@@ -130,8 +131,13 @@ class MethaneBLEReceiveManager @Inject constructor(
                         //Need to format exactly as the sensor package represents the passed data
                         // XX XX XX XX XX
                         //val multiplicator = if(value.first().toInt()> 5) -1 else 1
-                        val lelMethane = value[0].toFloat()
-                        val hashValue = value[1].toFloat()
+                        val hashValue = byteArrayOf(value[2])
+                        var lelMethane = 0f
+                        var absMethane = 0f
+                        if(crypto.checkHMAC(value, hashValue)){
+                            lelMethane = value[0].toFloat()
+                            absMethane = value[1].toFloat()
+                        }
                         //val lelMethane = value[4].toInt() + value[5].toInt() / 10f
                         //Need another value for the HMAC hashed values
                         val methaneResult = MethaneResult(
