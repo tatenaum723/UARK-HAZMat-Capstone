@@ -138,9 +138,7 @@ class MethaneBLEReceiveManager @Inject constructor(
                             lelMethane = value[0].toFloat()
                             absMethane = value[1].toFloat()
                         } else{
-                            coroutineScope.launch {
-                                data.emit(Resource.Error(errorMessage = "HMAC Failed"))
-                            }
+                            Log.d("Bluetooth Connection","HMAC Failed")
                             return
                         }
                         //val lelMethane = value[4].toInt() + value[5].toInt() / 10f
