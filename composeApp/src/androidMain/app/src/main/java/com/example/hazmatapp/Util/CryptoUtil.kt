@@ -5,7 +5,7 @@ import java.security.SecureRandom
 
 class CryptoUtil {
     // Create HMAC key
-    fun CreateKey(): ByteArray {
+    private fun createKey(): ByteArray {
         val random = SecureRandom()
         val bytes = ByteArray(20)
         random.nextBytes(bytes)
@@ -16,7 +16,7 @@ class CryptoUtil {
     fun checkHMAC(data: ByteArray, hashVal: ByteArray): Boolean {
         // Initialize values and variables
         var verified = false
-        val key = CreateKey();
+        val key = createKey();
         val mac = HmacSHA256(key)
 
         // Create HMAC value with received data
