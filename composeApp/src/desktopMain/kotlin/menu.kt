@@ -164,73 +164,55 @@ fun isValidUser(username: String, password: String): Boolean {
 @Composable
 fun openSettingsWindow(onBack: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("This is the settings window.")
-        BackButton(onBack)
-    }
+        modifier = Modifier.fillMaxSize()
+                           .padding(10.dp),
+        verticalArrangement = Arrangement.Top,
+    ) { BackButton(onBack) }
 }
 
 @Composable
 fun openMenu1Window(onBack: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("This is the Menu 1 window.")
-        BackButton(onBack)
-    }
+        modifier = Modifier.fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.Top,
+    ) { BackButton(onBack) }
 }
 
 @Composable
 fun openMenu2Window(onBack: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("This is the Menu 2 window.")
-        BackButton(onBack)
-    }
+        modifier = Modifier.fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.Top,
+    ) { BackButton(onBack) }
 }
 
 @Composable
 fun openMenu3Window(onBack: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("This is the Menu 3 window.")
-        BackButton(onBack)
-    }
+        modifier = Modifier.fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.Top,
+    ) { BackButton(onBack) }
 }
 
 @Composable
 fun openMenu4Window(onBack: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("This is the Menu 4 window.")
-        BackButton(onBack)
-    }
+        modifier = Modifier.fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.Top,
+    ) { BackButton(onBack) }
 }
 
 @Composable
 fun openMenu5Window(onBack: () -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("This is the Menu 5 window.")
-        BackButton(onBack)
-    }
+        modifier = Modifier.fillMaxSize()
+            .padding(10.dp),
+        verticalArrangement = Arrangement.Top,
+    ) { BackButton(onBack) }
 }
 
 @Composable
@@ -279,6 +261,6 @@ fun MenuButton5(onClick: () -> Unit) {
 @Composable
 fun BackButton(onBack: () -> Unit) {
     Button(onClick = onBack) {
-        Text("Back")
+        Text("< Back")
     }
 }
