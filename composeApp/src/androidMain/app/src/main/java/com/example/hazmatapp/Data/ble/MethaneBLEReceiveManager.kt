@@ -74,7 +74,7 @@ class MethaneBLEReceiveManager @Inject constructor(
                     this@MethaneBLEReceiveManager.gatt = gatt
                 } else if(newState == BluetoothProfile.STATE_DISCONNECTED){
                     coroutineScope.launch {
-                        data.emit(Resource.Success(data = MethaneResult(0f, byteArrayOf(0),ConnectionState.Disconnected)))
+                        data.emit(Resource.Success(data = MethaneResult(0f, 0f, ConnectionState.Disconnected)))
                     }
                     gatt.close()
                 }
@@ -137,12 +137,17 @@ class MethaneBLEReceiveManager @Inject constructor(
                         if(crypto.checkHMAC(value, hashValue)){
                             lelMethane = value[0].toFloat()
                             absMethane = value[1].toFloat()
+                        } else{
+                            coroutineScope.launch {
+                                data.emit(Resource.Error(errorMessage = "HMAC Failed"))
+                            }
+                            return
                         }
                         //val lelMethane = value[4].toInt() + value[5].toInt() / 10f
                         //Need another value for the HMAC hashed values
                         val methaneResult = MethaneResult(
                             lelMethane,
-                            hashValue,
+                            absMethane,
                             ConnectionState.Connected
                         )
                         coroutineScope.launch {

@@ -44,8 +44,8 @@ class MethaneViewModel  @Inject constructor(
                     is Resource.Success -> {
                         //if HMACS match then update the values in the ViewModel
                         connectionState = result.data.connectionState
-                        lowerExplosiveLimit = result.data.methane
-                        sensorHash = result.data.shaHash
+                        lowerExplosiveLimit = result.data.methaneLEL
+                        absoluteMethane = result.data.methaneABS
                         //absoluteMethane = result.data.absolutePercent
                         Log.d("Bluetooth Connection","LEL Methane: $lowerExplosiveLimit")
                     }
