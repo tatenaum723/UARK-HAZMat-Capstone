@@ -74,7 +74,7 @@ class MethaneBLEReceiveManager @Inject constructor(
                     this@MethaneBLEReceiveManager.gatt = gatt
                 } else if(newState == BluetoothProfile.STATE_DISCONNECTED){
                     coroutineScope.launch {
-                        data.emit(Resource.Success(data = MethaneResult(0f,ConnectionState.Disconnected)))
+                        data.emit(Resource.Success(data = MethaneResult(0f,0f,ConnectionState.Disconnected)))
                     }
                     gatt.close()
                 }
@@ -130,11 +130,13 @@ class MethaneBLEReceiveManager @Inject constructor(
                         //Need to format exactly as the sensor package represents the passed data
                         // XX XX XX XX XX
                         //val multiplicator = if(value.first().toInt()> 5) -1 else 1
-                        val lelMethane = value[1].toFloat()
+                        val lelMethane = value[0].toFloat()
+                        val hashValue = value[1].toFloat()
                         //val lelMethane = value[4].toInt() + value[5].toInt() / 10f
                         //Need another value for the HMAC hashed values
                         val methaneResult = MethaneResult(
                             lelMethane,
+                            hashValue,
                             ConnectionState.Connected
                         )
                         coroutineScope.launch {
@@ -216,11 +218,14 @@ class MethaneBLEReceiveManager @Inject constructor(
         val cccdUuid = UUID.fromString(CCCD_DESCRIPTOR_UUID)
         characteristic.getDescriptor(cccdUuid)?.let { cccdDescriptor ->
             if(gatt?.setCharacteristicNotification(characteristic,false) == false){
-                Log.d("MethaneReceiveManager","set charateristics notification failed")
+                Log.d("MethaneReceiveManager","set characteristic notification failed")
                 return
             }
             writeDescription(cccdDescriptor, BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE)
         }
     }
+
+
+
 
 }

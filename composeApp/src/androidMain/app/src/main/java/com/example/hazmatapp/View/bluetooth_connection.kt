@@ -53,10 +53,11 @@ class bluetooth_connection : AppCompatActivity() {
 
         //Scan Button Click Actions
         connect.setOnClickListener {
-            //scan.text = "Stop Scan"
             if (connectionEstablished == false && bleConnectionState == ConnectionState.Uninitialized) {
                 viewModel.initializeConnection()
                 connect.text = "Disconnect"
+                //Log.d("Registration", "User ID: $id")
+                Log.d("Bluetooth Connection","Connecting")
                 connectionEstablished = true
             }
             else if (connectionEstablished == true) {

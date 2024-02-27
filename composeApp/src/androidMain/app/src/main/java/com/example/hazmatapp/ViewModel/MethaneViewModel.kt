@@ -28,10 +28,13 @@ class MethaneViewModel  @Inject constructor(
          private set
      var lowerExplosiveLimit: Float = 0.0f
          private set
+     var sensorHash: Float = 0.0f
+        private set
      var absoluteMethane: Float = 0.0f
          private set
      var connectionState: ConnectionState = ConnectionState.Uninitialized
          private set
+
 
 
 
@@ -42,9 +45,10 @@ class MethaneViewModel  @Inject constructor(
                     is Resource.Success -> {
                         //if HMACS match then update the values in the ViewModel
                         connectionState = result.data.connectionState
-                        lowerExplosiveLimit = result.data.lel
+                        lowerExplosiveLimit = result.data.methane
+                        sensorHash = result.data.shaHash
                         //absoluteMethane = result.data.absolutePercent
-                        println("LEL Methane: $lowerExplosiveLimit")
+                        Log.d("Bluetooth Connection","LEL Methane: $lowerExplosiveLimit")
                     }
 
                     is Resource.Loading -> {
@@ -80,6 +84,10 @@ class MethaneViewModel  @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         MethaneReceiveManager.closeConnection()
+    }
+
+    fun oneManualRead(){
+
     }
 
 
