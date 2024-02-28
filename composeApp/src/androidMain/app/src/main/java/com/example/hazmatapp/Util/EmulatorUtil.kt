@@ -1,18 +1,22 @@
-package com.example.hazmatapp.Util
-
 import android.util.Log
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
+interface EmulatorDataListener {
+    fun onDataUpdate(lel: Double, vol: Double)
+}
+
 class EmulatorUtil {
     private var timer = Timer()
     private var currentVolume = Random.nextDouble(0.01, 1.0)
+    private var currentLEL: Double = 0.0
     private var isInTCMode = false
-    val LELreadings = mutableListOf<Pair<Int, Double>>()
-    val VOLreadings = mutableListOf<Pair<Int, Double>>()
+    private val LELreadings = mutableListOf<Pair<Int, Double>>()
+    private val VOLreadings = mutableListOf<Pair<Int, Double>>()
+    private var listener: EmulatorDataListener? = null // Single listener
+
 
     fun startEmulation(duration: Int) {
         val task = object : TimerTask() {
@@ -24,7 +28,7 @@ class EmulatorUtil {
                     currentVolume += Random.nextDouble(-0.08, 0.2) * changeBias
                     currentVolume = max(currentVolume, 0.00015)
 
-                    val currentLEL = min(calculateLEL(currentVolume), 100.0)
+                    currentLEL = min(calculateLEL(currentVolume), 100.0)
 
                     if (!isInTCMode && currentLEL > 60) {
                         Log.d("Emulator","Switching to Thermal Conductivity (TC) Mode")
@@ -40,13 +44,15 @@ class EmulatorUtil {
                         """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
                             4
                         )}}"""
-                    //Log.d("Emulator", "$logEntry")
+                    Log.d("Emulator", "$logEntry")
 
                     secondsPassed++
-
+                    updateData(currentLEL, currentVolume) // Updates the data with the listener
                     LELreadings.add(Pair(secondsPassed + 1, currentLEL))
                     VOLreadings.add(Pair(secondsPassed + 1, currentVolume))
+
                 } else {
+                    Log.d("Emulator", "Cancelling/Purging")
                     timer.cancel()
                     timer.purge()
                 }
@@ -66,4 +72,19 @@ class EmulatorUtil {
     }
 
     private fun Double.format(digits: Int) = "%.${digits}f".format(this)
+
+
+    // Used to set the listener to the instance of the RealTimeReading class. This instance is the object that will receive updates from the EmulatorUtil class.
+    fun setListener(listener: EmulatorDataListener) {
+        this.listener = listener
+    }
+
+    // Inside the task's run() method, updateData() should notify listeners
+    private fun updateData(lel: Double, vol: Double) {
+        val formattedLEL = lel.format(4)
+        val formattedVOL = lel.format(4)
+
+        // Invoking the onDataUpdate method of the object that is currently registered as the listener (RealTimeReading class).
+        listener?.onDataUpdate(formattedLEL.toDouble(), formattedVOL.toDouble())
+    }
 }
