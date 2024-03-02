@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.cloud_backedmaintenancelist.ViewModel.RegistrationViewModel
+import com.example.hazmatapp.ViewModel.RegistrationViewModel
 import com.example.hazmatapp.Model.User
 import com.example.hazmatapp.R
 import com.google.firebase.auth.FirebaseAuth
