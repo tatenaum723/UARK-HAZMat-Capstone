@@ -10,7 +10,7 @@
         android:id="@+id/connect_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Scan"
+        android:text="Connect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,16 +19,28 @@
 
     <TextView
         android:id="@+id/lel_methane"
-        android:layout_width="331dp"
-        android:layout_height="281dp"
-        android:text="Bluetooth is OFF"
+        android:layout_width="332dp"
+        android:layout_height="147dp"
+        android:text="LEL Methane: 0.0"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="48sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/connect_button"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="329dp"
+        android:layout_height="225dp"
+        android:text="ABS Methane: 0.0"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="372dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
