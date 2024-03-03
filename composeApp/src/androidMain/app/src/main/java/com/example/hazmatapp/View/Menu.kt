@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import com.example.hazmatapp.R
 import com.google.firebase.auth.FirebaseAuth
@@ -43,7 +42,7 @@ class Menu : AppCompatActivity() {
 
         // Button actions
         readingButton.setOnClickListener {
-            val intent = Intent(this, NormalReading::class.java)
+            val intent = Intent(this, RealTimeReading::class.java)
             startActivity(intent)
         }
         graphButton.setOnClickListener {

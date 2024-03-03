@@ -1,4 +1,4 @@
-package com.example.cloud_backedmaintenancelist.ViewModel
+package com.example.hazmatapp.ViewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.hazmatapp.Model.FirebaseRepository
