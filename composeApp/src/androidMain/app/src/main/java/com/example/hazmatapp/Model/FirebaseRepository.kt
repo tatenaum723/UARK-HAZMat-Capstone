@@ -23,5 +23,10 @@ class FirebaseRepository {
             Log.w("Firestore", "Error adding user", e)
         }
     }
+    fun addReading(reading: Methane){
+        auth = Firebase.auth
+        val currentUserID = auth.currentUser?.uid
+        Log.d("FR", "$currentUserID")
+    }
 
 }

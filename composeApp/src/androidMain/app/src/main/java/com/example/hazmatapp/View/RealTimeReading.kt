@@ -82,7 +82,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
             displayMessage("Save or Reset First!")
         }
         else{
-            emul.startEmulation(15)
+            emul.startEmulation(5)
         }
     }
 
