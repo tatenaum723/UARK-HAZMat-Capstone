@@ -50,7 +50,7 @@ class EmulatorUtil {
                         """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
                             4
                         )}}"""
-                    Log.d("Emulator", "$logEntry")
+                    //Log.d("Emulator", "$logEntry")
 
                     secondsPassed++
                     updateData(currentLEL, currentVolume) // Updates the data with the listener

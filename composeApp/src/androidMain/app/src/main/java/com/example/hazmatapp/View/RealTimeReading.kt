@@ -2,6 +2,7 @@ package com.example.hazmatapp.View
 
 import EmulatorDataListener
 import EmulatorUtil
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,8 +23,8 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
     private lateinit var resetButton: Button
     private lateinit var saveButton: Button
     private lateinit var emul: EmulatorUtil
-    private lateinit var lelData: MutableList<Pair<Int, Double>>
-    private lateinit var volData: MutableList<Pair<Int, Double>>
+    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
     private var isRunning = false
 
 
@@ -55,10 +56,25 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
             lelNum.text = "0"
             volNum.text = "0"
         }
+        saveButton.setOnClickListener {
+            saveData()
+        }
 
     }
 
-    private fun getData() {
+    private fun saveData() { // Sends the data to the SaveReading class to create record
+        if (lelData.isNotEmpty() && volData.isNotEmpty()) {
+            val intent = Intent(this, SaveReading::class.java)
+            intent.putExtra("lelData", ArrayList(lelData))
+            intent.putExtra("volData", ArrayList(volData))
+            startActivity(intent)
+        } else {
+            displayMessage("No data to save.")
+        }
+    }
+
+
+    private fun getData() { // Starts the emulator if it is not running already
         if(isRunning){
             displayMessage("Reading in process!")
         }

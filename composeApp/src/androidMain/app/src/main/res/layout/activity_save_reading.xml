@@ -43,7 +43,7 @@
         android:layout_marginTop="15dp"/>
 
     <EditText
-        android:id="@+id/description_input"
+        android:id="@+id/location_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
