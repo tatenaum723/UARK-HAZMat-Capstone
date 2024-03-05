@@ -22,9 +22,8 @@ class FirebaseRepository {
         }
     }
     fun addReading(reading: Methane){
-        auth = Firebase.auth
-        val currentUserID = auth.currentUser?.uid
-        Log.d("FR", "$currentUserID")
+        auth = Firebase.auth // Initializes authenticator instance
+        val currentUserID = auth.currentUser?.uid // ID of the current user
 
         // Create a path for the new reading in the form users -> currentUser -> readings -> newReading
         val path = currentUserID?.let { database.child("users").child(it).child("readings").push() }
