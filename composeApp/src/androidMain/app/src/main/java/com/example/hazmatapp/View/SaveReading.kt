@@ -68,22 +68,11 @@ class SaveReading : AppCompatActivity() {
             }, currentHour, currentMinute, false).show()
         }
         submit.setOnClickListener {
-            createRecord()
+            createRecord() // Used to create a new record with the readings
+            finish() // Closes the activity
         }
     }
 
-    /**
-     * data class Methane(
-     *     var name: String? = null,
-     *     var description: String? = null,
-     *     var notes: String? = null,
-     *     var date: String? = null,
-     *     var time: String? = null,
-     *     var methanePercentage: String? = null,
-     *     var methaneVolume: String? = null,
-     *     var id: String? = null
-     * )
-     */
     private fun createRecord() {
         val setName = name.text.toString()
         val setLocation = location.text.toString()
