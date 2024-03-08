@@ -29,5 +29,4 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-// Rest of the classes remain unchanged
 
