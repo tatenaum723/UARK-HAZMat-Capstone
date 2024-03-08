@@ -42,7 +42,7 @@ class _AppContentState extends State<AppContent> {
         return SettingsScreen(
           onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
         );
-      // Your additional case statements for other screens
+      // Additional case statements for other screens/default screens below
       default:
         return DefaultScreen(
           onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
