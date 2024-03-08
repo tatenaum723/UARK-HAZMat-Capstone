@@ -20,3 +20,6 @@ pubspec.lock
 pubspec.yaml
 
 Flutter should generate all remaining necessary files on compilation
+
+Compiling in terminal also assumes you have Flutter SDK installed on your
+machine and is in your environmental variable paths.
