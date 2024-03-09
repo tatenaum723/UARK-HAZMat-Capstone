@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.hazmatapp.Model.Methane
 import com.example.hazmatapp.R
@@ -69,6 +70,7 @@ class SaveReading : AppCompatActivity() {
         }
         submit.setOnClickListener {
             createRecord() // Used to create a new record with the readings
+            displayMessage("New reading SAVED!")
             finish() // Closes the activity
         }
     }
@@ -88,5 +90,11 @@ class SaveReading : AppCompatActivity() {
         // Passes the new object to the viewmodel to get stored in the database
         viewModel.create(newReading)
 
+    }
+
+    private fun displayMessage(message: String){ // Used to display Toast messages
+        val duration = Toast.LENGTH_SHORT
+        val toast = Toast.makeText(this, message, duration)
+        toast.show()
     }
 }
