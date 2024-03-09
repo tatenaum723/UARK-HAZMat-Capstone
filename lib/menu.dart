@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'SettingsScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'LoginScreen.dart';
-
-enum Screen { LOGIN, MAIN_MENU, SETTINGS, MENU_1, MENU_2, MENU_3, MENU_4 }
+import 'SessionsScreen.dart';
+enum Screen { LOGIN, MAIN_MENU, SETTINGS, SESSIONS, MENU_2, MENU_3, MENU_4 }
 
 class AppContent extends StatefulWidget {
   @override
@@ -40,6 +40,10 @@ class _AppContentState extends State<AppContent> {
         );
       case Screen.SETTINGS:
         return SettingsScreen(
+          onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
+        );
+      case Screen.SESSIONS:
+        return SessionsScreen(
           onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
         );
       // Additional case statements for other screens/default screens below
