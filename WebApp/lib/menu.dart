@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'SettingsScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
+
+import 'SettingsScreen.dart';
 import 'LoginScreen.dart';
 import 'SessionsScreen.dart';
-enum Screen { LOGIN, MAIN_MENU, SETTINGS, SESSIONS, MENU_2, MENU_3, MENU_4 }
+import 'GraphicsScreen.dart';
+import 'ListsScreen.dart';
+
+enum Screen { LOGIN, MAIN_MENU, SETTINGS, SESSIONS, GRAPHICS, LISTS, MENU_4 }
 
 class AppContent extends StatefulWidget {
   @override
@@ -13,18 +19,44 @@ class AppContent extends StatefulWidget {
 class _AppContentState extends State<AppContent> {
   Screen currentScreen = Screen.LOGIN;
   bool loginError = false;
+  String? selectedSessionId;
+  List<dynamic> methanePercentageData = [];
+  List<dynamic> methaneVolumeData = [];
 
   void _logout() {
-    FirebaseAuth.instance.signOut().then((value) {
+    FirebaseAuth.instance.signOut().then((_) {
       setState(() {
         currentScreen = Screen.LOGIN;
         loginError = false;
+        selectedSessionId = null;
+        methanePercentageData.clear();
+        methaneVolumeData.clear();
       });
+    });
+  }
+
+  void _selectSession(String sessionId) {
+    setState(() {
+      selectedSessionId = sessionId;
+      currentScreen = Screen.MAIN_MENU; // Navigate back to the main menu
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("WebApp")),
+      body: _buildBody(),
+      bottomNavigationBar: selectedSessionId != null ? BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('Session ID: $selectedSessionId'),
+        ),
+      ) : null,
+    );
+  }
+
+  Widget _buildBody() {
     switch (currentScreen) {
       case Screen.LOGIN:
         return LoginScreen(
@@ -33,24 +65,24 @@ class _AppContentState extends State<AppContent> {
           loginError: loginError,
         );
       case Screen.MAIN_MENU:
-        // Now correctly providing onLogout parameter
         return MainMenuScreen(
-          onScreenSelected: (selectedScreen) => setState(() => currentScreen = selectedScreen),
+          onScreenSelected: (selectedScreen) {
+            if (selectedScreen != Screen.SESSIONS && selectedSessionId == null && (selectedScreen == Screen.GRAPHICS || selectedScreen == Screen.LISTS || selectedScreen == Screen.MENU_4)) {
+              // If GRAPHICS, LISTS, or MENU_4 are selected without a session, do not navigate
+              return;
+            }
+            setState(() => currentScreen = selectedScreen);
+          },
           onLogout: _logout,
+          isSessionSelected: selectedSessionId != null,
         );
       case Screen.SETTINGS:
-        return SettingsScreen(
-          onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
-        );
+        return SettingsScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU));
       case Screen.SESSIONS:
-        return SessionsScreen(
-          onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
-        );
-      // Additional case statements for other screens/default screens below
+        return SessionsScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU), onSessionSelected: _selectSession);
+      // Implement other cases for GRAPHICS, LISTS, MENU_4
       default:
-        return DefaultScreen(
-          onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
-        );
+        return DefaultScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU));
     }
   }
 }
@@ -58,47 +90,68 @@ class _AppContentState extends State<AppContent> {
 class MainMenuScreen extends StatelessWidget {
   final Function(Screen) onScreenSelected;
   final VoidCallback onLogout;
+  final bool isSessionSelected;
+  final String? selectedSessionId;
 
-  MainMenuScreen({required this.onScreenSelected, required this.onLogout});
+  MainMenuScreen({
+    required this.onScreenSelected,
+    required this.onLogout,
+    required this.isSessionSelected,
+    this.selectedSessionId,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Initial list of widgets, which are ListTiles
     List<Widget> menuItems = Screen.values
-        .where((screen) => screen != Screen.LOGIN && screen != Screen.MAIN_MENU) // Exclude LOGIN and MAIN_MENU itself
-        .map((screen) => ListTile(
-              title: Text(screen.toString().split('.').last),
-              onTap: () => onScreenSelected(screen),
-            ))
-        .toList();
+        .where((screen) => screen != Screen.LOGIN && screen != Screen.MAIN_MENU)
+        .map((screen) {
+          bool isDisabled = !isSessionSelected && (screen == Screen.GRAPHICS || screen == Screen.LISTS || screen == Screen.MENU_4);
+          return ListTile(
+            title: Text(screen.toString().split('.').last),
+            onTap: isDisabled ? null : () => onScreenSelected(screen),
+            tileColor: isDisabled ? Colors.grey[300] : null,
+          );
+        }).toList();
 
-    // Adding a Logout button as the last item
-    menuItems.add(
-      ListTile(
-        title: Text('Logout'),
-        onTap: onLogout,
-      ),
-    );
+    // Properly add a logout ListTile to the list
+    menuItems.add(ListTile(
+      title: Text('Logout'),
+      onTap: onLogout,
+    ));
 
-    return Scaffold(
-      body: ListView(children: menuItems),
-    );
+    // If a session ID is selected, add a properly formatted Text widget wrapped in a Padding widget to the list
+    if (selectedSessionId != null) {
+      menuItems.add(Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text('Session ID: $selectedSessionId', style: TextStyle(fontWeight: FontWeight.bold)),
+      ));
+    }
+
+    // Use the menuItems list to build the ListView
+    return ListView(children: menuItems);
   }
 }
+
 
 
 class DefaultScreen extends StatelessWidget {
   final VoidCallback onBack;
 
-  DefaultScreen({required this.onBack});
+  const DefaultScreen({Key? key, required this.onBack}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Unimplemented Screen"),
-        leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: onBack),
+        title: const Text("Unimplemented Screen"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: onBack,
+        ),
       ),
-      body: Center(child: Text("This screen has not been implemented yet.")),
+      body: const Center(child: Text("This screen has not been implemented yet.")),
     );
   }
 }
+

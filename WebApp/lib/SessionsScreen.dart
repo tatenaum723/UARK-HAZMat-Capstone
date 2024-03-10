@@ -1,11 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 
 class SessionsScreen extends StatefulWidget {
   final VoidCallback onBack;
+  final Function(String) onSessionSelected; // Add this line
 
-  const SessionsScreen({Key? key, required this.onBack}) : super(key: key);
+  const SessionsScreen({
+    Key? key, 
+    required this.onBack,
+    required this.onSessionSelected, // Add this line
+  }) : super(key: key);
 
   @override
   _SessionsScreenState createState() => _SessionsScreenState();
@@ -70,7 +76,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                           title: Text(session['name'] ?? 'Unnamed Session'),
                           subtitle: Text(session['id']),
                           onTap: () {
-                            // Handle tap, possibly navigate to a detail page
+							widget.onSessionSelected(session['id']);
                           },
                         );
                       }).toList(),
