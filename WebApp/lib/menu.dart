@@ -8,6 +8,7 @@ import 'LoginScreen.dart';
 import 'SessionsScreen.dart';
 import 'GraphicsScreen.dart';
 import 'ListsScreen.dart';
+import 'SessionData.dart';
 
 enum Screen { LOGIN, MAIN_MENU, SETTINGS, SESSIONS, GRAPHICS, LISTS, MENU_4 }
 
@@ -20,8 +21,9 @@ class _AppContentState extends State<AppContent> {
   Screen currentScreen = Screen.LOGIN;
   bool loginError = false;
   String? selectedSessionId;
-  List<dynamic> methanePercentageData = [];
-  List<dynamic> methaneVolumeData = [];
+  
+  SessionData sessionData = SessionData.empty(); // Initialize with empty data
+
 
   void _logout() {
     FirebaseAuth.instance.signOut().then((_) {
@@ -29,8 +31,7 @@ class _AppContentState extends State<AppContent> {
         currentScreen = Screen.LOGIN;
         loginError = false;
         selectedSessionId = null;
-        methanePercentageData.clear();
-        methaneVolumeData.clear();
+		sessionData.clear();
       });
     });
   }
@@ -42,49 +43,68 @@ class _AppContentState extends State<AppContent> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("WebApp")),
-      body: _buildBody(),
-      bottomNavigationBar: selectedSessionId != null ? BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text('Session ID: $selectedSessionId'),
-        ),
-      ) : null,
-    );
-  }
 
-  Widget _buildBody() {
-    switch (currentScreen) {
-      case Screen.LOGIN:
-        return LoginScreen(
-          onLoginSuccess: () => setState(() => currentScreen = Screen.MAIN_MENU),
-          onLoginFailed: () => setState(() => loginError = true),
-          loginError: loginError,
-        );
-      case Screen.MAIN_MENU:
-        return MainMenuScreen(
-          onScreenSelected: (selectedScreen) {
-            if (selectedScreen != Screen.SESSIONS && selectedSessionId == null && (selectedScreen == Screen.GRAPHICS || selectedScreen == Screen.LISTS || selectedScreen == Screen.MENU_4)) {
-              // If GRAPHICS, LISTS, or MENU_4 are selected without a session, do not navigate
-              return;
-            }
-            setState(() => currentScreen = selectedScreen);
-          },
-          onLogout: _logout,
-          isSessionSelected: selectedSessionId != null,
-        );
-      case Screen.SETTINGS:
-        return SettingsScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU));
-      case Screen.SESSIONS:
-        return SessionsScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU), onSessionSelected: _selectSession);
-      // Implement other cases for GRAPHICS, LISTS, MENU_4
-      default:
-        return DefaultScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU));
-    }
-  }
+	@override
+	Widget build(BuildContext context) {
+	  return Scaffold(
+		body: _buildBody(),
+		bottomNavigationBar: selectedSessionId != null
+			? BottomAppBar(
+				child: Padding(
+				  padding: const EdgeInsets.all(16.0),
+				  child: Text('Session ID: $selectedSessionId'),
+				),
+			  )
+			: null,
+	  );
+	}
+
+	Widget _buildBody() {
+	  switch (currentScreen) {
+		case Screen.LOGIN:
+		  return LoginScreen(
+			onLoginSuccess: () => setState(() => currentScreen = Screen.MAIN_MENU),
+			onLoginFailed: () => setState(() => loginError = true),
+			loginError: loginError,
+		  );
+		case Screen.MAIN_MENU:
+		  return MainMenuScreen(
+			onScreenSelected: (selectedScreen) {
+			  if (selectedScreen == Screen.LISTS && selectedSessionId != null) {
+				// Navigate to ListsScreen when LISTS is selected and session ID is not null
+				Navigator.push(
+				  context,
+					MaterialPageRoute(
+					  builder: (context) => ListsScreen(sessionData: sessionData),
+					),
+				);
+			  } else if (selectedScreen != Screen.SESSIONS && selectedSessionId == null && (selectedScreen == Screen.GRAPHICS || selectedScreen == Screen.LISTS || selectedScreen == Screen.MENU_4)) {
+				// If GRAPHICS, LISTS, or MENU_4 are selected without a session, do not navigate
+				return;
+			  } else {
+				setState(() => currentScreen = selectedScreen);
+			  }
+			},
+			onLogout: _logout,
+			isSessionSelected: selectedSessionId != null,
+		  );
+		case Screen.SETTINGS:
+		  return SettingsScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU));
+		case Screen.SESSIONS:
+		  return SessionsScreen(
+			onBack: () => setState(() => currentScreen = Screen.MAIN_MENU),
+			onSessionSelected: _selectSession,
+			onSessionDataFetched: (fetchedSessionData) {
+			  // Update sessionData with the fetched data
+			  setState(() {
+				sessionData = fetchedSessionData;
+			  });
+			},
+		  );
+		default:
+		  return DefaultScreen(onBack: () => setState(() => currentScreen = Screen.MAIN_MENU));
+	  }
+	}
 }
 
 class MainMenuScreen extends StatelessWidget {
@@ -124,7 +144,7 @@ class MainMenuScreen extends StatelessWidget {
     if (selectedSessionId != null) {
       menuItems.add(Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Text('Session ID: $selectedSessionId', style: TextStyle(fontWeight: FontWeight.bold)),
+        child: Text('Session ID: ${selectedSessionId}'),
       ));
     }
 

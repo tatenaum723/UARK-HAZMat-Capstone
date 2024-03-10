@@ -2,15 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'SessionData.dart';
 
 class SessionsScreen extends StatefulWidget {
   final VoidCallback onBack;
-  final Function(String) onSessionSelected; // Add this line
+  final Function(String) onSessionSelected; 
+  final Function(SessionData) onSessionDataFetched; 
 
   const SessionsScreen({
     Key? key, 
     required this.onBack,
-    required this.onSessionSelected, // Add this line
+    required this.onSessionSelected,
+    required this.onSessionDataFetched,
   }) : super(key: key);
 
   @override
@@ -41,7 +44,6 @@ class _SessionsScreenState extends State<SessionsScreen> {
           sessionsByDate.putIfAbsent(date, () => []).add({
             'name': readingData['name'],
             'id': key, // Use the key from the database as the reading ID
-            // Include other properties you may need
           });
         });
       }
@@ -75,9 +77,15 @@ class _SessionsScreenState extends State<SessionsScreen> {
                         return ListTile(
                           title: Text(session['name'] ?? 'Unnamed Session'),
                           subtitle: Text(session['id']),
-                          onTap: () {
-							widget.onSessionSelected(session['id']);
-                          },
+							onTap: () async {
+							  // Clear previous session data if any
+							  SessionData sessionData = SessionData.empty();
+							  sessionData.clear(); // Reset before fetching new data
+							  
+							  widget.onSessionSelected(session['id']);
+							  sessionData = await fetchSessionData(session['id']);
+							  widget.onSessionDataFetched(sessionData);
+							},
                         );
                       }).toList(),
                     );
@@ -88,4 +96,19 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 ),
     );
   }
+
+	Future<SessionData> fetchSessionData(String sessionId) async {
+	  final user = FirebaseAuth.instance.currentUser;
+	  if (user != null) {
+		DatabaseReference ref = FirebaseDatabase.instance.ref('users/${user.uid}/readings/$sessionId');
+		final snapshot = await ref.get();
+
+		if (snapshot.exists) {
+		  return SessionData.fromSnapshot(sessionId, snapshot);
+		}
+	  }
+	  // Handle the case when datasets are not available or an error occurs
+	  return SessionData.empty();
+	}
+
 }
