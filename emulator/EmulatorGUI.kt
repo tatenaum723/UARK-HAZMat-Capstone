@@ -43,6 +43,7 @@ class EmulatorGUI : JFrame(), ActionListener {
 
 		// Create an instance of EmulatorLogic with the updateUI lambda
 		emulatorLogic = EmulatorLogic { message -> updateUI(message) }
+		emulatorLogic?.setInitialMessage()
 	}
 
 
@@ -76,9 +77,6 @@ class EmulatorGUI : JFrame(), ActionListener {
                 replaceButton(resumeButton)
             }
             "Resume" -> {
-				SwingUtilities.invokeLater {
-					updateUI("----Resumed [DEBUG]----")
-				}
                 // Resume the emulation
                 emulatorLogic?.startEmulation()
                 // Show the "Stop" button

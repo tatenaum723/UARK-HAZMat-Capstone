@@ -11,16 +11,28 @@ class EmulatorLogic(private val updateUI: (String) -> Unit) {
     private var timer: Timer? = null
     private var isTimerRunning = false
     private var isPaused = false
-
+	private var hasStarted = false
+	
     private val LELreadings = mutableListOf<Pair<Int, Double>>()
     private val VOLreadings = mutableListOf<Pair<Int, Double>>()
     private var isInTCMode = false
     private var currentVolume = Random.nextDouble(0.01, 1.0)
     private var secondsPassed = 0
 
-
-    fun startEmulation(duration: Int = 30) {
+    init {
+        // Shutdown hook to save data incase program crashes/closed unexpectedly
+        Runtime.getRuntime().addShutdownHook(Thread {
+            if (hasStarted) {
+                saveReadings() // Save readings if the emulation has started
+            }
+        })
+    }
+	fun setInitialMessage() {
+		updateUI("----Press 'Start' to begin simulation----")
+	}
+    fun startEmulation(duration: Int = 90) {
         if (!isTimerRunning) {
+			hasStarted = true
             isInTCMode = false
             timer = Timer()
             timer?.scheduleAtFixedRate(object : TimerTask() {
@@ -90,6 +102,7 @@ class EmulatorLogic(private val updateUI: (String) -> Unit) {
         isInTCMode = false
         currentVolume = Random.nextDouble(0.01, 1.0)
         secondsPassed = 0
+		hasStarted = false
     }
 
     private fun calculateLEL(volume: Double): Double = (volume / 5.0) * 100
