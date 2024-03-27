@@ -109,7 +109,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
     override fun onDataUpdate(lel: Double, vol: Double) {
         runOnUiThread {
             lelBar.progress = lel.toInt()
-            volBar.progress = vol.toInt()
+            volBar.progress = vol.toInt() * 20 // Scales the data to fill the progress bar from 0%-5%
             lelNum.text = "$lel"
             volNum.text = "$vol"
         }

@@ -13,7 +13,7 @@ class SplashScreen : AppCompatActivity() {
 
         // Launches the MainActivity after showing the splash screen for a short time
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, EntryMenu::class.java))
             finish()
         }, SPLASH_DELAY)
     }

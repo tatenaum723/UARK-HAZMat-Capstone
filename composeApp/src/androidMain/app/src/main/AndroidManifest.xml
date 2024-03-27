@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.MainActivity"
+            android:name=".View.EntryMenu"
             android:exported="false" />
         <activity
             android:name=".View.RealTimeReading"
@@ -59,7 +59,7 @@
             android:name=".View.Login"
             android:exported="false" />
         <activity
-            android:name=".View.Menu"
+            android:name=".View.MainMenu"
             android:exported="false" />
         <activity
             android:name=".View.Registration"

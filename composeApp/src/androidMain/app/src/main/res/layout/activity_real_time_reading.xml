@@ -38,7 +38,7 @@
             android:layout_height="230dp"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/progress_bar"
-            android:progress="60"
+            android:progress="0"
             android:layout_centerHorizontal="true"/>
 
         <LinearLayout
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="Methane LEL"
                 android:textSize="20sp"
-                android:textColor="@color/green"/>
+                android:textColor="@color/white"/>
 
             <LinearLayout
                 android:id="@+id/lel_text"
@@ -70,14 +70,14 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="20sp"
-                    android:textColor="@color/green" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="%"
                     android:textSize="20sp"
-                    android:textColor="@color/green"/>
+                    android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -94,7 +94,7 @@
             android:layout_height="230dp"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/progress_bar"
-            android:progress="60"
+            android:progress="0"
             android:layout_centerHorizontal="true"/>
 
         <LinearLayout
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="Methane VOL"
                 android:textSize="20sp"
-                android:textColor="@color/green"/>
+                android:textColor="@color/white"/>
 
             <LinearLayout
                 android:id="@+id/vol_text"
@@ -126,14 +126,14 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="20sp"
-                    android:textColor="@color/green" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="%"
                     android:textSize="20sp"
-                    android:textColor="@color/green"/>
+                    android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -149,26 +149,39 @@
             android:id="@+id/start_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start"/>
+            android:text="Start"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            style="@style/BrightButtons"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal">
 
             <Button
                 android:id="@+id/reset_button"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Reset"/>
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="Reset"
+                style="@style/BrightButtons"/>
 
             <Button
                 android:id="@+id/save_button"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Save"/>
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="Save"
+                style="@style/BrightButtons"/>
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

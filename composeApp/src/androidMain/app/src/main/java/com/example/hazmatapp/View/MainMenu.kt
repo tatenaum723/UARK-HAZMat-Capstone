@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class Menu : AppCompatActivity() {
+class MainMenu : AppCompatActivity() {
 
     // Instance variables
     private lateinit var readingButton: Button
@@ -24,7 +24,7 @@ class Menu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)
+        setContentView(R.layout.activity_main_menu)
 
         // Initialize buttons
         readingButton = findViewById(R.id.button1)
