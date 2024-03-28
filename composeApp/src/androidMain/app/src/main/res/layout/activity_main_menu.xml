@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    tools:context=".View.Menu">
+    tools:context=".View.MainMenu">
 
     <TextView
         android:id="@+id/welcome_text"
@@ -16,7 +16,7 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center_horizontal" />
@@ -50,7 +50,7 @@
             android:textSize="20sp"
             android:textColor="@color/pale_yellow"
             android:layout_margin="10dp"
-            style="@style/MenuButtons"
+            style="@style/BrightButtons"
             tools:ignore="VisualLintButtonSize"/>
 
         <Button
@@ -62,7 +62,7 @@
             android:textSize="20sp"
             android:textColor="@color/pale_yellow"
             android:layout_margin="10dp"
-            style="@style/MenuButtons"
+            style="@style/BrightButtons"
             tools:ignore="VisualLintButtonSize"/>
 
         <Button
@@ -74,7 +74,7 @@
             android:textSize="20sp"
             android:textColor="@color/pale_yellow"
             android:layout_margin="10dp"
-            style="@style/MenuButtons"
+            style="@style/BrightButtons"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
@@ -86,7 +86,7 @@
             android:textSize="20sp"
             android:textColor="@color/pale_yellow"
             android:layout_margin="10dp"
-            style="@style/MenuButtons"
+            style="@style/BrightButtons"
             tools:ignore="VisualLintButtonSize"/>
 
         <Button
@@ -98,7 +98,7 @@
             android:textSize="20sp"
             android:textColor="@color/pale_yellow"
             android:layout_margin="10dp"
-            style="@style/MenuButtons"
+            style="@style/BrightButtons"
             tools:ignore="VisualLintButtonSize"/>
     </LinearLayout>
 

@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.hazmatapp.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -48,7 +47,7 @@ class Login : AppCompatActivity() {
                         val user = auth.currentUser
                         val userEmail = user?.email.toString()
                         displayMessage("LOGIN SUCCESSFUL")
-                        val intent = Intent(this, Menu::class.java)
+                        val intent = Intent(this, MainMenu::class.java)
                         intent.putExtra("EMAIL", userEmail) // I want to pass username from here
                         startActivity(intent)
                         finish()

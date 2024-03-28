@@ -30,7 +30,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
-
+        <activity
+            android:name=".View.PreviousReadings"
+            android:parentActivityName=".View.MainMenu"
+            android:exported="false" />
         <activity
 
             android:name=".View.ScanningBluetooth"
@@ -40,23 +43,25 @@
             android:exported="false" />
         <activity
             android:name=".View.SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".View.MainActivity"
+            android:name=".View.EntryMenu"
             android:exported="false" />
         <activity
             android:name=".View.RealTimeReading"
+            android:parentActivityName=".View.MainMenu"
             android:exported="false" />
         <activity
             android:name=".View.Login"
             android:exported="false" />
         <activity
-            android:name=".View.Menu"
+            android:name=".View.MainMenu"
             android:exported="false" />
         <activity
             android:name=".View.Registration"

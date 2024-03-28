@@ -2,6 +2,7 @@ package com.example.hazmatapp.View
 
 import EmulatorDataListener
 import EmulatorUtil
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,8 @@ import com.example.hazmatapp.R
 class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
 
     // Instance variables
+    private lateinit var title: TextView
+    private lateinit var timer: TextView
     private lateinit var lelBar: ProgressBar
     private lateinit var lelNum: TextView
     private lateinit var volBar: ProgressBar
@@ -22,19 +25,23 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
     private lateinit var resetButton: Button
     private lateinit var saveButton: Button
     private lateinit var emul: EmulatorUtil
-    private lateinit var lelData: MutableList<Pair<Int, Double>>
-    private lateinit var volData: MutableList<Pair<Int, Double>>
+    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
     private var isRunning = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_real_time_reading)
+        supportActionBar?.title = "Back" // The tittle display at the top of each activity
 
         // Initializes the variables
+        title = findViewById(R.id.title)
+        timer = findViewById(R.id.time)
         lelBar = findViewById(R.id.lel_bar)
+        lelBar.progress = 0 // Sets the starting value of the progress bar
         lelNum = findViewById(R.id.lel_number)
         volBar = findViewById(R.id.vol_bar)
+        volBar.progress = 0 // Sets the starting value of the progress bar
         volNum = findViewById(R.id.vol_number)
         startButton = findViewById(R.id.start_button)
         resetButton = findViewById(R.id.reset_button)
@@ -51,28 +58,59 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
             getData()
         }
         resetButton.setOnClickListener {
-            emul.resetData()
-            lelNum.text = "0"
-            volNum.text = "0"
+            resetData()
+        }
+        saveButton.setOnClickListener {
+            saveData()
         }
 
     }
 
-    private fun getData() {
+    private fun resetData(){
+        emul.resetData()
+        title.text = "Real-Time Reading"
+        timer.text = ""
+        lelBar.progress = 0
+        volBar.progress = 0
+        lelNum.text = "0"
+        volNum.text = "0"
+    }
+
+    private fun saveData() { // Sends the data to the SaveReading class to create record
+        if (lelData.isNotEmpty() && volData.isNotEmpty()) {
+            val intent = Intent(this, SaveReading::class.java)
+            intent.putExtra("lelData", ArrayList(lelData))
+            intent.putExtra("volData", ArrayList(volData))
+            startActivity(intent)
+            resetData() // Reset the numbers on the screen
+        } else {
+            displayMessage("No data to save.")
+        }
+    }
+
+    private fun getData() { // Starts the emulator if it is not running already
         if(isRunning){
-            displayMessage("Reading in process!")
+            displayMessage("Reading stopped!")
+            emul.stop() // Stops reading
+            startButton.text = "Start"
+            title.text = "Done"
+
         }
         else if(lelData.isNotEmpty() && volData.isNotEmpty()){
             displayMessage("Save or Reset First!")
         }
         else{
-            emul.startEmulation(15)
+            displayMessage("Reading Started!")
+            emul.startEmulation() // Starts reading
+            startButton.text = "Stop"
         }
     }
 
-    // Updates the UI when the emulalator generates the data
+    // Updates the UI when the emulator generates the data
     override fun onDataUpdate(lel: Double, vol: Double) {
         runOnUiThread {
+            lelBar.progress = lel.toInt()
+            volBar.progress = vol.toInt() * 20 // Scales the data to fill the progress bar from 0%-5%
             lelNum.text = "$lel"
             volNum.text = "$vol"
         }
@@ -88,6 +126,13 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
 
     override fun onRunning(flag: Boolean) {
         isRunning = flag
+    }
+
+    override fun onTimeUpdate(time: Int) { // Updates the current time of the reading
+        runOnUiThread {
+            title.text = "Running.."
+            timer.text = "Time: $time"
+        }
     }
 
     private fun displayMessage(message: String){ // Used to display Toast messages

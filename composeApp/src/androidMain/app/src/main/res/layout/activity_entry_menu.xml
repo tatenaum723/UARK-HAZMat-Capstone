@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".View.EntryMenu">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="391dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="HAZ-Mat Methane Alert"
+        android:textColor="@color/white"
+        android:textSize="50sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drone_image"
+        android:layout_below="@id/title"/>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="186dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="326dp"
+            android:layout_height="49dp"
+            android:text="Sign up"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            style="@style/BrightButtons" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="326dp"
+            android:layout_height="49dp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/BrightButtons" />
+    </LinearLayout>
+
+</RelativeLayout>

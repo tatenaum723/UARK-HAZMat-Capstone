@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class Menu : AppCompatActivity() {
+class MainMenu : AppCompatActivity() {
 
     // Instance variables
     private lateinit var readingButton: Button
@@ -24,7 +24,7 @@ class Menu : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)
+        setContentView(R.layout.activity_main_menu)
 
         // Initialize buttons
         readingButton = findViewById(R.id.button1)
@@ -49,7 +49,8 @@ class Menu : AppCompatActivity() {
             Log.d("Main", "Clicking b2")
         }
         viewButton.setOnClickListener {
-            Log.d("Main", "Clicking b3")
+            val intent = Intent(this, PreviousReadings::class.java)
+            startActivity(intent)
         }
         bluetoothButton.setOnClickListener {
             val intent = Intent(this, bluetooth_connection::class.java)

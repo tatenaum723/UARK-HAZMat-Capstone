@@ -7,6 +7,7 @@ import kotlin.random.Random
 interface EmulatorDataListener {
     fun onRunning(flag: Boolean)
     fun onDataUpdate(lel: Double, vol: Double)
+    fun onTimeUpdate(time: Int)
     fun onDoneReading(lelReadings: MutableList<Pair<Int, Double>>, volReadings: MutableList<Pair<Int, Double>>)
 }
 
@@ -21,7 +22,7 @@ class EmulatorUtil {
     private var isRunning = false
 
 
-    fun startEmulation(duration: Int) {
+    fun startEmulation() {
         toggleFlag() // Changes status of flag
         timer = Timer()
 
@@ -29,7 +30,7 @@ class EmulatorUtil {
             var secondsPassed = 0
 
             override fun run(){
-                if (secondsPassed < duration) {
+                if (isRunning) {
                     val changeBias = calculateChangeBias(currentVolume)
                     currentVolume += Random.nextDouble(-0.08, 0.2) * changeBias
                     currentVolume = max(currentVolume, 0.00015)
@@ -50,19 +51,17 @@ class EmulatorUtil {
                         """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
                             4
                         )}}"""
-                    Log.d("Emulator", "$logEntry")
+                    //Log.d("Emulator", "$logEntry")
 
+                    updateTime(secondsPassed)
                     secondsPassed++
                     updateData(currentLEL, currentVolume) // Updates the data with the listener
                     lelReadings.add(Pair(secondsPassed, currentLEL))
                     volReadings.add(Pair(secondsPassed, currentVolume))
 
-                } else {
-                    Log.d("Emulator", "Cancelling/Purging")
-                    timer.cancel()
-                    timer.purge()
-                    setData(lelReadings, volReadings) // Informs the listener that there was a change in the data
-                    toggleFlag() // Changes status of flag
+                }
+                else{
+                    stop() // Stops the reading
                 }
             }
         }
@@ -70,6 +69,16 @@ class EmulatorUtil {
         Log.d("Emulator", "Starting in Catalytic mode")
         timer.scheduleAtFixedRate(task, 0, 1000)
 
+    }
+
+    fun stop(){ // Stops the reading
+        Log.d("Emulator", "Cancelling/Purging")
+        timer.cancel()
+        timer.purge()
+        currentVolume = 0.0 // Resets the variable
+        currentLEL = 0.0 // Resets the variable
+        setData(lelReadings, volReadings) // Informs the listener that there was a change in the data
+        toggleFlag() // Changes status of flag
     }
 
     private fun calculateLEL(volume: Double): Double = (volume / 5.0) * 100
@@ -88,6 +97,9 @@ class EmulatorUtil {
         this.listener = listener
     }
 
+    private fun updateTime(time: Int){ // Sends the time updates to the RTR
+        listener?.onTimeUpdate(time)
+    }
     // Inside the task's run() method, updateData() should notify listeners
     private fun updateData(lel: Double, vol: Double) {
         val formattedLEL = lel.format(4)
@@ -107,7 +119,7 @@ class EmulatorUtil {
         listener?.onDoneReading(lelReadings, volReadings)
     }
 
-    private fun toggleFlag(){
+    private fun toggleFlag(){ // Keeps track if the emulator is running "isRunning = true" or not
         isRunning = !isRunning
         Log.d("Emul","isRunning: $isRunning")
         listener?.onRunning(isRunning) // Listener notifies of change in value
