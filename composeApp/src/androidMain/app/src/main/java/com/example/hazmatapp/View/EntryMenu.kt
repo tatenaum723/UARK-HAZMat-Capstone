@@ -16,6 +16,7 @@ class EntryMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entry_menu)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)   // Hide the back button
 
         // Initializes variables
         login = findViewById(R.id.login_button)

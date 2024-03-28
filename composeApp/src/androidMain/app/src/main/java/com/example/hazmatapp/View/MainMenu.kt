@@ -49,7 +49,8 @@ class MainMenu : AppCompatActivity() {
             Log.d("Main", "Clicking b2")
         }
         viewButton.setOnClickListener {
-            Log.d("Main", "Clicking b3")
+            val intent = Intent(this, PreviousReadings::class.java)
+            startActivity(intent)
         }
         bluetoothButton.setOnClickListener {
             val intent = Intent(this, ScanningBluetooth::class.java)

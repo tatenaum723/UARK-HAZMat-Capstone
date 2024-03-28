@@ -32,6 +32,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_real_time_reading)
+        supportActionBar?.title = "Back" // The tittle display at the top of each activity
 
         // Initializes the variables
         title = findViewById(R.id.title)
