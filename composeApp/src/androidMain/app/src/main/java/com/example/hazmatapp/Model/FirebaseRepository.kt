@@ -1,8 +1,12 @@
 package com.example.hazmatapp.Model
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -11,6 +15,7 @@ class FirebaseRepository {
     private val database = Firebase.database.reference // Database reference
     private lateinit var auth: FirebaseAuth // Firebase authenticator reference
     private val usersPath = database.child("users") // Creates a parent node in the JSON file
+    val readingsList: MutableLiveData<List<Reading>> = MutableLiveData() // Holds a list of readings
 
     fun addUser(user: User) {
         val path = user.id?.let { usersPath.child(it) } // Creates path to new user child using firebase authenticator id
@@ -21,7 +26,7 @@ class FirebaseRepository {
             Log.w("Firestore", "Error adding user", e)
         }
     }
-    fun addReading(reading: Methane){
+    fun addReading(reading: Reading){
         auth = Firebase.auth // Initializes authenticator instance
         val currentUserID = auth.currentUser?.uid // ID of the current user
 
@@ -37,6 +42,33 @@ class FirebaseRepository {
             Log.w("Firestore", "Error adding user", e)
         }
 
+    }
+
+    fun getAllReadings() { // This method fetches all the readings stored in the firebase database
+        auth = Firebase.auth // Initializes authenticator instance
+        val currentUserID = auth.currentUser?.uid // ID of the current user
+
+        currentUserID?.let { database.child("users").child(it).child("readings") }
+            ?.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) { // snapshot represents the task node
+                    if (snapshot.exists()) { // Checks if there is any data(records)  at the task node
+                        val tempArray = arrayListOf<Reading>()
+                        for (taskSnapshot in snapshot.children) { // For each record in the task node
+                            val reading =
+                                taskSnapshot.getValue(Reading::class.java) // Gets the task in the form of a Task object
+                            if (reading != null) {
+                                tempArray.add(reading) // Adds the Task object to the array
+                            }
+                        }
+                        // Adds all the record stored in the array to the MutableLiveData array
+                        this@FirebaseRepository.readingsList.value = tempArray
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("Repository", "Error getting the data", error.toException())
+                }
+            })
     }
 
 }

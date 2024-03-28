@@ -4,14 +4,12 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.hazmatapp.Model.Methane
+import com.example.hazmatapp.Model.Reading
 import com.example.hazmatapp.R
-import com.example.hazmatapp.ViewModel.RegistrationViewModel
 import com.example.hazmatapp.ViewModel.SaveReadingViewModel
 import java.util.Calendar
 
@@ -86,7 +84,7 @@ class SaveReading : AppCompatActivity() {
         val id = ""
 
         // Creates a new object
-        val newReading = Methane(setName, setLocation, setNotes, setDate, setTime, setLelData, setVolData,id)
+        val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setLelData, setVolData,id)
         // Passes the new object to the viewmodel to get stored in the database
         viewModel.create(newReading)
 
