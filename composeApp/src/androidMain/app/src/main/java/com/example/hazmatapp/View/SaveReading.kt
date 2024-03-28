@@ -68,7 +68,7 @@ class SaveReading : AppCompatActivity() {
         }
         submit.setOnClickListener {
             createRecord() // Used to create a new record with the readings
-            displayMessage("New reading SAVED!")
+            displayMessage("NEW READING SAVED!")
             finish() // Closes the activity
         }
     }

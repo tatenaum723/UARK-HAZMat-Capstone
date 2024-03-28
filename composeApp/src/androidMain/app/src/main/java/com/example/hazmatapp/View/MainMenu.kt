@@ -36,8 +36,8 @@ class MainMenu : AppCompatActivity() {
         auth = Firebase.auth
 
         // Retrieve the username from the Intent and sets up the username on the menu screen
-        val username = intent.getStringExtra("EMAIL")
-        username_text.text = username
+        val currentUser = auth.currentUser?.email
+        username_text.text = currentUser.toString()
 
 
         // Button actions
@@ -59,5 +59,11 @@ class MainMenu : AppCompatActivity() {
         instructionsButton.setOnClickListener {
             Log.d("Main", "Clicking b5")
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val currentUser = auth.currentUser?.email
+        username_text.text = currentUser.toString()
     }
 }

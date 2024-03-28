@@ -90,17 +90,15 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
 
     private fun getData() { // Starts the emulator if it is not running already
         if(isRunning){
-            displayMessage("Reading stopped!")
             emul.stop() // Stops reading
             startButton.text = "Start"
             title.text = "Done"
 
         }
         else if(lelData.isNotEmpty() && volData.isNotEmpty()){
-            displayMessage("Save or Reset First!")
+            displayMessage("SAVE OR RESET CURRENT DATA")
         }
         else{
-            displayMessage("Reading Started!")
             emul.startEmulation() // Starts reading
             startButton.text = "Stop"
         }
