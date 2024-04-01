@@ -1,4 +1,5 @@
 package com.example.hazmatapp.View
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -27,14 +28,19 @@ class PreviousReadings : AppCompatActivity(), ReadingAdapter.OnReadingClickListe
 
         // Gets all the readings and displays them as cards in the recycler view
         viewModel.getAllReadings()
-        viewModel.getReadingList().observe(this) { readingList -> // Sets up an observer for the recycler
-            val adapter = ReadingAdapter(readingList, this) // Pass 'this' as the listener
-            recycler.adapter = adapter
-        }
+        viewModel.getReadingList()
+            .observe(this) { readingList -> // Sets up an observer for the recycler
+                val adapter = ReadingAdapter(readingList, this) // Pass 'this' as the listener
+                recycler.adapter = adapter
+            }
     }
 
     override fun onReadingClick(position: Int) {
-        // Handle item click here
-        Log.d("PR", "Clicked on position: $position")
+        val clickedReading = viewModel.getReadingList().value?.get(position)
+        if (clickedReading != null) {
+            val intent = Intent(this, CurrentReading::class.java)
+            intent.putExtra("reading", clickedReading) // Passes the reading's data to the activity
+            startActivity(intent)
+        }
     }
 }

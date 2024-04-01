@@ -43,7 +43,8 @@
         android:textColor="@color/white"
         android:layout_marginBottom="25dp"
         android:padding="10dp"
-        android:background="@drawable/input_box"/>
+        android:background="@drawable/input_box"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/login_button"
