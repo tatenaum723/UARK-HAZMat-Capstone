@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".View.CurrentReading">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location:"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/title"/>
+
+    <TextView
+        android:id="@+id/location_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@id/location"
+        android:layout_alignBottom="@id/location"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time:       "
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_below="@id/location"/>
+
+    <TextView
+        android:id="@+id/time_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@id/time"
+        android:layout_alignBottom="@id/time"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:        "
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_below="@id/time"/>
+
+    <TextView
+        android:id="@+id/date_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@id/date"
+        android:layout_alignBottom="@id/date"/>
+
+    <TextView
+        android:id="@+id/max_lel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Max LEL: "
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_below="@id/date"/>
+
+    <TextView
+        android:id="@+id/max_lel_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@id/max_lel"
+        android:layout_alignBottom="@id/max_lel"/>
+
+    <TextView
+        android:id="@+id/max_vol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Max VOL: "
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_below="@id/max_lel"/>
+
+    <TextView
+        android:id="@+id/max_vol_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="65dp"
+        android:layout_toRightOf="@id/max_vol"
+        android:layout_alignBottom="@id/max_vol"/>
+
+
+
+
+</RelativeLayout>

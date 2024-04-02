@@ -35,7 +35,7 @@
             android:id="@+id/login_button"
             android:layout_width="326dp"
             android:layout_height="49dp"
-            android:text="Sign up"
+            android:text="Login"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"

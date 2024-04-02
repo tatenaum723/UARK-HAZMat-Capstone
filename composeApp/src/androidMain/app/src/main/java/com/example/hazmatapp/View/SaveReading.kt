@@ -28,6 +28,7 @@ class SaveReading : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_save_reading)
+        supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         // Initializes variables
         name = findViewById(R.id.name_input)
@@ -58,17 +59,17 @@ class SaveReading : AppCompatActivity() {
         }
         time.setOnClickListener { // Used to get the current time(hour and minute) calling the Calendar class
             val currentTime = Calendar.getInstance()
-            val currentHour = currentTime.get(Calendar.HOUR) // Current hour
+            val currentHour = currentTime.get(Calendar.HOUR_OF_DAY) // Current hour
             val currentMinute = currentTime.get(Calendar.MINUTE) // Current min
 
-            TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{ // Set the data in the format (HH:MM)
-                    _, hour, minute ->
-                time.text = "$hour:$minute"
+            TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{ _, hour, minute ->
+                val formattedTime = String.format("%02d:%02d", hour, minute) // Set the data in the format (HH:MM)
+                time.text = formattedTime
             }, currentHour, currentMinute, false).show()
         }
         submit.setOnClickListener {
             createRecord() // Used to create a new record with the readings
-            displayMessage("New reading SAVED!")
+            displayMessage("NEW READING SAVED!")
             finish() // Closes the activity
         }
     }

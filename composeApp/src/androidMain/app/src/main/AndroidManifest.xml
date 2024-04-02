@@ -31,9 +31,13 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".View.CurrentReading"
+            android:exported="false"
+            android:parentActivityName=".View.PreviousReadings"/>
+        <activity
             android:name=".View.PreviousReadings"
-            android:parentActivityName=".View.MainMenu"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu" />
         <activity
 
             android:name=".View.ScanningBluetooth"
@@ -55,8 +59,8 @@
             android:exported="false" />
         <activity
             android:name=".View.RealTimeReading"
-            android:parentActivityName=".View.MainMenu"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu" />
         <activity
             android:name=".View.Login"
             android:exported="false" />

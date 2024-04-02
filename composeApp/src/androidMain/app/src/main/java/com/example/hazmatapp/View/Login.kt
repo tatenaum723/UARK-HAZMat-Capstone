@@ -46,9 +46,7 @@ class Login : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = auth.currentUser
                         val userEmail = user?.email.toString()
-                        displayMessage("LOGIN SUCCESSFUL")
                         val intent = Intent(this, MainMenu::class.java)
-                        intent.putExtra("EMAIL", userEmail) // I want to pass username from here
                         startActivity(intent)
                         finish()
                     } else {
