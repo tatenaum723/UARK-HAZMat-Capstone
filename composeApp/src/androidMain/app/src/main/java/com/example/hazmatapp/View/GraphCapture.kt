@@ -230,6 +230,16 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
     private fun updateGraphData(chart: LineChart, data: MutableList<Pair<Int, Double>>) {
         val values = ArrayList<Entry>()
 
+        // Find the maximum Int value
+        var maxInt = Int.MIN_VALUE
+        data.forEach { pair ->
+            maxInt = maxOf(maxInt, pair.first)
+        }
+
+        // Set the view range on the graph
+        chart.setVisibleXRangeMaximum(5f)
+        chart.moveViewToX((maxInt-4).toFloat())
+
         // Convert data to Entry objects
         data.forEachIndexed { index, pair ->
             values.add(Entry(pair.first.toFloat(), pair.second.toFloat()))
@@ -250,9 +260,9 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
         val lineData = LineData(dataSet)
 
         // Display Plot points
-        dataSet.setDrawValues(false)
-//        lineData.setValueTextColor(Color.BLACK)
-//        lineData.setValueTextSize(9f)
+        dataSet.setDrawValues(true)
+        lineData.setValueTextColor(Color.BLACK)
+        lineData.setValueTextSize(9f)
 
         // Set data to the chart
         chart.data = lineData
