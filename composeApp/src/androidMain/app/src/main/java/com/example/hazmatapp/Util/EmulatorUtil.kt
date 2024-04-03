@@ -15,9 +15,10 @@ class EmulatorUtil {
     private lateinit var timer: Timer
     private var currentVolume = Random.nextDouble(0.01, 1.0)
     private var currentLEL: Double = 0.0
+    private var currentTemp: Double = 65.5
     private var isInTCMode = false
-    private var lelReadings = mutableListOf<Pair<Int, Double>>()
-    private var volReadings = mutableListOf<Pair<Int, Double>>()
+    private var methaneReadings = mutableListOf<Pair<Int, Double>>() // Readings of sensor's methane %
+    private var tempReadings = mutableListOf<Pair<Int, Double>>() // Readings of sensor's temperature
     private var listener: EmulatorDataListener? = null
     private var isRunning = false
 
@@ -51,13 +52,13 @@ class EmulatorUtil {
                         """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
                             4
                         )}}"""
-                    //Log.d("Emulator", "$logEntry")
 
-                    updateTime(secondsPassed)
+                    updateTime(secondsPassed) // Updates the current time on the RTR using the listener.
                     secondsPassed++
-                    updateData(currentLEL, currentVolume) // Updates the data with the listener
-                    lelReadings.add(Pair(secondsPassed, currentLEL))
-                    volReadings.add(Pair(secondsPassed, currentVolume))
+
+                    updateData(currentLEL, currentVolume) // Updates the data on the RTR using the listener.
+                    methaneReadings.add(Pair(secondsPassed, currentLEL)) // Adds data to the methaneReadings list.
+                    tempReadings.add(Pair(secondsPassed, currentTemp))
 
                 }
                 else{
@@ -77,7 +78,7 @@ class EmulatorUtil {
         timer.purge()
         currentVolume = 0.0 // Resets the variable
         currentLEL = 0.0 // Resets the variable
-        setData(lelReadings, volReadings) // Informs the listener that there was a change in the data
+        setData(methaneReadings, tempReadings) // Informs the listener that there was a change in the data
         toggleFlag() // Changes status of flag
     }
 
@@ -114,9 +115,9 @@ class EmulatorUtil {
     }
 
     fun resetData(){ // Clears the data from the lists
-        lelReadings.clear()
-        volReadings.clear()
-        listener?.onDoneReading(lelReadings, volReadings)
+        methaneReadings.clear()
+        tempReadings.clear()
+        listener?.onDoneReading(methaneReadings, tempReadings)
     }
 
     private fun toggleFlag(){ // Keeps track if the emulator is running "isRunning = true" or not

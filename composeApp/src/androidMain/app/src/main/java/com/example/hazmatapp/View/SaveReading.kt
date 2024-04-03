@@ -21,8 +21,8 @@ class SaveReading : AppCompatActivity() {
     private lateinit var time: Button
     private lateinit var date: Button
     private lateinit var submit: Button
-    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
-    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var methaneData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var tempData: MutableList<Pair<Int, Double>> = mutableListOf()
     private lateinit var viewModel: SaveReadingViewModel // Reference to the view model class
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +39,8 @@ class SaveReading : AppCompatActivity() {
         submit = findViewById(R.id.submit_button)
 
         // Gets the data passed as extras in the intent of RealTimeReading
-        lelData = intent.getSerializableExtra("lelData") as ArrayList<Pair<Int, Double>>
-        volData = intent.getSerializableExtra("volData") as ArrayList<Pair<Int, Double>>
+        methaneData = intent.getSerializableExtra("lelData") as ArrayList<Pair<Int, Double>>
+        tempData = intent.getSerializableExtra("tempData") as ArrayList<Pair<Int, Double>>
 
         // Initializes viewmodel
         viewModel = ViewModelProvider(this)[SaveReadingViewModel::class.java]
@@ -80,12 +80,12 @@ class SaveReading : AppCompatActivity() {
         val setNotes = notes.text.toString()
         val setTime = time.text.toString()
         val setDate = date.text.toString()
-        val setLelData = lelData.toString()
-        val setVolData = volData.toString()
+        val setMethanePercentage = methaneData.toString()
+        val temperature = tempData.toString() // Will need to get data list of temp/time like above
         val id = ""
 
         // Creates a new object
-        val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setLelData, setVolData,id)
+        val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setMethanePercentage, temperature,id)
         // Passes the new object to the viewmodel to get stored in the database
         viewModel.create(newReading)
 

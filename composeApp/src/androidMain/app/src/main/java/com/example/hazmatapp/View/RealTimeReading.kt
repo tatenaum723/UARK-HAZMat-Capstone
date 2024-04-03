@@ -5,7 +5,6 @@ import EmulatorUtil
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -17,16 +16,16 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
     // Instance variables
     private lateinit var title: TextView
     private lateinit var timer: TextView
-    private lateinit var lelBar: ProgressBar
-    private lateinit var lelNum: TextView
-    private lateinit var volBar: ProgressBar
-    private lateinit var volNum: TextView
+    private lateinit var methaneBar: ProgressBar // Methane progress bar
+    private lateinit var methaneNum: TextView // Number inside progress bar
+    private lateinit var tempBar: ProgressBar // Temperature progress bar
+    private lateinit var tempNum: TextView // Number inside progress bar
     private lateinit var startButton: Button
     private lateinit var resetButton: Button
     private lateinit var saveButton: Button
     private lateinit var emul: EmulatorUtil
-    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
-    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var methaneData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var tempData: MutableList<Pair<Int, Double>> = mutableListOf()
     private var isRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,18 +36,18 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
         // Initializes the variables
         title = findViewById(R.id.title)
         timer = findViewById(R.id.time)
-        lelBar = findViewById(R.id.lel_bar)
-        lelBar.progress = 0 // Sets the starting value of the progress bar
-        lelNum = findViewById(R.id.lel_number)
-        volBar = findViewById(R.id.vol_bar)
-        volBar.progress = 0 // Sets the starting value of the progress bar
-        volNum = findViewById(R.id.vol_number)
+        methaneBar = findViewById(R.id.lel_bar)
+        methaneBar.progress = 0 // Sets the starting value of the progress bar
+        methaneNum = findViewById(R.id.lel_number)
+        tempBar = findViewById(R.id.vol_bar)
+        tempBar.progress = 0 // Sets the starting value of the progress bar
+        tempNum = findViewById(R.id.vol_number)
         startButton = findViewById(R.id.start_button)
         resetButton = findViewById(R.id.reset_button)
         saveButton = findViewById(R.id.save_button)
         emul = EmulatorUtil()
-        lelData = mutableListOf()
-        volData = mutableListOf()
+        methaneData = mutableListOf()
+        tempData = mutableListOf()
 
         // "Hey, I'm interested in receiving updates from you. Whenever you have new data available, please let me know by calling the onDataUpdate method."
         emul.setListener(this)
@@ -70,17 +69,17 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
         emul.resetData()
         title.text = "Real-Time Reading"
         timer.text = ""
-        lelBar.progress = 0
-        volBar.progress = 0
-        lelNum.text = "0"
-        volNum.text = "0"
+        methaneBar.progress = 0
+        tempBar.progress = 0
+        methaneNum.text = "0"
+        tempNum.text = "0"
     }
 
     private fun saveData() { // Sends the data to the SaveReading class to create record
-        if (lelData.isNotEmpty() && volData.isNotEmpty()) {
+        if (methaneData.isNotEmpty() && tempData.isNotEmpty()) {
             val intent = Intent(this, SaveReading::class.java)
-            intent.putExtra("lelData", ArrayList(lelData))
-            intent.putExtra("volData", ArrayList(volData))
+            intent.putExtra("lelData", ArrayList(methaneData))
+            intent.putExtra("tempData", ArrayList(tempData))
             startActivity(intent)
             resetData() // Reset the numbers on the screen
         } else {
@@ -95,7 +94,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
             title.text = "Done"
 
         }
-        else if(lelData.isNotEmpty() && volData.isNotEmpty()){
+        else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
             displayMessage("SAVE OR RESET CURRENT DATA")
         }
         else{
@@ -105,21 +104,19 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
     }
 
     // Updates the UI when the emulator generates the data
-    override fun onDataUpdate(lel: Double, vol: Double) {
+    override fun onDataUpdate(methane: Double, temp: Double) {
         runOnUiThread {
-            lelBar.progress = lel.toInt()
-            volBar.progress = vol.toInt() * 20 // Scales the data to fill the progress bar from 0%-5%
-            lelNum.text = "$lel"
-            volNum.text = "$vol"
+            methaneBar.progress = methane.toInt()
+            tempBar.progress = temp.toInt() * 20 // Scales the data to fill the progress bar from 0%-5%
+            methaneNum.text = "$methane"
+            tempNum.text = "$temp"
         }
     }
 
     // After the RTR is over, it gets the lists with data from the emulator class to the class here thanks to the listener
-    override fun onDoneReading(lelReadings: MutableList<Pair<Int, Double>>, volReadings: MutableList<Pair<Int, Double>>) {
-        lelData = lelReadings
-        volData = volReadings
-        Log.d("RTR", "$lelData")
-        Log.d("RTR", "$volData")
+    override fun onDoneReading(methaneReading: MutableList<Pair<Int, Double>>, tempReading: MutableList<Pair<Int, Double>>) {
+        methaneData = methaneReading
+        tempData = tempReading
     }
 
     override fun onRunning(flag: Boolean) {

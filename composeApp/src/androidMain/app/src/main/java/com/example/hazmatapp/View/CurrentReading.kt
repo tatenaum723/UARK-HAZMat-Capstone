@@ -1,7 +1,6 @@
 package com.example.hazmatapp.View
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.Model.Reading
@@ -57,7 +56,7 @@ class CurrentReading : AppCompatActivity() {
 
     private fun maxLEL(reading: Reading?): Double {
         var maxLEL = 0.0
-        val lelDataString = reading?.methaneLelPercentage
+        val lelDataString = reading?.methanePercentage
         if (lelDataString != null) {
             val lelData = lelDataString.split(",").map {
                 val (key, value) = it.split(":")
