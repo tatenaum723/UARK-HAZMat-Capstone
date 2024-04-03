@@ -1,3 +1,5 @@
+package com.example.hazmatapp.Util
+
 import android.util.Log
 import java.util.*
 import kotlin.math.max
@@ -92,7 +94,7 @@ class EmulatorUtil {
     private fun Double.format(digits: Int) = "%.${digits}f".format(this)
 
 
-    // Used to set the listener to the instance of the RealTimeReading class. This instance is the object that will receive updates from the EmulatorUtil class.
+    // Used to set the listener to the instance of the RealTimeReading class. This instance is the object that will receive updates from the com.example.hazmatapp.Util.EmulatorUtil class.
     fun setListener(listener: EmulatorDataListener) {
         this.listener = listener
     }
