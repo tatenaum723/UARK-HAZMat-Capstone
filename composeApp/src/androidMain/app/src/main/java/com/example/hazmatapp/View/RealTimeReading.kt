@@ -104,19 +104,19 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
     }
 
     // Updates the UI when the emulator generates the data
-    override fun onDataUpdate(methane: Double, temp: Double) {
+    override fun onDataUpdate(methanePercent: Double, tempFahrenheit: Double) {
         runOnUiThread {
-            methaneBar.progress = methane.toInt()
-            tempBar.progress = temp.toInt() * 20 // Scales the data to fill the progress bar from 0%-5%
-            methaneNum.text = "$methane"
-            tempNum.text = "$temp"
+            methaneBar.progress = methanePercent.toInt()
+            tempBar.progress = tempFahrenheit.toInt()
+            methaneNum.text = String.format("%.2f", methanePercent)
+            tempNum.text = String.format("%.2f", tempFahrenheit)
         }
     }
 
     // After the RTR is over, it gets the lists with data from the emulator class to the class here thanks to the listener
-    override fun onDoneReading(methaneReading: MutableList<Pair<Int, Double>>, tempReading: MutableList<Pair<Int, Double>>) {
-        methaneData = methaneReading
-        tempData = tempReading
+    override fun onDoneReading(methaneReadings: MutableList<Pair<Int, Double>>, tempReadings: MutableList<Pair<Int, Double>>) {
+        methaneData = methaneReadings
+        tempData = tempReadings
     }
 
     override fun onRunning(flag: Boolean) {

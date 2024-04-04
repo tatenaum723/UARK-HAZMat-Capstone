@@ -163,7 +163,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         rightAxis2.isEnabled = false
     }
 
-    private fun resetData() { // Does not work
+    private fun resetData() {
         //Reset emulator
         emul.resetData()
 
@@ -171,15 +171,24 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         lelData.clear()
         tempData.clear()
 
-        // Create new instances of LineChart
-        chart1 = findViewById(R.id.chart1)
-        chart2 = findViewById(R.id.chart2)
+        // Clear the charts
+        chart1.clear()
+        chart2.clear()
 
-        // Reinitialize the charts
+        // Reset the chart data to null to ensure no old data is being held.
+        chart1.data = null
+        chart2.data = null
+
+        // Reinitialize the charts to their default state
         initGraphs()
+
+        // Since you're modifying UI elements, you might want to ensure this is run on the UI thread,
+        // especially if resetData() could be called from a non-UI thread at any point.
+        runOnUiThread {
+            chart1.invalidate() // Refreshes the chart
+            chart2.invalidate()
+        }
     }
-
-
 
 
     private fun saveData() { // Sends the data to the SaveReading class to create record

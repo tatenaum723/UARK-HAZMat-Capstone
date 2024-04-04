@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:layout_margin="10dp"
     tools:context=".View.GraphCapture"
     android:orientation="vertical">
 
@@ -21,7 +21,9 @@
         android:id="@+id/graph_container1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center">
+
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart1"
@@ -65,7 +67,8 @@
         android:id="@+id/graph_container2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart2"
@@ -77,8 +80,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temperature(Fahrenheit)"
-            android:layout_marginStart="-70dp"
+            android:text="Temperature(&#176;F)"
+            android:layout_marginStart="-40dp"
             android:rotation="270"
             android:layout_centerVertical="true"
             android:textSize="16sp"
