@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    tools:context=".View.GraphCapture"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/graph_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Methane Concentration"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:id="@+id/graph_container1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginStart="30dp"/>
+
+        <!-- Y Axis Title for Graph 1 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Methane LEL(%)"
+            android:layout_marginStart="-40dp"
+            android:rotation="270"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+
+        <!-- X Axis Title for Graph 1 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time(seconds)"
+            android:layout_below="@id/chart1"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/graph_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Measured Temperature"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:id="@+id/graph_container2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginStart="30dp"/>
+
+        <!-- Y Axis Title for Graph 2 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature(Fahrenheit)"
+            android:layout_marginStart="-70dp"
+            android:rotation="270"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+
+        <!-- X Axis Title for Graph 2 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time(seconds)"
+            android:layout_below="@id/chart2"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            style="@style/BrightButtons"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/reset_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="Reset"
+                style="@style/BrightButtons"/>
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="Save"
+                style="@style/BrightButtons"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
