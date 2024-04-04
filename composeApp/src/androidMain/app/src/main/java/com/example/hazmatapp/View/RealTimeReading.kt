@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.EmulatorDataListener
 import com.example.hazmatapp.Util.EmulatorUtil
+import kotlin.properties.Delegates
 
 class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
 
@@ -26,6 +27,9 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
     private lateinit var emul: EmulatorUtil
     private var methaneData: MutableList<Pair<Int, Double>> = mutableListOf()
     private var tempData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var maxMethaneData = 0.0 // The max methane percentage from a reading
+    private var maxTemperatureData = 0.0 // The max temperature from a reading
+
     private var isRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,18 +58,18 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
 
         // On-click methods for buttons
         startButton.setOnClickListener {
-            getData()
+            startReading()
         }
         resetButton.setOnClickListener {
-            resetData()
+            resetReading()
         }
         saveButton.setOnClickListener {
-            saveData()
+            saveReading()
         }
 
     }
 
-    private fun resetData(){
+    private fun resetReading(){
         emul.resetData()
         title.text = "Real-Time Reading"
         timer.text = ""
@@ -75,19 +79,22 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         tempNum.text = "0"
     }
 
-    private fun saveData() { // Sends the data to the SaveReading class to create record
+    private fun saveReading() { // Sends the data to the SaveReading class to create record
         if (methaneData.isNotEmpty() && tempData.isNotEmpty()) {
             val intent = Intent(this, SaveReading::class.java)
-            intent.putExtra("lelData", ArrayList(methaneData))
+            intent.putExtra("methaneData", ArrayList(methaneData))
             intent.putExtra("tempData", ArrayList(tempData))
+            intent.putExtra("maxMethane", maxMethaneData)
+            intent.putExtra("maxTemperature", maxTemperatureData)
+
             startActivity(intent)
-            resetData() // Reset the numbers on the screen
+            resetReading() // Reset the numbers on the screen
         } else {
             displayMessage("No data to save.")
         }
     }
 
-    private fun getData() { // Starts the emulator if it is not running already
+    private fun startReading() { // Starts the emulator if it is not running already
         if(isRunning){
             emul.stop() // Stops reading
             startButton.text = "Start"
@@ -113,10 +120,18 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         }
     }
 
-    // After the RTR is over, it gets the lists with data from the emulator class to the class here thanks to the listener
-    override fun onDoneReading(methaneReadings: MutableList<Pair<Int, Double>>, tempReadings: MutableList<Pair<Int, Double>>) {
+    // After the RTR is over, it gets the data from the emulator class to the class here thanks to the listener
+    override fun onDoneReading(
+        methaneReadings: MutableList<Pair<Int, Double>>,
+        tempReadings: MutableList<Pair<Int, Double>>,
+        maxMethane: Double,
+        maxTemperature: Double
+    ) {
         methaneData = methaneReadings
         tempData = tempReadings
+        maxMethaneData = maxMethane
+        maxTemperatureData = maxTemperature
+
     }
 
     override fun onRunning(flag: Boolean) {

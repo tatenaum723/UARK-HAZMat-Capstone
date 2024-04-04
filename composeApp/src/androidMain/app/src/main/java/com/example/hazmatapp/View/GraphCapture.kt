@@ -36,6 +36,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph_capture)
+        supportActionBar?.title = "Back" // The tittle display at the top of each activity
 
         // Initialize the variables
         startButton = findViewById(R.id.start_button)
@@ -279,7 +280,12 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
 
 
     // After the RTR is over, it gets the lists with data from the emulator class to the class here thanks to the listener
-    override fun onDoneReading(methaneReadings: MutableList<Pair<Int, Double>>, tempReadings: MutableList<Pair<Int, Double>>) {
+    override fun onDoneReading(
+        methaneReadings: MutableList<Pair<Int, Double>>,
+        tempReadings: MutableList<Pair<Int, Double>>,
+        maxMethane: Double,
+        maxTemperature: Double
+    ) {
         lelData = methaneReadings
         tempData = tempReadings
         Log.d("RTR", "$lelData")

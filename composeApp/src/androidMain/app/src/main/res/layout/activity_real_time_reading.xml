@@ -95,6 +95,8 @@
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/progress_bar"
             android:progress="0"
+            android:min="0"
+            android:max="122"
             android:layout_centerHorizontal="true"/>
 
         <LinearLayout

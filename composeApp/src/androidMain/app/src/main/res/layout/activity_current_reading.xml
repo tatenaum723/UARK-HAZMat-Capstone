@@ -82,46 +82,68 @@
         android:layout_alignBottom="@id/date"/>
 
     <TextView
-        android:id="@+id/max_lel"
+        android:id="@+id/max_methane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max LEL: "
+        android:text="Max methane: "
         android:textColor="@color/white"
         android:textSize="25sp"
         android:layout_below="@id/date"/>
 
     <TextView
-        android:id="@+id/max_lel_data"
+        android:id="@+id/max_methane_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="70dp"
-        android:layout_toRightOf="@id/max_lel"
-        android:layout_alignBottom="@id/max_lel"/>
+        android:layout_marginTop="83dp"
+        android:layout_marginLeft="94dp"
+        android:layout_toRightOf="@id/max_methane"
+        android:layout_alignBottom="@id/max_methane"/>
 
     <TextView
-        android:id="@+id/max_vol"
+        android:id="@+id/max_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max VOL: "
+        android:text="Max temperature: "
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:layout_below="@id/max_lel"/>
+        android:layout_below="@id/max_methane"/>
 
     <TextView
-        android:id="@+id/max_vol_data"
+        android:id="@+id/max_temperature_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
         android:textSize="25sp"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="65dp"
-        android:layout_toRightOf="@id/max_vol"
-        android:layout_alignBottom="@id/max_vol"/>
+        android:layout_marginLeft="58dp"
+        android:layout_toRightOf="@id/max_temperature"
+        android:layout_alignBottom="@id/max_temperature"/>
+
+    <TextView
+        android:id="@+id/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/max_temperature_data"/>
+
+    <TextView
+        android:id="@+id/notes_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_below="@id/notes"/>
+
+
+
 
 
 
