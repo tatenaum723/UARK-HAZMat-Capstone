@@ -1,18 +1,17 @@
 package com.example.hazmatapp.View
 
 
-import EmulatorDataListener
-import EmulatorUtil
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
+import com.example.hazmatapp.Util.EmulatorDataListener
+import com.example.hazmatapp.Util.EmulatorUtil
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -21,17 +20,16 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 
-class GraphCapture : AppCompatActivity(), EmulatorDataListener{
+class GraphCapture : AppCompatActivity(), EmulatorDataListener {
 
     private lateinit var chart1: LineChart
     private lateinit var chart2: LineChart
-    private lateinit var tvX: TextView
     private lateinit var startButton: Button
     private lateinit var resetButton: Button
     private lateinit var saveButton: Button
     private lateinit var emul: EmulatorUtil
     private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
-    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var tempData: MutableList<Pair<Int, Double>> = mutableListOf()
     private var isRunning = false
 
     @SuppressLint("MissingInflatedId")
@@ -45,7 +43,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
         saveButton = findViewById(R.id.save_button)
         emul = EmulatorUtil()
         lelData = mutableListOf()
-        volData = mutableListOf()
+        tempData = mutableListOf()
 
         // Initializes both graphs
         initGraphs()
@@ -69,7 +67,6 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
     private fun initGraphs(){
 
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Graph 1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        tvX = findViewById(R.id.tvXMax1)
         chart1 = findViewById(R.id.chart1)
         // no description text
         chart1.description.isEnabled = false
@@ -87,7 +84,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
         // set an alternative background color
         chart1.setBackgroundColor(Color.WHITE)
-        chart1.setViewPortOffsets(0f, 0f, 0f, 0f)
+        chart1.setViewPortOffsets(0f, 0f, 50f, 0f)
 
 
         // get the legend (only possible after setting data)
@@ -119,7 +116,6 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
 
         // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Graph 2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        tvX = findViewById(R.id.tvXMax2)
         chart2 = findViewById(R.id.chart2)
         // no description text
         chart2.description.isEnabled = false
@@ -137,7 +133,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
         // set an alternative background color
         chart2.setBackgroundColor(Color.WHITE)
-        chart2.setViewPortOffsets(0f, 0f, 0f, 0f)
+        chart2.setViewPortOffsets(0f, 0f, 50f, 0f)
 
 
         // get the legend (only possible after setting data)
@@ -158,8 +154,8 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
         leftAxis2.textColor = ColorTemplate.getHoloBlue()
         leftAxis2.setDrawGridLines(true)
         leftAxis2.isGranularityEnabled = true
-        leftAxis2.axisMinimum = 0f
-        leftAxis2.axisMaximum = 10f
+        leftAxis2.axisMinimum = 32f
+        leftAxis2.axisMaximum = 140f
         leftAxis2.yOffset = -9f
         leftAxis2.textColor = Color.BLACK
 
@@ -173,7 +169,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
         // Clear the data lists
         lelData.clear()
-        volData.clear()
+        tempData.clear()
 
         // Create new instances of LineChart
         chart1 = findViewById(R.id.chart1)
@@ -187,10 +183,10 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
 
     private fun saveData() { // Sends the data to the SaveReading class to create record
-        if (lelData.isNotEmpty() && volData.isNotEmpty()) {
+        if (lelData.isNotEmpty() && tempData.isNotEmpty()) {
             val intent = Intent(this, SaveReading::class.java)
             intent.putExtra("lelData", ArrayList(lelData))
-            intent.putExtra("volData", ArrayList(volData))
+            intent.putExtra("tempData", ArrayList(tempData))
             startActivity(intent)
             resetData() // Reset the numbers on the screen
         } else {
@@ -204,7 +200,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
             startButton.text = "Start"
 
         }
-        else if(lelData.isNotEmpty() && volData.isNotEmpty()){
+        else if(lelData.isNotEmpty() && tempData.isNotEmpty()){
             displayMessage("SAVE OR RESET CURRENT DATA")
         }
         else{
@@ -214,15 +210,15 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
     }
 
     // Updates the UI when the emulator generates the data
-    override fun onDataUpdate(lel: Double, vol: Double) {
+    override fun onDataUpdate(methanePercent: Double, tempFahrenheit: Double) {
         runOnUiThread {
             // Update the UI with the new data
-            lelData.add(Pair(lelData.size, lel)) // Add new lel data
-            volData.add(Pair(volData.size, vol)) // Add new vol data
+            lelData.add(Pair(lelData.size, methanePercent)) // Add new lel data
+            tempData.add(Pair(tempData.size, tempFahrenheit)) // Add new temp data
 
             // Update the datasets with new data points
             updateGraphData(chart1, lelData)
-            updateGraphData(chart2, volData)
+            updateGraphData(chart2, tempData)
         }
     }
 
@@ -238,7 +234,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
         // Set the view range on the graph
         chart.setVisibleXRangeMaximum(5f)
-        chart.moveViewToX((maxInt-4).toFloat())
+        chart.moveViewToX((maxInt-5).toFloat())
 
         // Convert data to Entry objects
         data.forEachIndexed { index, pair ->
@@ -274,11 +270,11 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener{
 
 
     // After the RTR is over, it gets the lists with data from the emulator class to the class here thanks to the listener
-    override fun onDoneReading(lelReadings: MutableList<Pair<Int, Double>>, volReadings: MutableList<Pair<Int, Double>>) {
-        lelData = lelReadings
-        volData = volReadings
+    override fun onDoneReading(methaneReadings: MutableList<Pair<Int, Double>>, tempReadings: MutableList<Pair<Int, Double>>) {
+        lelData = methaneReadings
+        tempData = tempReadings
         Log.d("RTR", "$lelData")
-        Log.d("RTR", "$volData")
+        Log.d("RTR", "$tempData")
     }
 
     override fun onRunning(flag: Boolean) {

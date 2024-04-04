@@ -1,18 +1,18 @@
 package com.example.hazmatapp.View
 
-import EmulatorDataListener
-import EmulatorUtil
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
+import com.example.hazmatapp.Util.EmulatorDataListener
+import com.example.hazmatapp.Util.EmulatorUtil
 
-class RealTimeReading : AppCompatActivity(), EmulatorDataListener{
+class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
 
     // Instance variables
     private lateinit var title: TextView

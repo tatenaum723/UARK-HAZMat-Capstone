@@ -1,127 +1,105 @@
+package com.example.hazmatapp.Util
+
 import android.util.Log
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
 interface EmulatorDataListener {
     fun onRunning(flag: Boolean)
-    fun onDataUpdate(lel: Double, vol: Double)
+    fun onDataUpdate(methanePercent: Double, tempFahrenheit: Double)
     fun onTimeUpdate(time: Int)
-    fun onDoneReading(lelReadings: MutableList<Pair<Int, Double>>, volReadings: MutableList<Pair<Int, Double>>)
+    fun onDoneReading(methaneReadings: MutableList<Pair<Int, Double>>, tempReadings: MutableList<Pair<Int, Double>>)
 }
 
 class EmulatorUtil {
     private lateinit var timer: Timer
-    private var currentVolume = Random.nextDouble(0.01, 1.0)
-    private var currentLEL: Double = 0.0
-    private var isInTCMode = false
-    private var lelReadings = mutableListOf<Pair<Int, Double>>()
-    private var volReadings = mutableListOf<Pair<Int, Double>>()
+    private var currentTemperatureC = Random.nextDouble(20.0, 22.0) // Starting in a normal room temperature range in Celsius
+    private var currentMethanePercent = 0.0 // Starting methane concentration
+    private var isInTCMode = true // Always in TC Mode
+    private var methaneReadings = mutableListOf<Pair<Int, Double>>()
+    private var tempReadings = mutableListOf<Pair<Int, Double>>()
     private var listener: EmulatorDataListener? = null
     private var isRunning = false
 
-
     fun startEmulation() {
-        toggleFlag() // Changes status of flag
+        toggleFlag()
         timer = Timer()
-
         val task = object : TimerTask() {
             var secondsPassed = 0
 
-            override fun run(){
-                if (isRunning) {
-                    val changeBias = calculateChangeBias(currentVolume)
-                    currentVolume += Random.nextDouble(-0.08, 0.2) * changeBias
-                    currentVolume = max(currentVolume, 0.00015)
+            override fun run() {
+                if (isRunning && isInTCMode) {
+                    // Simulate environmental temperature change with relation to methane concentration
+                    val tempChangeBias = Random.nextDouble(-0.05, 0.05)
+                    currentTemperatureC += tempChangeBias
+                    val tempFahrenheit = celsiusToFahrenheit(currentTemperatureC)
 
-                    currentLEL = min(calculateLEL(currentVolume), 100.0)
+                    // Simulate methane percentage change, as if moving closer or further from a concentrated area
+                    val methaneChangeBias = calculateChangeBias(currentMethanePercent)
+                    currentMethanePercent += Random.nextDouble(-2.0, 5.0) * methaneChangeBias
+                    currentMethanePercent = min(max(currentMethanePercent, 0.0), 100.0) // Ensure within 0-100%
 
-                    if (!isInTCMode && currentLEL > 60) {
-                        Log.d("Emulator","Switching to Thermal Conductivity (TC) Mode")
-                        isInTCMode = true
-                    } else if (isInTCMode && currentLEL < 50) {
-                        Log.d("Emulator","Switching to Catalytic mode")
-                        isInTCMode = false
-                    }
-
-                    if (isInTCMode) currentVolume = min(currentVolume, 100.0)
-
-                    val logEntry =
-                        """{"time":${secondsPassed + 1},"volumePercent":${currentVolume.format(4)},"lelPercent":${currentLEL.format(
-                            4
-                        )}}"""
-                    //Log.d("Emulator", "$logEntry")
+                    val logEntry = """{"time":${secondsPassed + 1},"temperatureF":${tempFahrenheit.format(2)},"methanePercent":${currentMethanePercent.format(2)}}"""
+                    Log.d("Emulator", logEntry)
 
                     updateTime(secondsPassed)
                     secondsPassed++
-                    updateData(currentLEL, currentVolume) // Updates the data with the listener
-                    lelReadings.add(Pair(secondsPassed, currentLEL))
-                    volReadings.add(Pair(secondsPassed, currentVolume))
-
-                }
-                else{
-                    stop() // Stops the reading
+                    updateData(currentMethanePercent, tempFahrenheit)
+                    methaneReadings.add(Pair(secondsPassed, currentMethanePercent))
+                    tempReadings.add(Pair(secondsPassed, tempFahrenheit))
+                } else {
+                    stop()
                 }
             }
         }
-
-        Log.d("Emulator", "Starting in Catalytic mode")
+        Log.d("Emulator", "Starting in TC mode")
         timer.scheduleAtFixedRate(task, 0, 1000)
-
     }
 
-    fun stop(){ // Stops the reading
-        Log.d("Emulator", "Cancelling/Purging")
+    fun stop() {
         timer.cancel()
         timer.purge()
-        currentVolume = 0.0 // Resets the variable
-        currentLEL = 0.0 // Resets the variable
-        setData(lelReadings, volReadings) // Informs the listener that there was a change in the data
-        toggleFlag() // Changes status of flag
+        toggleFlag()
+        setData(methaneReadings, tempReadings)
     }
 
-    private fun calculateLEL(volume: Double): Double = (volume / 5.0) * 100
+    private fun celsiusToFahrenheit(celsius: Double): Double = (celsius * 9 / 5) + 32
 
-    private fun calculateChangeBias(currentVolume: Double): Double = when {
-        currentVolume < 1.0 -> 1.25
-        currentVolume < 2.0 -> 1.1
-        else -> 0.95
+    private fun calculateChangeBias(methanePercent: Double): Double = when {
+        methanePercent < 20.0 -> 1.2 // Simulating moving towards higher concentration
+        methanePercent < 40.0 -> 1.1
+        else -> 0.9 // Simulating moving away from higher concentration
     }
 
     private fun Double.format(digits: Int) = "%.${digits}f".format(this)
 
-
-    // Used to set the listener to the instance of the RealTimeReading class. This instance is the object that will receive updates from the EmulatorUtil class.
     fun setListener(listener: EmulatorDataListener) {
         this.listener = listener
     }
 
-    private fun updateTime(time: Int){ // Sends the time updates to the RTR
+    private fun updateTime(time: Int) {
         listener?.onTimeUpdate(time)
     }
-    // Inside the task's run() method, updateData() should notify listeners
-    private fun updateData(lel: Double, vol: Double) {
-        val formattedLEL = lel.format(4)
-        val formattedVOL = vol.format(4)
 
-        // Invoking the onDataUpdate method of the object that is currently registered as the listener (RealTimeReading class).
-        listener?.onDataUpdate(formattedLEL.toDouble(), formattedVOL.toDouble())
+    private fun updateData(methanePercent: Double, tempFahrenheit: Double) {
+        listener?.onDataUpdate(methanePercent, tempFahrenheit)
     }
 
-    private fun setData(lelData: MutableList<Pair<Int, Double>>, volData: MutableList<Pair<Int, Double>>){
-        listener?.onDoneReading(lelData, volData)
+    private fun setData(methaneData: MutableList<Pair<Int, Double>>, tempData: MutableList<Pair<Int, Double>>) {
+        listener?.onDoneReading(methaneData, tempData)
     }
 
-    fun resetData(){ // Clears the data from the lists
-        lelReadings.clear()
-        volReadings.clear()
-        listener?.onDoneReading(lelReadings, volReadings)
-    }
-
-    private fun toggleFlag(){ // Keeps track if the emulator is running "isRunning = true" or not
+    private fun toggleFlag() {
         isRunning = !isRunning
-        Log.d("Emul","isRunning: $isRunning")
-        listener?.onRunning(isRunning) // Listener notifies of change in value
+        listener?.onRunning(isRunning)
+    }
+
+    fun resetData() {
+        methaneReadings.clear()
+        tempReadings.clear()
+        listener?.onDoneReading(methaneReadings, tempReadings)
     }
 }
