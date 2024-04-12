@@ -52,9 +52,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         emul = EmulatorUtil()
         methaneData = mutableListOf()
         tempData = mutableListOf()
-
-        // "Hey, I'm interested in receiving updates from you. Whenever you have new data available, please let me know by calling the onDataUpdate method."
-        emul.setListener(this)
+        emul.setListener(this) // This activity will get updates from the listener
 
         // On-click methods for buttons
         startButton.setOnClickListener {

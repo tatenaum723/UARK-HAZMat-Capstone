@@ -42,6 +42,7 @@ data class Reading(
         parcel.writeString(temperature)
         parcel.writeString(maxMethane)
         parcel.writeString(maxTemperature)
+        parcel.writeString(id)
     }
 
     override fun describeContents(): Int {

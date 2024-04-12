@@ -15,8 +15,7 @@ interface EmulatorDataListener {
         methaneReadings: MutableList<Pair<Int, Double>>,
         tempReadings: MutableList<Pair<Int, Double>>,
         maxMethane: Double,
-        maxTemperature: Double
-    )
+        maxTemperature: Double)
 }
 
 class EmulatorUtil {
