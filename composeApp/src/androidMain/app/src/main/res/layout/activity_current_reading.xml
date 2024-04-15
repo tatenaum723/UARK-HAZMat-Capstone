@@ -4,7 +4,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_marginTop="100dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
     tools:context=".View.CurrentReading">
 
     <TextView
@@ -13,8 +15,7 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textColor="@color/white"
-        android:textSize="40sp"
-        android:layout_marginTop="80dp"
+        android:textSize="35sp"
         android:gravity="center_horizontal"/>
 
     <TextView
@@ -22,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location:"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:layout_marginTop="60dp"
         android:layout_below="@id/title"/>
 
     <TextView
@@ -33,9 +35,8 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="70dp"
+        android:textSize="20sp"
+        android:gravity="end"
         android:layout_toRightOf="@id/location"
         android:layout_alignBottom="@id/location"/>
 
@@ -44,8 +45,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time:       "
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/location"/>
 
     <TextView
@@ -54,9 +57,9 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="70dp"
+        android:textSize="20sp"
+        android:gravity="end"
+        android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/time"
         android:layout_alignBottom="@id/time"/>
 
@@ -64,10 +67,12 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date:        "
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_below="@id/time"/>
+        android:layout_below="@id/time"
+        android:text="Date:"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/grey"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/date_data"
@@ -75,9 +80,9 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:gravity="end"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="70dp"
         android:layout_toRightOf="@id/date"
         android:layout_alignBottom="@id/date"/>
 
@@ -85,9 +90,11 @@
         android:id="@+id/max_methane"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max methane: "
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:text="Max methane:"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/date"/>
 
     <TextView
@@ -96,9 +103,9 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:gravity="end"
         android:layout_marginTop="83dp"
-        android:layout_marginLeft="94dp"
         android:layout_toRightOf="@id/max_methane"
         android:layout_alignBottom="@id/max_methane"/>
 
@@ -106,9 +113,11 @@
         android:id="@+id/max_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max temperature: "
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:text="Max temperature:"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/max_methane"/>
 
     <TextView
@@ -117,9 +126,9 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:gravity="end"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="58dp"
         android:layout_toRightOf="@id/max_temperature"
         android:layout_alignBottom="@id/max_temperature"/>
 
@@ -128,8 +137,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notes"
-        android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
         android:layout_marginTop="50dp"
         android:layout_below="@id/max_temperature_data"/>
 
@@ -139,7 +149,8 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/notes"/>
 
     <Button
@@ -148,10 +159,9 @@
         android:layout_height="wrap_content"
         android:text="Delete"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/blue_button_normal"
         android:layout_alignParentBottom="true"/>
 

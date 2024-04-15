@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="20dp"
     tools:context=".View.RealTimeReading"
     android:orientation="vertical">
 
@@ -86,6 +86,7 @@
     <RelativeLayout
         android:id="@+id/vol_container"
         android:layout_width="match_parent"
+        android:layout_marginBottom="20dp"
         android:layout_height="wrap_content">
 
         <ProgressBar
