@@ -24,8 +24,6 @@ class CurrentReading : AppCompatActivity(), DialogListener {
     private lateinit var deleteButton: Button
     private lateinit var viewModel: CurrentReadingViewModel // Reference to the view model class
     private lateinit var deletePopUp: DialogUtil
-    private var deleteAnswer = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +71,6 @@ class CurrentReading : AppCompatActivity(), DialogListener {
         if (reading != null) {
             cNotes.text = reading.notes
         }
-        Log.d("CR", "$deleteAnswer")
         deleteButton.setOnClickListener {
             deletePopUp.show(supportFragmentManager, "DELETE_DIALOG")
         }

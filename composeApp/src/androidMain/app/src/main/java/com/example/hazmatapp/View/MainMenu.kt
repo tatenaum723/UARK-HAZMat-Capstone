@@ -7,11 +7,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
+import com.example.hazmatapp.Util.DialogListener
+import com.example.hazmatapp.Util.DialogUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class MainMenu : AppCompatActivity() {
+class MainMenu : AppCompatActivity(), DialogListener {
 
     // Instance variables
     private lateinit var readingButton: Button
@@ -19,8 +21,10 @@ class MainMenu : AppCompatActivity() {
     private lateinit var viewButton: Button
     private lateinit var bluetoothButton: Button
     private lateinit var instructionsButton: Button
+    private lateinit var logoutButton: Button
     private lateinit var username_text: TextView
     private lateinit var auth: FirebaseAuth
+    private lateinit var logoutPopUp: DialogUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +36,22 @@ class MainMenu : AppCompatActivity() {
         viewButton = findViewById(R.id.button3)
         bluetoothButton = findViewById(R.id.button4)
         instructionsButton = findViewById(R.id.button5)
+        logoutButton = findViewById(R.id.button6)
         username_text = findViewById(R.id.username_text)
         auth = Firebase.auth
+        logoutPopUp = DialogUtil("Are you sure that you want to logout?", "Yes", "No")
 
         // Retrieve the username from the Intent and sets up the username on the menu screen
         val currentUser = auth.currentUser?.email
         username_text.text = currentUser.toString()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val currentUser = auth.currentUser?.email
+        username_text.text = currentUser.toString()
+        logoutPopUp.setListener(this)
 
         // Button actions
         readingButton.setOnClickListener {
@@ -60,11 +73,21 @@ class MainMenu : AppCompatActivity() {
         instructionsButton.setOnClickListener {
             Log.d("Main", "Clicking b5")
         }
+        logoutButton.setOnClickListener {
+            logoutPopUp.show(supportFragmentManager, "DELETE_DIALOG")
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        val currentUser = auth.currentUser?.email
-        username_text.text = currentUser.toString()
+    override fun onYes(flag: Boolean) {
+        if(flag){
+            finish() // Terminates the activity if the user presses yes in the pop up screen
+        }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // Nothing happens if user presses back button
+    }
+
+
 }

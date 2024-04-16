@@ -48,9 +48,12 @@
             android:text="@string/button1_menu"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/pale_yellow"
+            android:textColor="@color/white"
             android:layout_margin="10dp"
-            style="@style/BrightButtons"
+            style="@style/MenuButtons"
+            android:drawableStart="@drawable/rtr_icon"
+            android:paddingStart="60dp"
+            android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
         <Button
@@ -60,9 +63,13 @@
             android:text="@string/button2_menu"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/pale_yellow"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:layout_margin="10dp"
-            style="@style/BrightButtons"
+            style="@style/MenuButtons"
+            android:drawableStart="@drawable/graph_icon"
+            android:paddingStart="60dp"
+            android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
         <Button
@@ -72,9 +79,12 @@
             android:text="@string/button3_menu"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/pale_yellow"
+            android:textColor="@color/white"
             android:layout_margin="10dp"
-            style="@style/BrightButtons"
+            style="@style/MenuButtons"
+            android:drawableStart="@drawable/previous_readings_icon"
+            android:paddingStart="60dp"
+            android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
@@ -84,9 +94,12 @@
             android:text="@string/button4_menu"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/pale_yellow"
+            android:textColor="@color/white"
             android:layout_margin="10dp"
-            style="@style/BrightButtons"
+            style="@style/MenuButtons"
+            android:drawableStart="@drawable/connection_icon"
+            android:paddingStart="60dp"
+            android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
         <Button
@@ -96,9 +109,27 @@
             android:text="@string/button5_menu"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/pale_yellow"
+            android:textColor="@color/white"
             android:layout_margin="10dp"
-            style="@style/BrightButtons"
+            style="@style/MenuButtons"
+            android:drawableStart="@drawable/instructions_icon"
+            android:paddingStart="60dp"
+            android:paddingEnd="40dp"
+            tools:ignore="VisualLintButtonSize"/>
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Log out"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_margin="10dp"
+            style="@style/MenuButtons"
+            android:drawableStart="@drawable/logout_icon"
+            android:paddingStart="60dp"
+            android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
     </LinearLayout>
 

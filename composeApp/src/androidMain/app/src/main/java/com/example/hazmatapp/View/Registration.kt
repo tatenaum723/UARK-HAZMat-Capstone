@@ -40,6 +40,7 @@ class Registration : AppCompatActivity() {
         // OnClick methods
         registerButton.setOnClickListener {
             registerUser()
+            finish() // Terminates activity
         }
     }
 

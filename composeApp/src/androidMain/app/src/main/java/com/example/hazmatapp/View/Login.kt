@@ -31,6 +31,7 @@ class Login : AppCompatActivity() {
         // OnClick methods
         loginButton.setOnClickListener {
             loginUser()
+            finish() // Terminates activity
         }
 
     }
