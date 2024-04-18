@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Location:"
         android:textStyle="bold"
-        android:textColor="@color/grey"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:layout_marginTop="60dp"
         android:layout_below="@id/title"/>
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time:       "
-        android:textColor="@color/grey"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
@@ -71,7 +71,7 @@
         android:text="Date:"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
-        android:textColor="@color/grey"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp" />
 
     <TextView
@@ -91,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Max methane:"
-        android:textColor="@color/grey"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
@@ -114,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Max temperature:"
-        android:textColor="@color/grey"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:text="Notes"
         android:textStyle="bold"
-        android:textColor="@color/grey"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:layout_marginTop="50dp"
         android:layout_below="@id/max_temperature_data"/>

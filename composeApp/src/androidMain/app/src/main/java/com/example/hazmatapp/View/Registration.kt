@@ -28,6 +28,7 @@ class Registration : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         name = findViewById(R.id.name_input)
         email = findViewById(R.id.email_input)

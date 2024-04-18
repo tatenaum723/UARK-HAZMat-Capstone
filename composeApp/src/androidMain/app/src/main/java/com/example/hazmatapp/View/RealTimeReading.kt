@@ -113,8 +113,8 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         runOnUiThread {
             methaneBar.progress = methanePercent.toInt()
             tempBar.progress = tempFahrenheit.toInt()
-            methaneNum.text = String.format("%.2f", methanePercent)
-            tempNum.text = String.format("%.2f", tempFahrenheit)
+            methaneNum.text = String.format("%.2f", methanePercent) + "%"
+            tempNum.text = String.format("%.2f", tempFahrenheit) + "F"
         }
     }
 

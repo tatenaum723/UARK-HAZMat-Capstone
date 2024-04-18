@@ -24,18 +24,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name of reading"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:layout_marginTop="60dp"
+        android:layout_marginBottom="15dp"
         android:layout_below="@id/title"/>
 
     <EditText
         android:id="@+id/name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_text_main"
         android:hint="Enter name"
-        android:textColorHint="@color/grey"
+        android:textColorHint="@color/grey_text_secondary"
         android:textSize="20sp"
         android:padding="17dp"
         android:background="@drawable/reading_box"
@@ -46,19 +47,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Location"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_below="@id/name_input"/>
 
     <EditText
         android:id="@+id/location_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:hint="Enter name"
-        android:textColorHint="@color/grey"
+        android:textColorHint="@color/grey_text_secondary"
         android:padding="17dp"
         android:background="@drawable/reading_box"
         android:layout_below="@id/location_text"/>
@@ -82,8 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time"
-                android:textColor="@color/white"
+                android:textColor="@color/grey_text_main"
                 android:textSize="20sp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"/>
 
             <Button
@@ -92,8 +95,8 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Select Time"
                 android:hint="hh:mm"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/white"
+                android:textColorHint="@color/grey_text_secondary"
+                android:textColor="@color/grey_text_main"
                 android:textSize="20sp"
                 android:textAlignment="center"
                 android:paddingStart="10dp"
@@ -115,8 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:textColor="@color/white"
+                android:textColor="@color/grey_text_main"
                 android:textSize="20sp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"/>
 
             <Button
@@ -125,8 +129,8 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="Select Date"
                 android:hint="mm-dd-yyyy"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/white"
+                android:textColorHint="@color/grey_text_secondary"
+                android:textColor="@color/grey_text_main"
                 android:textSize="20sp"
                 android:textAlignment="textStart"
                 android:paddingStart="10dp"
@@ -144,9 +148,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Notes (Optional)"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_below="@id/buttons"/>
 
 
@@ -155,7 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_text_main"
         android:textSize="20sp"
         android:layout_marginBottom="20dp"
         android:padding="17dp"

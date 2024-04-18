@@ -22,6 +22,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         email = findViewById(R.id.email_input)
         password = findViewById(R.id.password_input)
