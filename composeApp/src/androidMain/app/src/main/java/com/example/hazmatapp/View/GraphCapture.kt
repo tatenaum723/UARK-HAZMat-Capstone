@@ -19,6 +19,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.EntryXComparator
+import java.util.Collections
 
 class GraphCapture : AppCompatActivity(), EmulatorDataListener {
 
@@ -28,8 +30,10 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
     private lateinit var resetButton: Button
     private lateinit var saveButton: Button
     private lateinit var emul: EmulatorUtil
-    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var methaneData: MutableList<Pair<Int, Double>> = mutableListOf()
     private var tempData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var maxMethaneData = 0.0 // The max methane percentage from a reading
+    private var maxTemperatureData = 0.0 // The max temperature from a reading
     private var isRunning = false
 
     @SuppressLint("MissingInflatedId")
@@ -43,7 +47,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         resetButton = findViewById(R.id.reset_button)
         saveButton = findViewById(R.id.save_button)
         emul = EmulatorUtil()
-        lelData = mutableListOf()
+        methaneData = mutableListOf()
         tempData = mutableListOf()
 
         // Initializes both graphs
@@ -165,11 +169,17 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
     }
 
     private fun resetData() {
-        //Reset emulator
-        emul.resetData()
+        // Stop the emulator if it's running
+        if (emul.isRunning) {
+            emul.stop()
+        }
+
+        // Create a new instance of EmulatorUtil
+        emul = EmulatorUtil()
+        emul.setListener(this)
 
         // Clear the data lists
-        lelData.clear()
+        methaneData.clear()
         tempData.clear()
 
         // Clear the charts
@@ -183,6 +193,10 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         // Reinitialize the charts to their default state
         initGraphs()
 
+        // Reset the isRunning flag and the startButton text
+        isRunning = false
+        startButton.text = "Start"
+
         // Since you're modifying UI elements, you might want to ensure this is run on the UI thread,
         // especially if resetData() could be called from a non-UI thread at any point.
         runOnUiThread {
@@ -192,13 +206,15 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
     }
 
 
-    private fun saveData() { // Sends the data to the SaveReading class to create record
-        if (lelData.isNotEmpty() && tempData.isNotEmpty()) {
+    private fun saveData() {
+        if (methaneData.isNotEmpty() && tempData.isNotEmpty()) {
             val intent = Intent(this, SaveReading::class.java)
-            intent.putExtra("lelData", ArrayList(lelData))
+            intent.putExtra("methaneData", ArrayList(methaneData))
             intent.putExtra("tempData", ArrayList(tempData))
+            intent.putExtra("maxMethane", maxMethaneData)
+            intent.putExtra("maxTemperature", maxTemperatureData)
             startActivity(intent)
-            resetData() // Reset the numbers on the screen
+            resetData()
         } else {
             displayMessage("No data to save.")
         }
@@ -210,7 +226,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
             startButton.text = "Start"
 
         }
-        else if(lelData.isNotEmpty() && tempData.isNotEmpty()){
+        else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
             displayMessage("SAVE OR RESET CURRENT DATA")
         }
         else{
@@ -223,11 +239,11 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
     override fun onDataUpdate(methanePercent: Double, tempFahrenheit: Double) {
         runOnUiThread {
             // Update the UI with the new data
-            lelData.add(Pair(lelData.size, methanePercent)) // Add new lel data
+            methaneData.add(Pair(methaneData.size, methanePercent)) // Add new methane data
             tempData.add(Pair(tempData.size, tempFahrenheit)) // Add new temp data
 
             // Update the datasets with new data points
-            updateGraphData(chart1, lelData)
+            updateGraphData(chart1, methaneData)
             updateGraphData(chart2, tempData)
         }
     }
@@ -242,14 +258,18 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
             maxInt = maxOf(maxInt, pair.first)
         }
 
-        // Set the view range on the graph
+        // Set the view range on the graph to 5
         chart.setVisibleXRangeMaximum(5f)
-        chart.moveViewToX((maxInt-5).toFloat())
+        // Move the view to the last 5 data points
+        chart.moveViewToX(data.size.toFloat() - 5)
 
         // Convert data to Entry objects
         data.forEachIndexed { index, pair ->
             values.add(Entry(pair.first.toFloat(), pair.second.toFloat()))
         }
+
+        // Sort the entries by x value
+        Collections.sort(values, EntryXComparator())
 
         // Create a dataset with the new data
         val dataSet = LineDataSet(values, "DataSet")
@@ -286,9 +306,11 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         maxMethane: Double,
         maxTemperature: Double
     ) {
-        lelData = methaneReadings
+        methaneData = methaneReadings
         tempData = tempReadings
-        Log.d("RTR", "$lelData")
+        maxMethaneData = maxMethane
+        maxTemperatureData = maxTemperature
+        Log.d("RTR", "$methaneData")
         Log.d("RTR", "$tempData")
     }
 
