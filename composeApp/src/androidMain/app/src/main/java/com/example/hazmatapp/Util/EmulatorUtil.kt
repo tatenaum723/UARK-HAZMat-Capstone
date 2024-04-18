@@ -26,7 +26,7 @@ class EmulatorUtil {
     private var methaneReadings = mutableListOf<Pair<Int, Double>>()
     private var tempReadings = mutableListOf<Pair<Int, Double>>()
     private var listener: EmulatorDataListener? = null
-    private var isRunning = false
+    var isRunning = false
     var maxMethane = 0.0 // Keeps track of the max methane percentage found during the reading
     var maxTemperature = 0.0 // Keeps track of the max temperature found during the reading
 
