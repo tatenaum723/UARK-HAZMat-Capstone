@@ -5,6 +5,8 @@
     android:backgroundTint="@color/grey_blue"
     android:layout_marginBottom="20dp"
     android:padding="10dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:background="@drawable/reading_box">
 
     <TextView

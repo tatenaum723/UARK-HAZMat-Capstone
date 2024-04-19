@@ -1,7 +1,7 @@
 package com.example.hazmatapp.Model
 
-import android.content.ContentValues
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -85,5 +85,28 @@ class FirebaseRepository {
                 }
             })
     }
+
+    fun getUsername(): LiveData<String> {
+        auth = Firebase.auth // Initializes authenticator instance
+        val currentUserID = auth.currentUser?.uid
+        val usernameLiveData = MutableLiveData<String>() // Observable data holder class
+
+        currentUserID?.let { userID ->
+            val userRef = database.child("users").child(userID)
+            val listener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val username = snapshot.child("name").getValue(String::class.java)
+                    usernameLiveData.value = username
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("Repository", "Error getting the data", error.toException())
+                }
+            }
+            userRef.addListenerForSingleValueEvent(listener)
+        }
+        return usernameLiveData
+    }
+
 
 }

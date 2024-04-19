@@ -1,7 +1,6 @@
 package com.example.hazmatapp.View
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +30,7 @@ class CurrentReading : AppCompatActivity(), DialogListener {
         supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         // Initializes variables
-        cTitle = findViewById(R.id.title)
+        cTitle = findViewById(R.id.readings_title)
         cLocation = findViewById(R.id.location_data)
         cDate = findViewById(R.id.date_data)
         cTime = findViewById(R.id.time_data)

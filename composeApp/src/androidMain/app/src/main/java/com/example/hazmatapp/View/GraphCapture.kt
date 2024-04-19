@@ -227,7 +227,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
 
         }
         else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
-            displayMessage("SAVE OR RESET CURRENT DATA")
+            displayMessage("Save or Reset data")
         }
         else{
             emul.startEmulation() // Starts reading

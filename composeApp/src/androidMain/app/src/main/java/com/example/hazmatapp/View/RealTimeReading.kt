@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.EmulatorDataListener
 import com.example.hazmatapp.Util.EmulatorUtil
-import kotlin.properties.Delegates
 
 class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
 
@@ -38,7 +37,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         supportActionBar?.title = "Back" // The tittle display at the top of each activity
 
         // Initializes the variables
-        title = findViewById(R.id.title)
+        title = findViewById(R.id.readings_title)
         timer = findViewById(R.id.time)
         methaneBar = findViewById(R.id.lel_bar)
         methaneBar.progress = 0 // Sets the starting value of the progress bar
@@ -100,7 +99,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
 
         }
         else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
-            displayMessage("SAVE OR RESET CURRENT DATA")
+            displayMessage("Save or Reset data")
         }
         else{
             emul.startEmulation() // Starts reading

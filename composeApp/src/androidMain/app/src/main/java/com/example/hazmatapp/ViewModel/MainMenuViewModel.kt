@@ -3,13 +3,13 @@ package com.example.hazmatapp.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.hazmatapp.Model.FirebaseRepository
-import com.example.hazmatapp.Model.Reading
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class CurrentReadingViewModel: ViewModel() {
+class MainMenuViewModel: ViewModel() {
     private val repository = FirebaseRepository()
 
-    fun delete(reading: Reading){
-        repository.deleteReading(reading)
+    fun getUsername(): LiveData<String> {
+        return repository.getUsername()
     }
-
 }

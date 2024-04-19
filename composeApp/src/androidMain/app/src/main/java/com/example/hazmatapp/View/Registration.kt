@@ -62,19 +62,19 @@ class Registration : AppCompatActivity() {
 
                             val newUser = User(id, userName, email) // New user object to add the user data into
                             addUser(newUser) // Adds the new user object into the database
-                            displayMessage("REGISTRATION SUCCESSFUL")
+                            displayMessage("Registration successful")
                             finish() // The activity is finished/ terminated and user goes back to l/r menu
                         } else {
-                            displayMessage("REGISTRATION FAILED")
+                            displayMessage("Error creating account")
                         }
                     }
             }
             else{
-                displayMessage("PASSWORDS DO NOT MATCH")
+                displayMessage("Passwords do not match")
             }
         }
         else{
-            displayMessage("ENTER ALL FIELDS")
+            displayMessage("Enter all required fields")
         }
     }
 

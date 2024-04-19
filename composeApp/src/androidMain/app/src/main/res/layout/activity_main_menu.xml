@@ -17,8 +17,8 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -28,8 +28,8 @@
         android:text="Username"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:gravity="center_horizontal" />
@@ -55,7 +55,7 @@
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/rtr_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -71,7 +71,7 @@
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/graph_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -86,7 +86,7 @@
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/previous_readings_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize" />
 
@@ -101,7 +101,7 @@
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/connection_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -116,7 +116,7 @@
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/instructions_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -131,7 +131,7 @@
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/logout_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
     </LinearLayout>
