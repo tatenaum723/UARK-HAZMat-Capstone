@@ -37,7 +37,7 @@ class InstructionsScreen : AppCompatActivity() {
             ),
             listOf( // Testing Bluetooth Connection
                 "What does this page do?" to "The Test Connection page checks if the phone has a Bluetooth adapter and whether it is enabled and can scan for the sensor package. It prompts the user to enable Bluetooth if its turned off.",
-                "How do I test the connection?" to "TO DO - Add instructions for testing the Bluetooth connection."
+                "How do I test the connection?" to "When you open the screen it will display the current Bluetooth status of your device as “Bluetooth disabled” or “Ready to pair”. If Bluetooth is disabled and you wish to use the Bluetooth-dependent features of the app, you must turn it on by pressing the “Test Bluetooth” button and clicking enable in the dialog box or enable it manually through your phone's settings. At any time you can return to the “Test Bluetooth Connection” page to test if your phone can make Bluetooth connections."
             )
         )
 
