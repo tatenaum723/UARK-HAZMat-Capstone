@@ -2,7 +2,6 @@ package com.example.hazmatapp.View
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -71,7 +70,8 @@ class MainMenu : AppCompatActivity(), DialogListener {
             startActivity(intent)
         }
         instructionsButton.setOnClickListener {
-            Log.d("Main", "Clicking b5")
+            val intent = Intent(this, InstructionsScreen::class.java)
+            startActivity(intent)
         }
         logoutButton.setOnClickListener {
             logoutPopUp.show(supportFragmentManager, "DELETE_DIALOG")

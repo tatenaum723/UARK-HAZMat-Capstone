@@ -48,11 +48,17 @@
             android:parentActivityName=".View.MainMenu" />
         <activity
             android:name=".View.ScanningBluetooth"
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu"
             tools:targetApi="31" />
         <activity
             android:name=".View.SaveReading"
             android:parentActivityName=".View.RealTimeReading"
             android:exported="false" />
+        <activity
+            android:name=".View.InstructionsScreen"
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu"/>
         <activity
             android:name=".View.EntryMenu"
             android:exported="true">
