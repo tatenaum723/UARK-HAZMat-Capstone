@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColor
 import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.EmulatorDataListener
 import com.example.hazmatapp.Util.EmulatorUtil
@@ -74,6 +75,9 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         tempBar.progress = 0
         methaneNum.text = "0"
         tempNum.text = "0"
+        startButton.setBackgroundResource(R.drawable.blue_button) // Changes color of start button when reading stops
+        resetButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of reset button when reading stops
+        saveButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of save button when reading stops
     }
 
     private fun saveReading() { // Sends the data to the SaveReading class to create record
@@ -96,7 +100,9 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
             emul.stop() // Stops reading
             startButton.text = "Start"
             title.text = "Done"
-
+            startButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of start button when reading stops
+            resetButton.setBackgroundResource(R.drawable.blue_button) // Changes color of reset button when reading stops
+            saveButton.setBackgroundResource(R.drawable.blue_button) // Changes color of save button when reading stops
         }
         else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
             displayMessage("Save or Reset data")
@@ -111,6 +117,7 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
     override fun onDataUpdate(methanePercent: Double, tempFahrenheit: Double) {
         runOnUiThread {
             methaneBar.progress = methanePercent.toInt()
+            methaneBar.progress
             tempBar.progress = tempFahrenheit.toInt()
             methaneNum.text = String.format("%.2f", methanePercent) + "%"
             tempNum.text = String.format("%.2f", tempFahrenheit) + "F"

@@ -42,7 +42,7 @@
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/progress_bar"
             android:progress="0"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"/>
 
         <LinearLayout
@@ -56,28 +56,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Methane LEL"
+                android:text="Methane"
                 android:textSize="20sp"
                 android:textColor="@color/white"/>
 
-            <LinearLayout
-                android:id="@+id/lel_text"
+            <TextView
+                android:id="@+id/lel_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/lel_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
-
-
-            </LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>
@@ -112,25 +102,19 @@
                 android:layout_height="wrap_content"
                 android:text="Temperature"
                 android:textSize="20sp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/white"/>
 
-            <LinearLayout
-                android:id="@+id/vol_text"
+            <TextView
+                android:id="@+id/vol_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true">
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/vol_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="20sp"
-                    android:textColor="@color/white" />
 
-            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -147,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="Start"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="17sp"
             style="@style/BrightButtons"/>
 
         <LinearLayout
@@ -163,9 +147,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:text="Reset"
-                style="@style/BrightButtons"/>
+                android:textAllCaps="false"
+                android:background="@drawable/main_menu_buttons"/>
 
             <Button
                 android:id="@+id/save_button"
@@ -173,9 +158,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:text="Save"
-                style="@style/BrightButtons"/>
+                android:textAllCaps="false"
+                android:background="@drawable/main_menu_buttons"/>
         </LinearLayout>
 
     </LinearLayout>

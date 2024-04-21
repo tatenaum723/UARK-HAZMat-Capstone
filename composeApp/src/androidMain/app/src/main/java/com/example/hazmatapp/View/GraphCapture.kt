@@ -13,6 +13,7 @@ import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.EmulatorDataListener
 import com.example.hazmatapp.Util.EmulatorUtil
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
@@ -59,7 +60,7 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
 
         // On-click methods for buttons
         startButton.setOnClickListener {
-            getData()
+            startReading()
         }
         resetButton.setOnClickListener {
             resetData()
@@ -69,110 +70,106 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         }
     }
 
-    private fun initGraphs(){
-
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Graph 1>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    private fun initGraphs() {
+        // Graph 1
         chart1 = findViewById(R.id.chart1)
-        // no description text
-        chart1.description.isEnabled = false
-
-        // enable touch gestures
+        chart1.description.isEnabled = true
+        chart1.description.text = "Time"
+        chart1.description.textColor = Color.WHITE
+        chart1.description.textSize = 12f
+        chart1.description.xOffset= 135f
+        chart1.description.yOffset=-30f
         chart1.setTouchEnabled(true)
-
         chart1.dragDecelerationFrictionCoef = 0.9f
-
-        // enable scaling and dragging
         chart1.isDragEnabled = true
         chart1.setScaleEnabled(true)
         chart1.setDrawGridBackground(false)
         chart1.isHighlightPerDragEnabled = true
+        chart1.setBackgroundColor(getResources().getColor(R.color.grey_blue))
+        chart1.setViewPortOffsets(100f, 100f, 100f, 100f) // Add padding
 
-        // set an alternative background color
-        chart1.setBackgroundColor(Color.WHITE)
-        chart1.setViewPortOffsets(0f, 0f, 50f, 0f)
-
-
-        // get the legend (only possible after setting data)
         val l1 = chart1.legend
         l1.isEnabled = false
 
         val xAxis1 = chart1.xAxis
-        xAxis1.position = XAxis.XAxisPosition.BOTTOM_INSIDE
+        xAxis1.position = XAxis.XAxisPosition.BOTTOM
         xAxis1.textSize = 10f
         xAxis1.setDrawAxisLine(false)
         xAxis1.setDrawGridLines(true)
         xAxis1.setDrawLabels(true)
-        xAxis1.textColor = Color.BLACK
+        xAxis1.textColor = Color.WHITE
         xAxis1.setCenterAxisLabels(true)
-        xAxis1.granularity = 1f // one hour
+        xAxis1.granularity = 1f
 
         val leftAxis1 = chart1.axisLeft
-        leftAxis1.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART)
-        leftAxis1.textColor = ColorTemplate.getHoloBlue()
+        leftAxis1.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+        leftAxis1.textColor = Color.WHITE // Set axis label color to white
         leftAxis1.setDrawGridLines(true)
+        leftAxis1.gridColor = Color.WHITE // Set grid line color to white
         leftAxis1.isGranularityEnabled = true
         leftAxis1.axisMinimum = 0f
         leftAxis1.axisMaximum = 101f
         leftAxis1.yOffset = -9f
-        leftAxis1.textColor = Color.BLACK
+        leftAxis1.textSize = 10f // Increase text size
+        leftAxis1.setDrawLabels(true)
 
         val rightAxis1 = chart1.axisRight
         rightAxis1.isEnabled = false
 
-
-        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Graph 2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // Graph 2
         chart2 = findViewById(R.id.chart2)
-        // no description text
-        chart2.description.isEnabled = false
-
-        // enable touch gestures
+        chart2.description.isEnabled = true
+        chart2.description.text = "Time"
+        chart2.description.textColor = Color.WHITE
+        chart2.description.textSize = 12f
+        chart2.description.xOffset= 135f
+        chart2.description.yOffset=-30f
         chart2.setTouchEnabled(true)
-
         chart2.dragDecelerationFrictionCoef = 0.9f
-
-        // enable scaling and dragging
         chart2.isDragEnabled = true
         chart2.setScaleEnabled(true)
         chart2.setDrawGridBackground(false)
         chart2.isHighlightPerDragEnabled = true
+        chart2.setBackgroundColor(getResources().getColor(R.color.grey_blue))
+        chart2.setViewPortOffsets(100f, 100f, 100f, 100f) // Add padding
 
-        // set an alternative background color
-        chart2.setBackgroundColor(Color.WHITE)
-        chart2.setViewPortOffsets(0f, 0f, 50f, 0f)
-
-
-        // get the legend (only possible after setting data)
         val l2 = chart2.legend
         l2.isEnabled = false
 
         val xAxis2 = chart2.xAxis
-        xAxis2.position = XAxis.XAxisPosition.BOTTOM_INSIDE
+        xAxis2.position = XAxis.XAxisPosition.BOTTOM
         xAxis2.textSize = 10f
         xAxis2.setDrawAxisLine(false)
-        xAxis2.setDrawGridLines(true)
-        xAxis2.textColor = Color.BLACK
+        xAxis2.setDrawGridLines(false)
+        xAxis2.textColor = Color.WHITE
         xAxis2.setCenterAxisLabels(true)
-        xAxis2.granularity = 1f // one hour
+        xAxis2.granularity = 1f
 
         val leftAxis2 = chart2.axisLeft
-        leftAxis2.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART)
-        leftAxis2.textColor = ColorTemplate.getHoloBlue()
+        leftAxis2.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+        leftAxis2.textColor = Color.WHITE
         leftAxis2.setDrawGridLines(true)
+        leftAxis2.gridColor = Color.WHITE
         leftAxis2.isGranularityEnabled = true
         leftAxis2.axisMinimum = 32f
         leftAxis2.axisMaximum = 140f
         leftAxis2.yOffset = -9f
-        leftAxis2.textColor = Color.BLACK
+        leftAxis2.textSize = 10f
+        leftAxis2.setDrawLabels(true)
 
         val rightAxis2 = chart2.axisRight
         rightAxis2.isEnabled = false
     }
+
 
     private fun resetData() {
         // Stop the emulator if it's running
         if (emul.isRunning) {
             emul.stop()
         }
+        startButton.setBackgroundResource(R.drawable.blue_button) // Changes color of start button when reading stops
+        resetButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of reset button when reading stops
+        saveButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of save button when reading stops
 
         // Create a new instance of EmulatorUtil
         emul = EmulatorUtil()
@@ -220,10 +217,13 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
         }
     }
 
-    private fun getData() { // Starts the emulator if it is not running already
+    private fun startReading() { // Starts the emulator if it is not running already
         if(isRunning){
             emul.stop() // Stops reading
             startButton.text = "Start"
+            startButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of start button when reading stops
+            resetButton.setBackgroundResource(R.drawable.blue_button) // Changes color of reset button when reading stops
+            saveButton.setBackgroundResource(R.drawable.blue_button) // Changes color of save button when reading stops
 
         }
         else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
@@ -273,22 +273,20 @@ class GraphCapture : AppCompatActivity(), EmulatorDataListener {
 
         // Create a dataset with the new data
         val dataSet = LineDataSet(values, "DataSet")
-        dataSet.color = Color.BLACK
-        dataSet.lineWidth = 1.5f
+        dataSet.lineWidth = 3f
         dataSet.setDrawCircles(true)
         dataSet.fillAlpha = 65
-        dataSet.fillColor = Color.BLACK
-        dataSet.highLightColor = Color.rgb(255, 255, 255)
+        dataSet.color = getResources().getColor(R.color.bright_light_blue)
         dataSet.setDrawCircleHole(false)
-        dataSet.setCircleColors(Color.BLACK)
+        dataSet.setCircleColors(Color.WHITE)
 
         // Create a data object with the data sets
         val lineData = LineData(dataSet)
 
         // Display Plot points
         dataSet.setDrawValues(true)
-        lineData.setValueTextColor(Color.BLACK)
-        lineData.setValueTextSize(9f)
+        lineData.setValueTextColor(getResources().getColor(R.color.bright_light_blue))
+        lineData.setValueTextSize(10f)
 
         // Set data to the chart
         chart.data = lineData
