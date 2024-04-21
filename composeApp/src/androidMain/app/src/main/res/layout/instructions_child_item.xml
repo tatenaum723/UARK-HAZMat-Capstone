@@ -3,31 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
-
-    <TextView
-        android:id="@+id/titleItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@android:color/transparent"/>
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/questionItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/white"
         android:background="@android:color/transparent"
-        android:paddingLeft="20dp"/>
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/descriptionItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/grey_text_secondary"
+        android:textSize="14sp"
+        android:textColor="@color/white"
         android:background="@android:color/transparent"
-        android:paddingLeft="40dp"/>
+        android:paddingLeft="20dp"/>
 </LinearLayout>

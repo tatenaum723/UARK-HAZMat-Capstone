@@ -44,13 +44,13 @@ class InstructionsScreen : AppCompatActivity() {
         val listAdapter = SimpleExpandableListAdapter(
             this,
             titleList.map { hashMapOf("GROUP_NAME" to it) },
-            R.layout.instructions_text_item,
+            R.layout.instructions_group_item,
             arrayOf("GROUP_NAME"),
             intArrayOf(R.id.titleItem),
             detailList.map { it.map { detail ->
                 hashMapOf("CHILD_TYPE" to detail.first, "CHILD_TEXT" to detail.second)
             }},
-            R.layout.instructions_text_item,
+            R.layout.instructions_child_item,
             arrayOf("CHILD_TYPE", "CHILD_TEXT"),
             intArrayOf(R.id.questionItem, R.id.descriptionItem)
         )
