@@ -8,7 +8,7 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="fontFamily">@font/poppins</item>
-
+        <item name="colorAccent">@color/bright_blue_normal</item>
     </style>
 
 </resources>
