@@ -25,50 +25,61 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".View.GraphCapture"
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu"/>
+        <activity
             android:name=".View.CurrentReading"
             android:exported="false"
-            android:parentActivityName=".View.PreviousReadings"/>
+            android:parentActivityName=".View.PreviousReadings" />
         <activity
             android:name=".View.PreviousReadings"
             android:exported="false"
             android:parentActivityName=".View.MainMenu" />
         <activity
             android:name=".View.ScanningBluetooth"
-            tools:targetApi="31"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu"
+            tools:targetApi="31" />
+
         <activity
             android:name=".View.SaveReading"
+            android:parentActivityName=".View.RealTimeReading"
             android:exported="false" />
         <activity
-            android:name=".View.SplashScreen"
+            android:name=".View.InstructionsScreen"
+            android:exported="false"
+            android:parentActivityName=".View.MainMenu"/>
+        <activity
+            android:name=".View.EntryMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".View.EntryMenu"
-            android:exported="false" />
         <activity
             android:name=".View.RealTimeReading"
             android:exported="false"
             android:parentActivityName=".View.MainMenu" />
         <activity
             android:name=".View.Login"
+            android:noHistory="true"
+            android:parentActivityName=".View.EntryMenu"
             android:exported="false" />
         <activity
             android:name=".View.MainMenu"
             android:exported="false" />
         <activity
             android:name=".View.Registration"
+            android:noHistory="true"
+            android:parentActivityName=".View.EntryMenu"
             android:exported="false" />
         <activity
             android:name=".View.bluetooth_connection"

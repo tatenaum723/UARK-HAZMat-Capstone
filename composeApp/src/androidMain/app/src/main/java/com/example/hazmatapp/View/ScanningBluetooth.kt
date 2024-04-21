@@ -1,7 +1,7 @@
 package com.example.hazmatapp.View
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
@@ -54,6 +54,7 @@ class ScanningBluetooth : AppCompatActivity() {
             }
         }
 
+        supportActionBar?.title = "Back" // The tittle display at the top of each activity
     }
     override fun onStart() {
         super.onStart()

@@ -10,14 +10,18 @@ data class Reading(
     var notes: String? = null,
     var date: String? = null,
     var time: String? = null,
-    var methaneLelPercentage: String? = null,
-    var methaneVolumePercentage: String? = null,
+    var methanePercentage: String? = null,
+    var temperature: String? = null,
+    var maxMethane: String? = null,
+    var maxTemperature: String? = null,
     var id: String? = null
 )  : Parcelable {
 
     // Methods used to parse the values of the task object
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -34,8 +38,11 @@ data class Reading(
         parcel.writeString(notes)
         parcel.writeString(date)
         parcel.writeString(time)
-        parcel.writeString(methaneLelPercentage)
-        parcel.writeString(methaneVolumePercentage)
+        parcel.writeString(methanePercentage)
+        parcel.writeString(temperature)
+        parcel.writeString(maxMethane)
+        parcel.writeString(maxTemperature)
+        parcel.writeString(id)
     }
 
     override fun describeContents(): Int {

@@ -28,6 +28,7 @@ class Registration : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         name = findViewById(R.id.name_input)
         email = findViewById(R.id.email_input)
@@ -40,6 +41,7 @@ class Registration : AppCompatActivity() {
         // OnClick methods
         registerButton.setOnClickListener {
             registerUser()
+            finish() // Terminates activity
         }
     }
 
@@ -60,19 +62,19 @@ class Registration : AppCompatActivity() {
 
                             val newUser = User(id, userName, email) // New user object to add the user data into
                             addUser(newUser) // Adds the new user object into the database
-                            displayMessage("REGISTRATION SUCCESSFUL")
+                            displayMessage("Registration successful")
                             finish() // The activity is finished/ terminated and user goes back to l/r menu
                         } else {
-                            displayMessage("REGISTRATION FAILED")
+                            displayMessage("Error creating account")
                         }
                     }
             }
             else{
-                displayMessage("PASSWORDS DO NOT MATCH")
+                displayMessage("Passwords do not match")
             }
         }
         else{
-            displayMessage("ENTER ALL FIELDS")
+            displayMessage("Enter all required fields")
         }
     }
 

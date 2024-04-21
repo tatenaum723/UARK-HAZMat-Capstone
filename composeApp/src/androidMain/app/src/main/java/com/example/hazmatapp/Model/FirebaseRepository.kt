@@ -1,6 +1,7 @@
 package com.example.hazmatapp.Model
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,7 +27,7 @@ class FirebaseRepository {
             Log.w("Firestore", "Error adding user", e)
         }
     }
-    fun addReading(reading: Reading){
+    fun addReading(reading: Reading){ // Adds reading to the user's data
         auth = Firebase.auth // Initializes authenticator instance
         val currentUserID = auth.currentUser?.uid // ID of the current user
 
@@ -37,11 +38,25 @@ class FirebaseRepository {
         reading.id = newKey // Adds the ID to the reading to be able to retrieve it later on
 
         path?.setValue(reading)?.addOnSuccessListener {
-            Log.d("Firestore", "User added successfully with ID: $currentUserID.id")
+            Log.d("Firestore", "Reading added successfully with ID: $currentUserID.id")
         }?.addOnFailureListener { e ->
-            Log.w("Firestore", "Error adding user", e)
+            Log.w("Firestore", "Error adding reading", e)
         }
 
+    }
+
+    fun deleteReading(reading: Reading) { // Deletes reading from user's data
+        auth = Firebase.auth // Initializes authenticator instance
+        val readingID = reading.id
+        Log.d("ReadingID", "$readingID")
+        val currentUserID = auth.currentUser?.uid // ID of the current user
+        val path = database.child("users").child(currentUserID.toString()).child("readings")
+            .child(readingID.toString()).removeValue()
+        path.addOnSuccessListener {
+            Log.d("Firebase", "SUCCESS DELETING READING '$readingID'")
+        }.addOnFailureListener { e ->
+            Log.d("Firebase", "ERROR DELETING READING '$readingID'", e)
+        }
     }
 
     fun getAllReadings() { // This method fetches all the readings stored in the firebase database
@@ -70,5 +85,28 @@ class FirebaseRepository {
                 }
             })
     }
+
+    fun getUsername(): LiveData<String> {
+        auth = Firebase.auth // Initializes authenticator instance
+        val currentUserID = auth.currentUser?.uid
+        val usernameLiveData = MutableLiveData<String>() // Observable data holder class
+
+        currentUserID?.let { userID ->
+            val userRef = database.child("users").child(userID)
+            val listener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val username = snapshot.child("name").getValue(String::class.java)
+                    usernameLiveData.value = username
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("Repository", "Error getting the data", error.toException())
+                }
+            }
+            userRef.addListenerForSingleValueEvent(listener)
+        }
+        return usernameLiveData
+    }
+
 
 }

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -21,8 +22,10 @@ class SaveReading : AppCompatActivity() {
     private lateinit var time: Button
     private lateinit var date: Button
     private lateinit var submit: Button
-    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
-    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var methanePercentage: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var temperature: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var maxMethane = 0.0
+    private var maxTemperature = 0.0
     private lateinit var viewModel: SaveReadingViewModel // Reference to the view model class
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +42,11 @@ class SaveReading : AppCompatActivity() {
         submit = findViewById(R.id.submit_button)
 
         // Gets the data passed as extras in the intent of RealTimeReading
-        lelData = intent.getSerializableExtra("lelData") as ArrayList<Pair<Int, Double>>
-        volData = intent.getSerializableExtra("volData") as ArrayList<Pair<Int, Double>>
+        methanePercentage = intent.getSerializableExtra("methaneData") as ArrayList<Pair<Int, Double>>
+        temperature = intent.getSerializableExtra("tempData") as ArrayList<Pair<Int, Double>>
+        maxMethane = intent.getSerializableExtra("maxMethane") as Double
+        maxTemperature = intent.getSerializableExtra("maxTemperature") as Double
+
 
         // Initializes viewmodel
         viewModel = ViewModelProvider(this)[SaveReadingViewModel::class.java]
@@ -69,26 +75,30 @@ class SaveReading : AppCompatActivity() {
         }
         submit.setOnClickListener {
             createRecord() // Used to create a new record with the readings
-            displayMessage("NEW READING SAVED!")
-            finish() // Closes the activity
         }
     }
 
     private fun createRecord() {
         val setName = name.text.toString()
         val setLocation = location.text.toString()
-        val setNotes = notes.text.toString()
+        var setNotes = notes.text.toString()
         val setTime = time.text.toString()
         val setDate = date.text.toString()
-        val setLelData = lelData.toString()
-        val setVolData = volData.toString()
+        val setMethanePercentage = methanePercentage.toString()
+        val temperature = temperature.toString() // Will need to get data list of temp/time like above
+        val setMaxMethane = "%.2f".format(maxMethane)
+        val setMaxTemperature = "%.2f".format(maxTemperature)
         val id = ""
 
-        // Creates a new object
-        val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setLelData, setVolData,id)
-        // Passes the new object to the viewmodel to get stored in the database
-        viewModel.create(newReading)
-
+        if(setName.isNullOrBlank() || setLocation.isNullOrBlank() || setTime.isNullOrBlank() || setDate.isNullOrBlank()){
+            displayMessage("Enter all required fields")
+        }
+        else{
+            val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setMethanePercentage, temperature, setMaxMethane, setMaxTemperature, id)
+            viewModel.create(newReading) // Passes the new object to the viewmodel to get stored in the database
+            displayMessage("Saved")
+            finish() // Closes the activity
+        }
     }
 
     private fun displayMessage(message: String){ // Used to display Toast messages

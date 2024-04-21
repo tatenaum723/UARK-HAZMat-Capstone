@@ -3,7 +3,7 @@
 
     <style name="MenuButtons" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@null</item> <!-- Overwrites the custom theme -->
-        <item name="android:background">@drawable/button</item>
+        <item name="android:background">@drawable/main_menu_buttons</item>
     </style>
 
     <style name="BrightButtons" parent="Widget.MaterialComponents.Button">

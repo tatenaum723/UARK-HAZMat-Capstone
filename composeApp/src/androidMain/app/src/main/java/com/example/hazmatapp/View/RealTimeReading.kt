@@ -2,12 +2,12 @@ package com.example.hazmatapp.View
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.toColor
 import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.EmulatorDataListener
 import com.example.hazmatapp.Util.EmulatorUtil
@@ -17,16 +17,19 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
     // Instance variables
     private lateinit var title: TextView
     private lateinit var timer: TextView
-    private lateinit var lelBar: ProgressBar
-    private lateinit var lelNum: TextView
-    private lateinit var volBar: ProgressBar
-    private lateinit var volNum: TextView
+    private lateinit var methaneBar: ProgressBar // Methane progress bar
+    private lateinit var methaneNum: TextView // Number inside progress bar
+    private lateinit var tempBar: ProgressBar // Temperature progress bar
+    private lateinit var tempNum: TextView // Number inside progress bar
     private lateinit var startButton: Button
     private lateinit var resetButton: Button
     private lateinit var saveButton: Button
     private lateinit var emul: EmulatorUtil
-    private var lelData: MutableList<Pair<Int, Double>> = mutableListOf()
-    private var volData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var methaneData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var tempData: MutableList<Pair<Int, Double>> = mutableListOf()
+    private var maxMethaneData = 0.0 // The max methane percentage from a reading
+    private var maxTemperatureData = 0.0 // The max temperature from a reading
+
     private var isRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,68 +38,74 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         supportActionBar?.title = "Back" // The tittle display at the top of each activity
 
         // Initializes the variables
-        title = findViewById(R.id.title)
+        title = findViewById(R.id.readings_title)
         timer = findViewById(R.id.time)
-        lelBar = findViewById(R.id.lel_bar)
-        lelBar.progress = 0 // Sets the starting value of the progress bar
-        lelNum = findViewById(R.id.lel_number)
-        volBar = findViewById(R.id.vol_bar)
-        volBar.progress = 0 // Sets the starting value of the progress bar
-        volNum = findViewById(R.id.vol_number)
+        methaneBar = findViewById(R.id.lel_bar)
+        methaneBar.progress = 0 // Sets the starting value of the progress bar
+        methaneNum = findViewById(R.id.lel_number)
+        tempBar = findViewById(R.id.vol_bar)
+        tempBar.progress = 0 // Sets the starting value of the progress bar
+        tempNum = findViewById(R.id.vol_number)
         startButton = findViewById(R.id.start_button)
         resetButton = findViewById(R.id.reset_button)
         saveButton = findViewById(R.id.save_button)
         emul = EmulatorUtil()
-        lelData = mutableListOf()
-        volData = mutableListOf()
-
-        // "Hey, I'm interested in receiving updates from you. Whenever you have new data available, please let me know by calling the onDataUpdate method."
-        emul.setListener(this)
+        methaneData = mutableListOf()
+        tempData = mutableListOf()
+        emul.setListener(this) // This activity will get updates from the listener
 
         // On-click methods for buttons
         startButton.setOnClickListener {
-            getData()
+            startReading()
         }
         resetButton.setOnClickListener {
-            resetData()
+            resetReading()
         }
         saveButton.setOnClickListener {
-            saveData()
+            saveReading()
         }
 
     }
 
-    private fun resetData(){
+    private fun resetReading(){
         emul.resetData()
         title.text = "Real-Time Reading"
         timer.text = ""
-        lelBar.progress = 0
-        volBar.progress = 0
-        lelNum.text = "0"
-        volNum.text = "0"
+        methaneBar.progress = 0
+        tempBar.progress = 0
+        methaneNum.text = "0"
+        tempNum.text = "0"
+        startButton.setBackgroundResource(R.drawable.blue_button) // Changes color of start button when reading stops
+        resetButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of reset button when reading stops
+        saveButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of save button when reading stops
     }
 
-    private fun saveData() { // Sends the data to the SaveReading class to create record
-        if (lelData.isNotEmpty() && volData.isNotEmpty()) {
+    private fun saveReading() { // Sends the data to the SaveReading class to create record
+        if (methaneData.isNotEmpty() && tempData.isNotEmpty()) {
             val intent = Intent(this, SaveReading::class.java)
-            intent.putExtra("lelData", ArrayList(lelData))
-            intent.putExtra("volData", ArrayList(volData))
+            intent.putExtra("methaneData", ArrayList(methaneData))
+            intent.putExtra("tempData", ArrayList(tempData))
+            intent.putExtra("maxMethane", maxMethaneData)
+            intent.putExtra("maxTemperature", maxTemperatureData)
+
             startActivity(intent)
-            resetData() // Reset the numbers on the screen
+            resetReading() // Reset the numbers on the screen
         } else {
             displayMessage("No data to save.")
         }
     }
 
-    private fun getData() { // Starts the emulator if it is not running already
+    private fun startReading() { // Starts the emulator if it is not running already
         if(isRunning){
             emul.stop() // Stops reading
             startButton.text = "Start"
             title.text = "Done"
-
+            startButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of start button when reading stops
+            resetButton.setBackgroundResource(R.drawable.blue_button) // Changes color of reset button when reading stops
+            saveButton.setBackgroundResource(R.drawable.blue_button) // Changes color of save button when reading stops
         }
-        else if(lelData.isNotEmpty() && volData.isNotEmpty()){
-            displayMessage("SAVE OR RESET CURRENT DATA")
+        else if(methaneData.isNotEmpty() && tempData.isNotEmpty()){
+            displayMessage("Save or Reset data")
         }
         else{
             emul.startEmulation() // Starts reading
@@ -105,21 +114,28 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
     }
 
     // Updates the UI when the emulator generates the data
-    override fun onDataUpdate(lel: Double, vol: Double) {
+    override fun onDataUpdate(methanePercent: Double, tempFahrenheit: Double) {
         runOnUiThread {
-            lelBar.progress = lel.toInt()
-            volBar.progress = vol.toInt() * 20 // Scales the data to fill the progress bar from 0%-5%
-            lelNum.text = "$lel"
-            volNum.text = "$vol"
+            methaneBar.progress = methanePercent.toInt()
+            methaneBar.progress
+            tempBar.progress = tempFahrenheit.toInt()
+            methaneNum.text = String.format("%.2f", methanePercent) + "%"
+            tempNum.text = String.format("%.2f", tempFahrenheit) + "F"
         }
     }
 
-    // After the RTR is over, it gets the lists with data from the emulator class to the class here thanks to the listener
-    override fun onDoneReading(lelReadings: MutableList<Pair<Int, Double>>, volReadings: MutableList<Pair<Int, Double>>) {
-        lelData = lelReadings
-        volData = volReadings
-        Log.d("RTR", "$lelData")
-        Log.d("RTR", "$volData")
+    // After the RTR is over, it gets the data from the emulator class to the class here thanks to the listener
+    override fun onDoneReading(
+        methaneReadings: MutableList<Pair<Int, Double>>,
+        tempReadings: MutableList<Pair<Int, Double>>,
+        maxMethane: Double,
+        maxTemperature: Double
+    ) {
+        methaneData = methaneReadings
+        tempData = tempReadings
+        maxMethaneData = maxMethane
+        maxTemperatureData = maxTemperature
+
     }
 
     override fun onRunning(flag: Boolean) {

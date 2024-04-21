@@ -1,20 +1,28 @@
 package com.example.hazmatapp.View
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.hazmatapp.Model.Reading
 import com.example.hazmatapp.R
+import com.example.hazmatapp.Util.DialogUtil
+import com.example.hazmatapp.Util.DialogListener
+import com.example.hazmatapp.ViewModel.CurrentReadingViewModel
 
-class CurrentReading : AppCompatActivity() {
+class CurrentReading : AppCompatActivity(), DialogListener {
 
     private lateinit var cTitle: TextView
     private lateinit var cLocation: TextView
     private lateinit var cDate: TextView
     private lateinit var cTime: TextView
-    private lateinit var cLEL: TextView
-    private lateinit var cVOL: TextView
+    private lateinit var cMaxMethane: TextView // Methane max percentage of current reading
+    private lateinit var cMaxTemperature: TextView // Max Temperature of current reading
+    private lateinit var cNotes: TextView
+    private lateinit var deleteButton: Button
+    private lateinit var viewModel: CurrentReadingViewModel // Reference to the view model class
+    private lateinit var deletePopUp: DialogUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,19 +30,23 @@ class CurrentReading : AppCompatActivity() {
         supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         // Initializes variables
-        cTitle = findViewById(R.id.title)
+        cTitle = findViewById(R.id.readings_title)
         cLocation = findViewById(R.id.location_data)
         cDate = findViewById(R.id.date_data)
         cTime = findViewById(R.id.time_data)
-        cLEL = findViewById(R.id.max_lel_data)
-        cVOL = findViewById(R.id.max_vol_data)
+        cMaxMethane = findViewById(R.id.max_methane_data)
+        cMaxTemperature = findViewById(R.id.max_temperature_data)
+        cNotes = findViewById(R.id.notes_data)
+        deleteButton = findViewById(R.id.delete_button)
+        viewModel = ViewModelProvider(this)[CurrentReadingViewModel::class.java]
+        deletePopUp = DialogUtil("Are you sure that you want to delete the reading?", "Yes", "No")
 
     }
 
     override fun onResume() {
         super.onResume()
         val reading = intent.getParcelableExtra<Reading>("reading") // Reading data passed with intent
-        //val lelPercentageMax = maxLEL(reading)
+        deletePopUp.setListener(this)
 
         // Sets the data from the current reading into the view elements
         if (reading != null) {
@@ -50,26 +62,31 @@ class CurrentReading : AppCompatActivity() {
             cTime.text = reading.time
         }
         if (reading != null) {
-            //LEL.text = lelPercentageMax.toString()
+            cMaxMethane.text = reading.maxMethane + "%"
+        }
+        if (reading != null) {
+            cMaxTemperature.text = reading.maxTemperature + "F"
+        }
+        if (reading != null) {
+            cNotes.text = reading.notes
+        }
+        deleteButton.setOnClickListener {
+            deletePopUp.show(supportFragmentManager, "DELETE_DIALOG")
         }
 
     }
+    private fun delete(reading: Reading){ // Sends the data of the current reading to the viewmodel to be deleted
+        viewModel.delete(reading)
+    }
 
-    private fun maxLEL(reading: Reading?): Double {
-        var maxLEL = 0.0
-        val lelDataString = reading?.methaneLelPercentage
-        if (lelDataString != null) {
-            val lelData = lelDataString.split(",").map {
-                val (key, value) = it.split(":")
-                Pair(key.toInt(), value.toDouble())
+    override fun onYes(flag: Boolean) { // If the user presses yes in the pop up the reading is deleted
+        if (flag) {
+            val reading = intent.getParcelableExtra<Reading>("reading") // Reading data passed with intent
+            if (reading != null) {
+                delete(reading)
             }
-            for (pair in lelData) {
-                if (pair.second > maxLEL) {
-                    maxLEL = pair.second
-                }
-            }
+            finish() // Finishes the activity
         }
-        return maxLEL
     }
 
 }

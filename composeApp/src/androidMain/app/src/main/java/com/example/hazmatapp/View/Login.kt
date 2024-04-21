@@ -22,6 +22,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         email = findViewById(R.id.email_input)
         password = findViewById(R.id.password_input)
@@ -31,6 +32,7 @@ class Login : AppCompatActivity() {
         // OnClick methods
         loginButton.setOnClickListener {
             loginUser()
+            finish() // Terminates activity
         }
 
     }
@@ -50,12 +52,12 @@ class Login : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        displayMessage("LOGIN FAILED")
+                        displayMessage("Incorrect email or password")
                     }
                 }
         }
         else{
-            displayMessage("ENTER ALL FIELDS TO LOGIN USER")
+            displayMessage("Enter all required fields")
         }
     }
 
