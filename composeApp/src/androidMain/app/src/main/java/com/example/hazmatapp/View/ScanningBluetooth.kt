@@ -22,13 +22,9 @@ class ScanningBluetooth : AppCompatActivity() {
 
     //inject the bluetooth adapter
     @Inject lateinit var bluetoothAdapter: BluetoothAdapter
-
     //Declare button here
     private lateinit var scan: Button
     private lateinit var userBLEStatus: TextView
-
-
-
     private var isScanning = false
 
 
