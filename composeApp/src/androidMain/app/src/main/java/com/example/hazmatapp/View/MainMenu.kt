@@ -10,10 +10,6 @@ import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.DialogListener
 import com.example.hazmatapp.Util.DialogUtil
 import com.example.hazmatapp.ViewModel.MainMenuViewModel
-import com.example.hazmatapp.ViewModel.PreviousReadingsViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class MainMenu : AppCompatActivity(), DialogListener {
 
@@ -66,7 +62,7 @@ class MainMenu : AppCompatActivity(), DialogListener {
             startActivity(intent)
         }
         bluetoothButton.setOnClickListener {
-            val intent = Intent(this, testBluetooth::class.java)
+            val intent = Intent(this, TestBluetooth::class.java)
             startActivity(intent)
         }
         instructionsButton.setOnClickListener {

@@ -33,7 +33,7 @@
             android:textColor="@color/grey_text_main"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@id/registration_title"/>
 
         <EditText
@@ -44,7 +44,7 @@
             android:textSize="20sp"
             android:hint="Enter name"
             android:textColorHint="@color/grey_text_secondary"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="15dp"
             android:padding="10dp"
             android:background="@drawable/reading_box"
             android:layout_below="@id/name_text"/>
@@ -57,7 +57,7 @@
             android:textColor="@color/grey_text_main"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@id/name_input"/>
 
         <EditText
@@ -68,7 +68,7 @@
             android:textSize="20sp"
             android:hint="Enter email"
             android:textColorHint="@color/grey_text_secondary"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="15dp"
             android:padding="10dp"
             android:background="@drawable/reading_box"
             android:layout_below="@id/email_text"/>
@@ -81,7 +81,7 @@
             android:textColor="@color/grey_text_main"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@id/email_input"/>
 
         <EditText
@@ -92,7 +92,7 @@
             android:hint="Enter password"
             android:textColorHint="@color/grey_text_secondary"
             android:textColor="@color/white"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="15dp"
             android:padding="10dp"
             android:background="@drawable/reading_box"
             android:inputType="textPassword"
@@ -106,7 +106,7 @@
             android:textColor="@color/grey_text_main"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@id/password_input"/>
 
         <EditText

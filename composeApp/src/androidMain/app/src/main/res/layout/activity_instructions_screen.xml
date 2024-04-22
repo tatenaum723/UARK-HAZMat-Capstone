@@ -11,26 +11,18 @@
         android:id="@+id/title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:textSize="55sp"
         android:textStyle="bold"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="80dp"
         android:textColor="@color/white"
         android:text="Need help?"/>
 
-    <TextView
-        android:id="@+id/title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        android:text="We got you covered!"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/title1"/>
 
     <ExpandableListView
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/title2"/>
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/title1"/>
 </RelativeLayout>

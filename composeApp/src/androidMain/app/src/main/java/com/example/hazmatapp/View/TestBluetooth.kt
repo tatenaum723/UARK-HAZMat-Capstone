@@ -3,14 +3,8 @@ package com.example.hazmatapp.View
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
-import android.app.Activity
-import android.bluetooth.BluetoothAdapter
-import android.content.Intent
-import android.widget.Button
-import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 
-class testBluetooth : AppCompatActivity() {
+class TestBluetooth : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_bluetooth)
