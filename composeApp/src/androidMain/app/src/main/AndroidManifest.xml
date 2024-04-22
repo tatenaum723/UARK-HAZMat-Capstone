@@ -47,7 +47,7 @@
             android:exported="false"
             android:parentActivityName=".View.MainMenu" />
         <activity
-            android:name=".View.ScanningBluetooth"
+            android:name=".View.testBluetooth"
             android:exported="false"
             android:parentActivityName=".View.MainMenu"
             tools:targetApi="31" />

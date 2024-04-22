@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
 
-class ScanningBluetooth : AppCompatActivity() {
+class testBluetooth : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scanning_bluetooth)
+        setContentView(R.layout.activity_test_bluetooth)
         supportActionBar?.title = "Back" // The tittle display at the top of each activity
     }
 }
