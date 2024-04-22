@@ -3,8 +3,6 @@ package com.example.hazmatapp.View
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hazmatapp.R
-import android.os.Bundle
-import com.example.hazmatapp.R
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
@@ -18,8 +16,6 @@ class testBluetooth : AppCompatActivity() {
         setContentView(R.layout.activity_test_bluetooth)
         supportActionBar?.title = "Back" // The tittle display at the top of each activity
 
-        // Initialize buttons
-        scan = findViewById(R.id.connect_button)
-        userBLEStatus = findViewById(R.id.lel_methane)
+
     }
 }
