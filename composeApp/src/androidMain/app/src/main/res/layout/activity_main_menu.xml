@@ -17,8 +17,8 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -28,8 +28,8 @@
         android:text="Username"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:gravity="center_horizontal" />
@@ -50,12 +50,12 @@
             android:layout_height="70dp"
             android:text="@string/button1_menu"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/rtr_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -65,13 +65,13 @@
             android:layout_height="70dp"
             android:text="@string/button2_menu"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/graph_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -81,12 +81,12 @@
             android:layout_height="70dp"
             android:text="@string/button3_menu"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/previous_readings_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize" />
 
@@ -96,12 +96,12 @@
             android:layout_height="70dp"
             android:text="@string/button4_menu"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/connection_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -111,12 +111,12 @@
             android:layout_height="70dp"
             android:text="@string/button5_menu"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/instructions_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
 
@@ -126,12 +126,12 @@
             android:layout_height="70dp"
             android:text="Log out"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textColor="@color/white"
             android:layout_margin="10dp"
             style="@style/MenuButtons"
             android:drawableStart="@drawable/logout_icon"
-            android:paddingStart="60dp"
+            android:paddingStart="40dp"
             android:paddingEnd="40dp"
             tools:ignore="VisualLintButtonSize"/>
     </LinearLayout>

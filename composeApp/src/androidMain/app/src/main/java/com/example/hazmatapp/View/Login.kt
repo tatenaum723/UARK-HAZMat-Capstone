@@ -52,12 +52,12 @@ class Login : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        displayMessage("LOGIN FAILED")
+                        displayMessage("Incorrect email or password")
                     }
                 }
         }
         else{
-            displayMessage("ENTER ALL FIELDS TO LOGIN USER")
+            displayMessage("Enter all required fields")
         }
     }
 

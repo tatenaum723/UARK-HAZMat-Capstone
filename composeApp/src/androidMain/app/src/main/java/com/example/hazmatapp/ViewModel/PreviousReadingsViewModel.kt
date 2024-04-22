@@ -1,5 +1,6 @@
 package com.example.hazmatapp.ViewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hazmatapp.Model.FirebaseRepository
@@ -14,5 +15,9 @@ class PreviousReadingsViewModel: ViewModel() {
 
     fun getReadingList(): MutableLiveData<List<Reading>> {  // Gets the taskList from the repository
         return repository.readingsList
+    }
+
+    fun getUsername(): LiveData<String> {
+        return repository.getUsername()
     }
 }

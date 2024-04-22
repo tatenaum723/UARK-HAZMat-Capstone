@@ -27,11 +27,11 @@ class DialogUtil(setMessage: String, setAnswer1: String, setAnswer2: String) : D
             // Use the Builder class for convenient dialog construction.
             val builder = AlertDialog.Builder(it)
             builder.setMessage(message)
-                .setNegativeButton(choice2) { _, _ ->
-                    dismiss() // Closes the delete pop up
-                }
-                .setPositiveButton(choice1) { _, _ ->
+                .setNegativeButton(choice1) { _, _ ->
                     yesAction(true)
+                }
+                .setPositiveButton(choice2) { _, _ ->
+                    dismiss() // Closes the delete pop up
                 }
             // Create the AlertDialog object and return it.
             builder.create()

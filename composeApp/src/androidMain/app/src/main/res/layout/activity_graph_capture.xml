@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:layout_margin="20dp"
+    android:layout_height="match_parent"
+
     tools:context=".View.GraphCapture"
     android:orientation="vertical">
 
@@ -12,97 +13,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Methane Concentration"
+        android:text="Methane Concentration (%)"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
 
-    <RelativeLayout
-        android:id="@+id/graph_container1"
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_marginTop="20dp"
+        android:id="@+id/chart1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center">
-
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart1"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginStart="30dp"/>
-
-        <!-- Y Axis Title for Graph 1 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Methane LEL(%)"
-            android:layout_marginStart="-40dp"
-            android:rotation="270"
-            android:layout_centerVertical="true"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
-
-        <!-- X Axis Title for Graph 1 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time(seconds)"
-            android:layout_below="@id/chart1"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
-
-    </RelativeLayout>
+        android:layout_height="250dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/grey_blue"/>
 
     <TextView
         android:id="@+id/graph_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Measured Temperature"
+        android:text="Measured Temperature (F)"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
 
-    <RelativeLayout
-        android:id="@+id/graph_container2"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_gravity="center">
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart2"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginStart="30dp"/>
-
-        <!-- Y Axis Title for Graph 2 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Temperature(&#176;F)"
-            android:layout_marginStart="-40dp"
-            android:rotation="270"
-            android:layout_centerVertical="true"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
-
-        <!-- X Axis Title for Graph 2 -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time(seconds)"
-            android:layout_below="@id/chart2"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
-    </RelativeLayout>
+        android:layout_height="250dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/grey_blue"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
         android:orientation="vertical"
+        android:layout_margin="20dp"
         android:layout_gravity="center_horizontal">
 
         <Button
@@ -111,7 +55,7 @@
             android:layout_height="wrap_content"
             android:text="Start"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="17sp"
             style="@style/BrightButtons"/>
 
         <LinearLayout
@@ -127,9 +71,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:text="Reset"
-                style="@style/BrightButtons"/>
+                android:background="@drawable/main_menu_buttons"
+                android:textAllCaps="false"/>
 
             <Button
                 android:id="@+id/save_button"
@@ -137,9 +82,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:text="Save"
-                style="@style/BrightButtons"/>
+                android:background="@drawable/main_menu_buttons"
+                android:textAllCaps="false"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

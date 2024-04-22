@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registration"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="30dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="50dp"/>
@@ -130,7 +130,8 @@
             android:layout_gravity="center_horizontal"
             android:text="Submit"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="17sp"
+            android:textAllCaps="false"
             android:background="@drawable/blue_button_normal"
             android:layout_alignParentBottom="true"/>
 

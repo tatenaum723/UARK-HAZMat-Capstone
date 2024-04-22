@@ -2,7 +2,7 @@ package com.example.hazmatapp.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +12,7 @@ import com.example.hazmatapp.ViewModel.PreviousReadingsViewModel
 
 class PreviousReadings : AppCompatActivity(), ReadingAdapter.OnReadingClickListener {
 
+    private lateinit var title: TextView
     private lateinit var viewModel: PreviousReadingsViewModel
     private lateinit var recycler: RecyclerView
 
@@ -21,6 +22,7 @@ class PreviousReadings : AppCompatActivity(), ReadingAdapter.OnReadingClickListe
         supportActionBar?.title = "Back" // The title displayed at the top of each activity
 
         // Initializes variables
+        title = findViewById(R.id.readings_title)
         recycler = findViewById(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.setHasFixedSize(true)
@@ -35,6 +37,9 @@ class PreviousReadings : AppCompatActivity(), ReadingAdapter.OnReadingClickListe
                 val adapter = ReadingAdapter(readingList, this) // Pass 'this' as the listener
                 recycler.adapter = adapter
             }
+        viewModel.getUsername().observe(this) { setUsername ->
+            title.text = "$setUsername's readings"
+        }
 
     }
 

@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.hazmatapp.R
 import com.example.hazmatapp.Util.DialogListener
 import com.example.hazmatapp.Util.DialogUtil
+import com.example.hazmatapp.ViewModel.MainMenuViewModel
+import com.example.hazmatapp.ViewModel.PreviousReadingsViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -22,14 +25,14 @@ class MainMenu : AppCompatActivity(), DialogListener {
     private lateinit var instructionsButton: Button
     private lateinit var logoutButton: Button
     private lateinit var username_text: TextView
-    private lateinit var auth: FirebaseAuth
     private lateinit var logoutPopUp: DialogUtil
+    private lateinit var viewModel: MainMenuViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
-        // Initialize buttons
+        // Initialize variables
         readingButton = findViewById(R.id.button1)
         graphButton = findViewById(R.id.button2)
         viewButton = findViewById(R.id.button3)
@@ -37,19 +40,16 @@ class MainMenu : AppCompatActivity(), DialogListener {
         instructionsButton = findViewById(R.id.button5)
         logoutButton = findViewById(R.id.button6)
         username_text = findViewById(R.id.username_text)
-        auth = Firebase.auth
         logoutPopUp = DialogUtil("Are you sure that you want to logout?", "Yes", "No")
-
-        // Retrieve the username from the Intent and sets up the username on the menu screen
-        val currentUser = auth.currentUser?.email
-        username_text.text = currentUser.toString()
+        viewModel = ViewModelProvider(this)[MainMenuViewModel::class.java]
 
     }
 
     override fun onResume() {
         super.onResume()
-        val currentUser = auth.currentUser?.email
-        username_text.text = currentUser.toString()
+        viewModel.getUsername().observe(this) { username -> // Observer for the live data object
+            username_text.text = username // Displays the name of the user with live data
+        }
         logoutPopUp.setListener(this)
 
         // Button actions
@@ -83,11 +83,5 @@ class MainMenu : AppCompatActivity(), DialogListener {
             finish() // Terminates the activity if the user presses yes in the pop up screen
         }
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        // Nothing happens if user presses back button
-    }
-
 
 }

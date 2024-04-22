@@ -75,15 +75,13 @@ class SaveReading : AppCompatActivity() {
         }
         submit.setOnClickListener {
             createRecord() // Used to create a new record with the readings
-            displayMessage("NEW READING SAVED!")
-            finish() // Closes the activity
         }
     }
 
     private fun createRecord() {
         val setName = name.text.toString()
         val setLocation = location.text.toString()
-        val setNotes = notes.text.toString()
+        var setNotes = notes.text.toString()
         val setTime = time.text.toString()
         val setDate = date.text.toString()
         val setMethanePercentage = methanePercentage.toString()
@@ -92,9 +90,15 @@ class SaveReading : AppCompatActivity() {
         val setMaxTemperature = "%.2f".format(maxTemperature)
         val id = ""
 
-        val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setMethanePercentage, temperature, setMaxMethane, setMaxTemperature, id)
-        viewModel.create(newReading) // Passes the new object to the viewmodel to get stored in the database
-
+        if(setName.isNullOrBlank() || setLocation.isNullOrBlank() || setTime.isNullOrBlank() || setDate.isNullOrBlank()){
+            displayMessage("Enter all required fields")
+        }
+        else{
+            val newReading = Reading(setName, setLocation, setNotes, setDate, setTime, setMethanePercentage, temperature, setMaxMethane, setMaxTemperature, id)
+            viewModel.create(newReading) // Passes the new object to the viewmodel to get stored in the database
+            displayMessage("Saved")
+            finish() // Closes the activity
+        }
     }
 
     private fun displayMessage(message: String){ // Used to display Toast messages
