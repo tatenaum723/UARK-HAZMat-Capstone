@@ -32,7 +32,6 @@ class Login : AppCompatActivity() {
         // OnClick methods
         loginButton.setOnClickListener {
             loginUser()
-            finish() // Terminates activity
         }
 
     }
@@ -46,8 +45,6 @@ class Login : AppCompatActivity() {
             auth.signInWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        val userEmail = user?.email.toString()
                         val intent = Intent(this, MainMenu::class.java)
                         startActivity(intent)
                         finish()

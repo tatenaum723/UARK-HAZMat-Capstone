@@ -14,16 +14,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="Methane Concentration (%)"
-        android:textSize="20sp"
+        android:textSize="23sp"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
 
     <com.github.mikephil.charting.charts.LineChart
-        android:layout_marginTop="20dp"
         android:id="@+id/chart1"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/grey_blue"/>
 
     <TextView
@@ -31,7 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Measured Temperature (F)"
-        android:textSize="20sp"
+        android:textSize="23sp"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
 
