@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="100dp"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    tools:context=".View.CurrentReading">
+
+    <TextView
+        android:id="@+id/readings_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:padding= "5dp"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location:"
+        android:textStyle="bold"
+        android:textColor="@color/grey_text_main"
+        android:textSize="17sp"
+        android:layout_marginTop="60dp"
+        android:layout_below="@id/readings_title"/>
+
+    <TextView
+        android:id="@+id/location_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="end"
+        android:layout_toRightOf="@id/location"
+        android:layout_alignBottom="@id/location"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time:       "
+        android:textColor="@color/grey_text_main"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/location"/>
+
+    <TextView
+        android:id="@+id/time_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="end"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/time"
+        android:layout_alignBottom="@id/time"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time"
+        android:text="Date:"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/grey_text_main"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/date_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="end"
+        android:layout_marginTop="80dp"
+        android:layout_toRightOf="@id/date"
+        android:layout_alignBottom="@id/date"/>
+
+    <TextView
+        android:id="@+id/max_methane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Max methane:"
+        android:textColor="@color/grey_text_main"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/date"/>
+
+    <TextView
+        android:id="@+id/max_methane_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="end"
+        android:layout_marginTop="83dp"
+        android:layout_toRightOf="@id/max_methane"
+        android:layout_alignBottom="@id/max_methane"/>
+
+    <TextView
+        android:id="@+id/max_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Max temperature:"
+        android:textColor="@color/grey_text_main"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/max_methane"/>
+
+    <TextView
+        android:id="@+id/max_temperature_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="end"
+        android:layout_marginTop="80dp"
+        android:layout_toRightOf="@id/max_temperature"
+        android:layout_alignBottom="@id/max_temperature"/>
+
+    <TextView
+        android:id="@+id/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        android:textStyle="bold"
+        android:textColor="@color/grey_text_main"
+        android:textSize="17sp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/max_temperature_data"/>
+
+    <TextView
+        android:id="@+id/notes_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/notes"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/blue_button_normal"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
