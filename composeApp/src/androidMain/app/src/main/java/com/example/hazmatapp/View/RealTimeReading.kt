@@ -2,6 +2,7 @@ package com.example.hazmatapp.View
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -53,6 +54,10 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         methaneData = mutableListOf()
         tempData = mutableListOf()
         emul.setListener(this) // This activity will get updates from the listener
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         // On-click methods for buttons
         startButton.setOnClickListener {
@@ -64,17 +69,24 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
         saveButton.setOnClickListener {
             saveReading()
         }
-
     }
 
     private fun resetReading(){
-        emul.resetData()
+        emul.resetData() // Wipes the data collected
         title.text = "Real-Time Reading"
         timer.text = ""
         methaneBar.progress = 0
         tempBar.progress = 0
+        maxMethaneData = 0.0
+        maxTemperatureData = 0.0
         methaneNum.text = "0"
         tempNum.text = "0"
+        methaneData.clear() // Empties the data from the list
+        tempData.clear() // Empties the data from the list
+        Log.d("RTR", "methane: $methaneData")
+        Log.d("RTR", "temp: $tempData")
+        Log.d("RTR", "maxM: $maxMethaneData")
+        Log.d("RTR", "maxT: $maxTemperatureData")
         startButton.setBackgroundResource(R.drawable.blue_button) // Changes color of start button when reading stops
         resetButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of reset button when reading stops
         saveButton.setBackgroundResource(R.drawable.main_menu_buttons) // Changes color of save button when reading stops
@@ -87,9 +99,8 @@ class RealTimeReading : AppCompatActivity(), EmulatorDataListener {
             intent.putExtra("tempData", ArrayList(tempData))
             intent.putExtra("maxMethane", maxMethaneData)
             intent.putExtra("maxTemperature", maxTemperatureData)
-
             startActivity(intent)
-            resetReading() // Reset the numbers on the screen
+            resetReading()
         } else {
             displayMessage("No data to save.")
         }

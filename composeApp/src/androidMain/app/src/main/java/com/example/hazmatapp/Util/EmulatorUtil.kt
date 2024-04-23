@@ -21,8 +21,8 @@ interface EmulatorDataListener {
 class EmulatorUtil {
     private lateinit var timer: Timer
     private var currentTemperatureC = Random.nextDouble(20.0, 22.0) // Starting in a normal room temperature range in Celsius
+    var tempFahrenheit = 0.0
     private var currentMethanePercent = 0.0 // Starting methane concentration
-    private var isInTCMode = true // Always in TC Mode
     private var methaneReadings = mutableListOf<Pair<Int, Double>>()
     private var tempReadings = mutableListOf<Pair<Int, Double>>()
     private var listener: EmulatorDataListener? = null
@@ -33,22 +33,20 @@ class EmulatorUtil {
     fun startEmulation() {
         toggleFlag()
         timer = Timer()
+
         val task = object : TimerTask() {
             var secondsPassed = 0
 
             override fun run() {
-                if (isRunning && isInTCMode) {
+                if (isRunning) {
                     // Simulate environmental temperature change with relation to methane concentration
                     val tempChangeBias = Random.nextDouble(-0.05, 0.05)
                     currentTemperatureC += tempChangeBias
-                    val tempFahrenheit = celsiusToFahrenheit(currentTemperatureC)
+                    tempFahrenheit = celsiusToFahrenheit(currentTemperatureC)
                     // Simulate methane percentage change, as if moving closer or further from a concentrated area
                     val methaneChangeBias = calculateChangeBias(currentMethanePercent)
                     currentMethanePercent += Random.nextDouble(-2.0, 5.0) * methaneChangeBias
                     currentMethanePercent = min(max(currentMethanePercent, 0.0), 100.0) // Ensure within 0-100%
-
-                    val logEntry = """{"time":${secondsPassed + 1},"temperatureF":${tempFahrenheit.format(2)},"methanePercent":${currentMethanePercent.format(2)}}"""
-                    Log.d("Emulator", logEntry)
 
                     // Check if currentMethanePercentage is greater than maxMethane
                     if(currentMethanePercent > maxMethane){
@@ -64,8 +62,6 @@ class EmulatorUtil {
                     updateData(currentMethanePercent, tempFahrenheit)
                     methaneReadings.add(Pair(secondsPassed, currentMethanePercent))
                     tempReadings.add(Pair(secondsPassed, tempFahrenheit))
-                } else {
-                    stop()
                 }
             }
         }
@@ -119,6 +115,14 @@ class EmulatorUtil {
     fun resetData() {
         methaneReadings.clear()
         tempReadings.clear()
+        maxMethane = 0.0
+        maxTemperature = 0.0
+        currentMethanePercent = 0.0
+        tempFahrenheit = 0.0
+        Log.d("E", "methane: $methaneReadings")
+        Log.d("E", "temp: $tempReadings")
+        Log.d("E", "maxM: $maxMethane")
+        Log.d("E", "maxT: $maxTemperature")
         listener?.onDoneReading(methaneReadings, tempReadings, maxMethane, maxTemperature)
     }
 }
