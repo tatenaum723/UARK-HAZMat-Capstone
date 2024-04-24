@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textColor="@color/white"
-        android:textSize="35sp"
-        android:padding= "5dp"
+        android:textSize="30sp"
+        android:padding= "4dp"
         android:gravity="center_horizontal"/>
 
     <TextView
@@ -27,7 +27,7 @@
         android:textStyle="bold"
         android:textColor="@color/grey_text_main"
         android:textSize="17sp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@id/readings_title"/>
 
     <TextView
@@ -49,7 +49,7 @@
         android:textColor="@color/grey_text_main"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_below="@id/location"/>
 
     <TextView
@@ -60,7 +60,7 @@
         android:textColor="@color/white"
         android:textSize="17sp"
         android:gravity="end"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/time"
         android:layout_alignBottom="@id/time"/>
 
@@ -71,7 +71,7 @@
         android:layout_below="@id/time"
         android:text="Date:"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@color/grey_text_main"
         android:textSize="17sp" />
 
@@ -95,7 +95,7 @@
         android:textColor="@color/grey_text_main"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_below="@id/date"/>
 
     <TextView
@@ -118,7 +118,7 @@
         android:textColor="@color/grey_text_main"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_below="@id/max_methane"/>
 
     <TextView
@@ -141,18 +141,26 @@
         android:textStyle="bold"
         android:textColor="@color/grey_text_main"
         android:textSize="17sp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@id/max_temperature_data"/>
 
-    <TextView
-        android:id="@+id/notes_data"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="..."
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/notes"/>
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/notes"
+        android:layout_above="@id/delete_button">
+
+        <TextView
+            android:id="@+id/notes_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+    </ScrollView>
+
 
     <Button
         android:id="@+id/delete_button"

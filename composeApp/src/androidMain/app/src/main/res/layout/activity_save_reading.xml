@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:text="Name of reading"
         android:textColor="@color/grey_text_main"
-        android:textSize="20sp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="15dp"
+        android:textSize="17dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="12dp"
         android:layout_below="@id/readings_title"/>
 
     <EditText
@@ -37,7 +37,7 @@
         android:textColor="@color/grey_text_main"
         android:hint="Enter name"
         android:textColorHint="@color/grey_text_secondary"
-        android:textSize="20sp"
+        android:textSize="17dp"
         android:padding="17dp"
         android:background="@drawable/reading_box"
         android:layout_below="@id/name_text"/>
@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:text="Location"
         android:textColor="@color/grey_text_main"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:textSize="17dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:layout_below="@id/name_input"/>
 
     <EditText
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/grey_text_main"
-        android:textSize="20sp"
+        android:textSize="17dp"
         android:hint="Enter name"
         android:textColorHint="@color/grey_text_secondary"
         android:padding="17dp"
@@ -85,19 +85,19 @@
                 android:layout_height="wrap_content"
                 android:text="Time"
                 android:textColor="@color/grey_text_main"
-                android:textSize="20sp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="17dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"/>
 
             <Button
                 android:id="@+id/event_time"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="Select Time"
                 android:hint="hh:mm"
                 android:textColorHint="@color/grey_text_secondary"
                 android:textColor="@color/grey_text_main"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textAlignment="center"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -119,19 +119,19 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:textColor="@color/grey_text_main"
-                android:textSize="20sp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="17dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"/>
 
             <Button
                 android:id="@+id/event_date"
-                android:layout_width="160dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:contentDescription="Select Date"
                 android:hint="mm:dd:yy"
                 android:textColorHint="@color/grey_text_secondary"
                 android:textColor="@color/grey_text_main"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textAlignment="textStart"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -149,9 +149,9 @@
         android:layout_height="wrap_content"
         android:text="Notes (Optional)"
         android:textColor="@color/grey_text_main"
-        android:textSize="20sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:textSize="17dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:layout_below="@id/buttons"/>
 
 
@@ -161,7 +161,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:textColor="@color/grey_text_main"
-        android:textSize="20sp"
+        android:textSize="17dp"
         android:padding="17dp"
         android:background="@drawable/reading_box"
         android:layout_above="@id/submit_button"
@@ -173,7 +173,7 @@
         android:layout_height="wrap_content"
         android:text="Save"
         android:textColor="@color/white"
-        android:textSize="17sp"
+        android:textSize="12dp"
         android:textAllCaps="false"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="60dp"

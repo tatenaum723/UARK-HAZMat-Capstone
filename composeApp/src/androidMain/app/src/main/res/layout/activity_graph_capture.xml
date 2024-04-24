@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="Methane Concentration (%)"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
@@ -22,7 +22,7 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart1"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="30dp"
         android:background="@color/grey_blue"/>
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Measured Temperature (F)"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"/>
@@ -39,8 +39,8 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart2"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginBottom="24dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="25dp"
         android:background="@color/grey_blue"/>
 
     <LinearLayout

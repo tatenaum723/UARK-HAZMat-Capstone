@@ -14,18 +14,21 @@
         <TextView
             android:id="@+id/readings_title"
             android:layout_width="match_parent"
-            android:layout_height="198dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:gravity="center"
-            android:text="HAZ-MAT GasHawk"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="HAZ-MAT Air Sentinel"
             android:textColor="@color/white"
             android:fontFamily="@font/offside"
-            android:textSize="60sp" />
+            android:textSize="65sp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/drone_image"
+            android:scaleType="centerCrop"
             android:paddingEnd="10dp"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
@@ -36,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="186dp"
+            android:layout_marginBottom="100dp"
             android:layout_centerHorizontal="true"
             android:orientation="vertical">
 
