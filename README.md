@@ -1,6 +1,6 @@
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
 
-*`This` HAZ-MAT Application version contains all back-end code necessary for Bluetooth LE functionality. It has not been integrated into the data display screens due to the hardware delays.
+* `HAZ-MAT Application` version containing all back-end code necessary for Bluetooth LE functionality. It has not been integrated into the data display screens due to the hardware delays.
 It was tested on a physical device to confirm the skeleton code works.
 Modification can be made easily to finish the data parsing and conversion should this project continue in future semesters.
 
