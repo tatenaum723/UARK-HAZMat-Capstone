@@ -32,7 +32,7 @@ class TestBluetooth : AppCompatActivity() {
         scan = findViewById(R.id.test_button)
         userBLEStatus = findViewById(R.id.bluetooth_status)
 
-        showBluetoothDialog()
+
         //Scan Button Click Actions
         scan.setOnClickListener {
             //Prompt the user to turn on Bluetooth if it's off
@@ -46,7 +46,7 @@ class TestBluetooth : AppCompatActivity() {
         if(bluetoothAdapter?.isEnabled == false){
             userBLEStatus.text = "Bluetooth disabled"
         }else{
-            userBLEStatus.text = "Bluetooth ready to pair"
+            userBLEStatus.text = "Bluetooth ready to pain"
         }
         scan.text = "Test Bluetooth"
 
