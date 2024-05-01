@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -50,4 +52,28 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //dagger hilt
+    implementation ("com.google.dagger:hilt-android:2.50")
+    kapt ("com.google.dagger:hilt-compiler:2.50")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
+
+    //Kotlin Crypto
+    val core = "0.4.0"
+    implementation("org.kotlincrypto.core:digest:$core")
+    implementation("org.kotlincrypto.core:mac:$core")
+    implementation("org.kotlincrypto.core:xof:$core")
+    // define the BOM and its version
+    implementation(platform("org.kotlincrypto.macs:bom:0.4.0"))
+    // HmacSHA224, HmacSHA256, HmacSHA384, HmacSHA512
+    // HmacSHA512/t, HmacSHA512/224, HmacSHA512/256
+    implementation("org.kotlincrypto.macs:hmac-sha2")
+
+
+    //Permissions
+    implementation ("com.google.accompanist:accompanist-permissions:0.21.1-beta")
+}
+kapt{
+    correctErrorTypes = true
 }
