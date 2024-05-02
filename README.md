@@ -1,5 +1,10 @@
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
 
+
+* `HAZ-MAT Application` version containing the final UI, data display functionality, and Firebase link. This version has unimplemented Bluetooth LE code and instead uses a Kotlin emulator to produce the data displayed by the application activities. 
+
+* `To open the application` download the files and copy the contents of the zipped folder to a new directory. The next step requires you to have the current version of Android Studio installed. Open Android Studio and click the "File" or "Project" tab then select "Open". In the file explorer popup, navigate to the directory your files are stored in (The folder should have an Android robot icon next to it) and select \UARK-HAZMat-Capstone-[branch name]\composeApp\src\androidMain to open the Android application. From here you will have access to all files. The application can be built and run on an Android emulator or physical device using Android Studio's built-in features. You will also have the option to package the app as an apk file for deployment. 
+
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
   - `commonMain` is for code that’s common for all targets.
